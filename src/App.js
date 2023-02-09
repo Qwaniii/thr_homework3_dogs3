@@ -1,23 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
+import Cards from "./components/Cards/Cards";
+import { useEffect, useState } from "react";
+import api from "./Api/Api";
+import useDebounce from "./hooks/useDebounse";
 
 function App() {
+  const [cards, setCards] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [currentUser, setCurrentUser] = useState({});
+  const debounceValue = useDebounce(searchQuery, 500);
+
+  useEffect(() => {
+    api.getAppInfo()
+      .then(([cardData, currentUserData]) => {
+        setCards(cardData.products);        
+        setCurrentUser(currentUserData);
+      })
+    // api.getProductList().then((cardData) => {
+    //   console.log(cardData.products)
+    //   setCards(cardData.products);
+    // });
+  }, []);
+
+  useEffect(() => {
+    api.search(debounceValue)
+      .then(data => {
+        setCards(data);
+      })
+    // const newState = (cardData.products).filter((item) => (item.name.toLowerCase()).includes(searchQuery.toLowerCase()))
+  }, [debounceValue]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Header currentUser={currentUser} setSearchQuery={setSearchQuery} />
+      <Cards goods={cards} searchQuery={searchQuery}/>
+      <Footer />
     </div>
   );
 }
