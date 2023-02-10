@@ -37,8 +37,6 @@ function App() {
 		api.changeLikeProductStatus(product._id, !isLike).then((newCard) => {
 			// в зависимсоти от того есть лайки или нет отправляем запрос PUT или DELETE
 			const newCards = cards.map((c) => {
-				console.log("Карточка в переборе", c);
-				console.log("Карточка c сервера", newCard);
 				return c._id === newCard._id ? newCard : c;
 			});
 			setCards(newCards);

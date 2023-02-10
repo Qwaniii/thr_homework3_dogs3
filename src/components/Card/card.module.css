@@ -1,9 +1,17 @@
-.card {
+/* .card {
   display: flex;
   flex-direction: column;
+  align-content: center;
   gap: 5px;
   position: relative;
   margin: 20px 0;
+} */
+.card {
+  display: grid;
+  grid-template-rows: 13rem 6rem auto auto;
+  align-content: center;
+  position: relative;
+  margin: 30px 0;
 }
 
 .discount {
@@ -24,7 +32,7 @@
 
 .likeContainer {
   position: absolute;
-  bottom: calc(100% - 300px);
+  bottom: 50px;
   right: 0;
   z-index: 10;
 }
@@ -37,6 +45,10 @@
   fill: rgba(128, 128, 128, 0.5);
 }
 
+.like:hover {
+  fill: rgba(128, 128, 128, 0.6);
+}
+
 .likeActive {
   background: none;
   border: none;
@@ -45,21 +57,27 @@
   fill: red;
 }
 
+.likeActive:hover {
+  fill: rgba(255, 0, 0, 0.7);
+}
+
 .image {
   position: relative;
   overflow: hidden;
-  width: 100%;
-  height: 200px;
 }
 
 .image img {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 100%;
-  height: 200px;
+  width: 75%;
   transform: translate(-50%, -50%);
   object-fit: cover;
+  transition: width .6s ease-out;
+}
+
+.image img:hover {
+  width: 85%;
 }
 
 .descr {
@@ -81,7 +99,7 @@
 }
 
 .title {
-  min-height: 45px;
+  place-self: center;
 }
 
 .add {
@@ -90,7 +108,7 @@
 
 .add a {
   padding: 10px 15px;
-  background-color: pink;
+  background-color: rgb(255, 255, 43, 0.7);
   border-radius: 20px;
   /* font-size: 1.3vw; */
   text-decoration: none;
@@ -99,7 +117,7 @@
 }
 
 .add a:hover {
-    background-color: rgba(255, 84, 84, 0.8);
-    color: white;
-    transform: scale(1.2);
+    background-color:  rgba(220, 205, 0, 0.8);
+    color: rgba(99, 99, 99);
+    transform: scale(1.3);
 }

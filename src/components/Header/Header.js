@@ -16,11 +16,11 @@ export default function Header({currentUser, setSearchQuery}) {
           </div>
           <div className={s.enter}>
             {!currentUser.email && `Войти`}
-            {currentUser.email && <span className={s.email}>{currentUser.email}</span>}
-            {currentUser.name && <div className={s.nameAbout}> Имя: {currentUser.name} {currentUser.about}</div>}
-            {currentUser.name && <button className={s.btn}>
+            {currentUser.email && <span className={s.email}><b>E-mail: </b>{currentUser.email}</span>}
+            {currentUser.name && <span className={s.name}> <b>Имя:</b> {currentUser.name} <span className={s.about}><b>Должность: </b>{currentUser.about}</span></span>}
+            {/* {currentUser.name && <button className={s.btn}>
               Изменить
-            </button>}
+            </button>} */}
           </div>
         </div>
       </div>

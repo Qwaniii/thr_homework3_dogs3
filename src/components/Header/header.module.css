@@ -17,12 +17,14 @@ header {
 
 .enter {
     justify-self: end;
-    display: block;
+}
 
+.enter span {
+    display: block;
 }
 
 
-@media (max-width: 720px) {
+@media (max-width: 790px) {
     .wrapper {
         grid-template-columns: 1fr;
         grid-template-rows: repeat(3, auto);
