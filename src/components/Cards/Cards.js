@@ -3,7 +3,7 @@ import Card from '../Card/Card'
 import s from './cards.module.css'
 
 
-export default function Cards({goods, searchQuery}) {
+export default function Cards({goods, searchQuery, onProductLike, currentUser}) {
     
     return (
         <main>
@@ -11,7 +11,7 @@ export default function Cards({goods, searchQuery}) {
                 {searchQuery && <div className={s.searchInfo}>По запросу {searchQuery} найдено: {goods.length} позиции</div>}
                 <div className={s.cards}>
                     {goods.map((item, index) => (
-                        <Card card={item} key={item._id}/>
+                        <Card card={item} key={item._id} onProductLike={onProductLike} currentUser={currentUser}/>
                     ))}
                     
                 </div>

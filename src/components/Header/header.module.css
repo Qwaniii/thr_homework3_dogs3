@@ -17,8 +17,10 @@ header {
 
 .enter {
     justify-self: end;
+    display: block;
 
 }
+
 
 @media (max-width: 720px) {
     .wrapper {

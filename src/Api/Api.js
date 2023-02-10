@@ -59,25 +59,16 @@ class Api {
         }).then(onResponce);
     }
 
-    getLikeProductStatus(productID) {
-        return fetch(`${this._dataUrl}/product/likes/${productID}`, {
-            method: "PUT",
-            headers: {
-                authorization: this._token,
-                "Content-Type": "application/json",
-            }
-        }).then(onResponce)
-    }
-
-    delLikeProductStatus(productID) {
-        return fetch(`${this._dataUrl}/product/likes/${productID}`, {
-            method: "DELETE",
-            headers: {
-                authorization: this._token,
-                "Content-Type": "application/json",
-            }
-        }).then(onResponce)
-    }
+	changeLikeProductStatus(productID, like) {
+		// Обычная реализация: 2 разных метода для удаления и постановки лайка.
+		return fetch(`${this._dataUrl}/products/likes/${productID}`, {
+			method: like ? "PUT" : "DELETE",
+			headers: {
+				authorization: this._token,
+				"Content-Type": "application/json",
+			},
+		}).then(onResponce);
+	}
 
 
 }
