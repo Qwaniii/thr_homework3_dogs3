@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/thr_homework3_dogs3/static/css/main.4b451f35.css",
+    "main.js": "/thr_homework3_dogs3/static/js/main.25d51ba7.js",
+    "static/media/logo.svg": "/thr_homework3_dogs3/static/media/logo.282ad3b9b3e090315c9ee53271a952b1.svg",
+    "static/media/like.svg": "/thr_homework3_dogs3/static/media/like.5477474a5721b1245a266ec6464c3f25.svg",
+    "index.html": "/thr_homework3_dogs3/index.html",
+    "main.4b451f35.css.map": "/thr_homework3_dogs3/static/css/main.4b451f35.css.map",
+    "main.25d51ba7.js.map": "/thr_homework3_dogs3/static/js/main.25d51ba7.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.4b451f35.css",
+    "static/js/main.25d51ba7.js"
+  ]
+}
