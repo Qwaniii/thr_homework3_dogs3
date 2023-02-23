@@ -24,7 +24,22 @@ export default function Card({ card, onProductLike, currentUser, setIsLoading, l
           <Tags tag={tag} key={index}/>
         )}
       </div>
-      <div className={s.likeContainer}>
+
+      <Link to={`product/${card._id}`} onClick={() => setIsLoading(false)} className={s.link}>
+        <div className={s.image}>
+            <img src={card.pictures} alt="Image"></img> 
+        </div>
+        <div className={s.descr}>
+          <span className={s.oldprice}>{card.discount > 0 && card.price > 0 && `${Math.round((card.price * 100) / (100 - card.discount))} руб.` } </span>
+          <span className={cn(s.price, {[s.redprice]: card.discount})}>{card.price} руб.</span>
+          <span className={s.wight}>{card.wight}</span>
+          <div className={s.title}>{card.name}</div>
+          {/* <p>{card.description}</p> */}
+        </div>
+      </Link>
+      <div className={s.add}>
+        <a href="#">В корзину</a>
+        <div className={s.likeContainer}>
         <button
           className={cn(s.like, { [s.likeActive]: isLiked })}
           onClick={handleLikeClick}
@@ -33,20 +48,6 @@ export default function Card({ card, onProductLike, currentUser, setIsLoading, l
         </button>
         <span className={s.num}>{likes > 0 && likes}</span>
       </div>
-      <div className={s.image}>
-        <Link to={`product/${card._id}`} onClick={() => setIsLoading(false)}>
-          <img src={card.pictures} alt="Image"></img> 
-        </Link>
-      </div>
-      <div className={s.title}>{card.name}</div>
-      <div className={s.descr}>
-        <span className={s.oldprice}>{card.discount > 0 && card.price > 0 && `${Math.round((card.price * 100) / (100 - card.discount))} руб.` } </span>
-        <span className={cn(s.price, {[s.redprice]: card.discount})}>{card.price} руб.</span>
-        <span className={s.wight}>{card.wight}</span>
-        {/* <p>{card.description}</p> */}
-      </div>
-      <div className={s.add}>
-        <a href="#">В корзину</a>
       </div>
     </div>
   );
