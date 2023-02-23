@@ -1,0 +1,16 @@
+.option {
+  padding: 5px 20px;
+  color: rgba(128, 128, 128, 0.6);
+  cursor: pointer; 
+}
+
+.option:hover {
+  color: rgb(0, 0, 0);
+  transition: color .3s;
+}
+
+.select {
+  color: black;
+  font-weight: 600;
+  font-size: 17px;
+}

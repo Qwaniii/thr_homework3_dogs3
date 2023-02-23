@@ -3,6 +3,11 @@
 * {
     margin: 0;
     padding: 0;
+    box-sizing: inherit;
+}
+
+html {
+    box-sizing: border-box;
 }
 
 body {
@@ -11,7 +16,9 @@ body {
     font-weight: 300;
 }
 
-.wrapper {
-    width: 1200px;
-    margin: 50px auto;
+.container {
+	max-width: 1024px;
+    padding: 0 16px;
+	width: 95%;
+	margin: 0 auto;
 }
