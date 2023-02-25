@@ -3,7 +3,7 @@ import s from "./product.module.css";
 import { ReactComponent as Like } from "../Card/img/like.svg";
 import cn from "classnames";
 import api from "../../Api/Api";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import NotFoundPage from "../../Page/NotFoundPage"
 import Spinner from "../Spinner/Spinner";
 import { UserContext } from "../../Context/UserContext";
@@ -15,6 +15,7 @@ export default function Product({ id, isLoading, setIsLoading, cards, setCards, 
   const { currentUser } = useContext(UserContext)
 
   const isLike = aboutProduct?.likes?.some((id) => id === currentUser._id)
+  const navigate = useNavigate()
 
   useEffect(() => {
     api
@@ -47,7 +48,7 @@ export default function Product({ id, isLoading, setIsLoading, cards, setCards, 
       !errStatus && (<div className="container">
         <div className={s.wrapper}>
           <div className={s.header}>
-            <Link to="/" className={s.back}>Назад</Link>
+            <Link onClick={() => navigate(-1)} className={s.back}>Назад</Link>
             <h2 className="div">{aboutProduct.name}</h2>
             <p className="div">Артикул 5345345</p>
           </div>

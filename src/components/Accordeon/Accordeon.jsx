@@ -23,7 +23,7 @@ export default function Accordeon() {
       {isAccordeon && <div className={cn(s.window, {[s.active]: isAccordeon})}>
         <div style={{padding: 10, cursor: "pointer"}} onClick={toggle}>X</div>
         <div className={s.link}>
-          <Link to="favorite" onClick={toggle} className={s.favorite}>Любимые продукты  {favoriteCards.length}</Link>
+          <Link to="thr_homework3_dogs3/favorite" onClick={toggle} className={s.favorite}>Любимые продукты  {favoriteCards.length}</Link>
         </div>
       </div>}
     </div>
