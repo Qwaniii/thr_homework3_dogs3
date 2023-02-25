@@ -1,0 +1,32 @@
+.wrapper {
+  background-color: rgba(220, 220, 220, 0.8);
+  border-radius: 30px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content:  center;
+  align-items: center;
+  border: .3px solid gray;
+  cursor: pointer;
+  transition: all .3s;
+  color: white;
+  font-weight: 600;
+}
+
+.wrapper:hover {
+  background-color: rgb(81, 81, 81);
+  color: white;
+  transition: all .3s;
+}
+
+.linkPage {
+  text-decoration: none;
+  color: currentColor;
+}
+
+.current {
+  color: rgb(18, 18, 18);
+  font-size: 20px;
+  background-color: darkgray;
+  transition: all .3s;
+}

@@ -10,47 +10,33 @@ import IndexPage from "./Page/IndexPage";
 import ProductPage from "./Page/ProductPage";
 import NotFoundPage from "./Page/NotFoundPage";
 import { UserContext } from "./Context/UserContext";
-import FavoritePage from "./Page/FavoritePage";
-import { FavoriteContext } from "./Context/FavoriteContext";
 
 function App() {
   const [cards, setCards] = useState([]);
-  const [allCardsForSort, setAllCardsForSort] = useState([]);
+  const [cardsForPaginate, setCardsForPaginate] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [currentUser, setCurrentUser] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [selectTab, setSelectTab] = useState("all")
   const [page, setPage] = useState(1);
   const [maxPage, setMaxPage] = useState();
-  const [cardsOnList, setCardsOnList] = useState(12);
-  const [favoriteCards, setFavoriteCards] = useState([]);
+  const [cardsOnList, setCardsonList] = useState(12);
   const arrMaxPage = [];
 
   const debounceValue = useDebounce(searchQuery, 500);
-  
+
+  const startPaginate = (cardsOnList * page) - cardsOnList;
+
 
   useEffect(() => {
-    api.getAppInfo(page, cardsOnList, debounceValue)
-      .then(([cardData, currentUserData]) => {
-        setCards(cardData.products);
-        setMaxPage(Math.ceil(cardData.total / cardsOnList))
-        setCurrentUser(currentUserData);
-        setIsLoading(true);
-      })
-      .catch((err) => console.log(err));
-}, [page, debounceValue, cardsOnList]);
-
-  useEffect(() => {
-    api.getProductList()
-    .then((data) => {
-      setAllCardsForSort(data.products);
-      const filtredData = (data.products)?.filter((post) => post?.likes?.some((id) => id === currentUser._id));
-      setFavoriteCards((prevState) => filtredData);
-    })
-    .catch((err) => console.log(err))
-  }, [currentUser])
-
-
+    api.getAppInfo().then(([cardData, currentUserData]) => {
+      setCards(cardData.products);
+      setMaxPage(Math.ceil(cardData.total / cardsOnList))
+      setCurrentUser(currentUserData);
+      setCardsForPaginate(cardData.products.slice(startPaginate, startPaginate + cardsOnList))
+      setIsLoading(true);
+    });
+}, []);
 
   //   api.getProductPaginateList(page, cardsOnList).then((cardData) => {
   //     setMaxPage(Math.ceil(cardData.total / cardsOnList))
@@ -69,12 +55,13 @@ function App() {
 
   // Поиск товаров без пагинации
 
-  // useEffect(() => {
-  //   searchQuery > 0 && api.search(debounceValue).then((data) => {
-  //     setCards(data);
-  //   });
+  useEffect(() => {
+    api.search(debounceValue).then((data) => {
+      // setCards(data);
+      setCardsForPaginate(data);
+    });
     // const newState = (cardData.products).filter((item) => (item.name.toLowerCase()).includes(searchQuery.toLowerCase())) --- поиск товаров без сервера
-  // }, [debounceValue]);
+  }, [debounceValue]);
 
   function handleProductLike(product) {
     const isLike = product.likes.some((id) => id === currentUser._id);
@@ -83,17 +70,13 @@ function App() {
       const newCards = cards.map((c) => {
         return c._id === newCard._id ? newCard : c;
       });
-      if (!isLike) {
-        setFavoriteCards(prevState => [...prevState, newCard])
-      } else {
-        setFavoriteCards(prevState => prevState.filter((card) => card._id !== newCard._id))
-      }
       setCards(newCards);
     });
   }
 
   const curPaginate = (pagePaginate) => {
     setPage(pagePaginate)
+    setCardsForPaginate(cards.slice(startPaginate, startPaginate + cardsOnList))
   }
 
 // Создание массива для пагинации страниц 
@@ -101,19 +84,23 @@ function App() {
   for (let i = 1; i <= maxPage; i ++) {
     arrMaxPage.push(i)
   }
-  console.log(favoriteCards)
+  
+  useEffect(() => {
+    setCardsForPaginate(cards.slice(startPaginate, startPaginate + cardsOnList))
+  }, [startPaginate])
+
+  console.log(cardsForPaginate)
 
   return (
     <div>
-      <FavoriteContext.Provider value={{favoriteCards}}>
-      <UserContext.Provider value={{currentUser, selectTab, setSelectTab, allCardsForSort}}>
+      <UserContext.Provider value={{currentUser, selectTab, setSelectTab, cards}}>
         <Header currentUser={currentUser} setSearchQuery={setSearchQuery} />
         <Routes>
           <Route
             index
             element={
               <IndexPage
-                cards={cards}
+                cards={cardsForPaginate}
                 searchQuery={searchQuery}
                 handleProductLike={handleProductLike}
                 currentUser={currentUser}
@@ -123,8 +110,6 @@ function App() {
                 page={page}
                 setPage={setPage}
                 curPaginate={curPaginate}
-                cardsOnList={cardsOnList}
-                setCardsOnList={setCardsOnList}
               />
             }
           ></Route>
@@ -136,26 +121,6 @@ function App() {
                 setIsLoading={setIsLoading}
                 cards={cards}
                 setCards={setCards}
-                handleProductLike={handleProductLike}
-              />
-            }
-          ></Route>
-          <Route
-            path="favorite"
-            element={
-              <FavoritePage
-                cards={favoriteCards}
-                searchQuery={searchQuery}
-                handleProductLike={handleProductLike}
-                currentUser={currentUser}
-                isLoading={isLoading}
-                setIsLoading={setIsLoading}
-                countPage={arrMaxPage}
-                page={page}
-                setPage={setPage}
-                curPaginate={curPaginate}
-                cardsOnList={cardsOnList}
-                setCardsOnList={setCardsOnList}
               />
             }
           ></Route>
@@ -163,7 +128,6 @@ function App() {
         </Routes>
         <Footer />
       </UserContext.Provider>
-      </FavoriteContext.Provider>
     </div>
   );
 }

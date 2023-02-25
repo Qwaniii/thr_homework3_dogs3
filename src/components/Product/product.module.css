@@ -70,7 +70,7 @@
 }
 
 .cart {
-  padding: 20px 0;
+  padding: 20px 2px;
 }
 
 .cart a {
@@ -80,12 +80,14 @@
   /* font-size: 1.3vw; */
   text-decoration: none;
   color: black;
-  transition: all 0.1s linear;
+  transition: all .1s linear;
 }
 
 .cart a:hover {
-  background-color: rgba(220, 205, 0, 0.8);
-  color: rgba(99, 99, 99);
+  background-color:  rgba(202, 66, 7, 0.536);
+  color: rgb(0, 0, 0);
+  box-shadow: 0 7px 7px -4px gray;
+  font-size: 17px;
 
 }
 

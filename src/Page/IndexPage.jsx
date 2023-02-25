@@ -8,7 +8,13 @@ export default function IndexPage({
   handleProductLike,
   currentUser,
   isLoading,
-  setIsLoading
+  setIsLoading,
+  page,
+  setPage,
+  countPage,
+  curPaginate,
+  cardsOnList,
+  setCardsOnList,
 }) {
   return (
     <div>
@@ -19,6 +25,12 @@ export default function IndexPage({
         onProductLike={handleProductLike}
         currentUser={currentUser}
         setIsLoading={setIsLoading}
+        page={page}
+        setPage={setPage}
+        countPage={countPage}
+        curPaginate={curPaginate}
+        cardsOnList={cardsOnList}
+        setCardsOnList={setCardsOnList}
       /> : <Spinner/>}
     </div>
   );
