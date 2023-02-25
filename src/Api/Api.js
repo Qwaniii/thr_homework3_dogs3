@@ -19,6 +19,15 @@ class Api {
         }).then(onResponce);
     }
 
+    getProductPaginateList(page, limit, searchQuery) {
+        return fetch(`${this._dataUrl}/products?page=${page}&limit=${limit}&query=${searchQuery}`, {
+            headers: {
+                authorization: this._token,
+                "Content-Type": "application/json"
+            },
+        }).then(onResponce);
+    }
+
     getProductById(prodId) {
         return fetch(`${this._dataUrl}/products/${prodId}`, {
             headers: {
@@ -56,10 +65,15 @@ class Api {
 
     // Получать данные только вместе
 
-    getAppInfo() {
-        return Promise.all([this.getProductList(), this.getUserInfo()]);
+    // getAppInfo() {
+    //     return Promise.all([this.getProductList(), this.getUserInfo()]);
+    // }
+    
+    // получаем данные с сервера с пагинацией 
+    getAppInfo(page, limit, searchQuery) {
+        return Promise.all([this.getProductPaginateList(page, limit, searchQuery), this.getUserInfo()]);
     }
-
+    
     search(searchQuery) {
         return fetch(`${this._dataUrl}/products/search?query=${searchQuery}`, {
             headers: {

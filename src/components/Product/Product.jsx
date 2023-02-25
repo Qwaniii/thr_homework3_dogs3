@@ -8,11 +8,11 @@ import NotFoundPage from "../../Page/NotFoundPage"
 import Spinner from "../Spinner/Spinner";
 import { UserContext } from "../../Context/UserContext";
 
-export default function Product({ id, isLoading, setIsLoading, cards, setCards }) {
+export default function Product({ id, isLoading, setIsLoading, cards, setCards, handleProductLike }) {
 
   const [aboutProduct, setAboutProduct] = useState({});
   const [errStatus, setErrStatus] = useState(false)
-  const currentUser = useContext(UserContext)
+  const { currentUser } = useContext(UserContext)
 
   const isLike = aboutProduct?.likes?.some((id) => id === currentUser._id)
 
@@ -27,22 +27,19 @@ export default function Product({ id, isLoading, setIsLoading, cards, setCards }
         console.log(err);
         setErrStatus(true)
       });
-  }, [id]);
+  }, [id, cards]);
 
-  function handleProductLikeClick() {
-    api.changeLikeProductStatus(aboutProduct._id, !isLike)
-      .then((newProduct) => {
+  // function handleProductLikeClick() {
+  //   api.changeLikeProductStatus(aboutProduct._id, !isLike)
+  //     .then((newProduct) => {
         
-        setAboutProduct(newProduct);
-        const newCards = cards.map((card) => 
-          card._id === newProduct._id ? newProduct : card
-        )
-        setCards(newCards);
-      })
-  }
-
-
-  console.log(aboutProduct);
+  //       setAboutProduct(newProduct);
+  //       const newCards = cards.map((card) => 
+  //         card._id === newProduct._id ? newProduct : card
+  //       )
+  //       setCards(newCards);
+  //     })
+  // }
 
   return (
     <div>
@@ -74,7 +71,7 @@ export default function Product({ id, isLoading, setIsLoading, cards, setCards }
               <div className={s.likeContainer}>
                 <button
                   className={cn(s.like, { [s.likeActive]: isLike })}
-                  onClick={handleProductLikeClick}
+                  onClick={() => handleProductLike(aboutProduct)}
                 >
                   <Like />
                 </button>
@@ -87,12 +84,12 @@ export default function Product({ id, isLoading, setIsLoading, cards, setCards }
             <p>{aboutProduct.description}</p>
           </div>
           <div className={s.character}>
-            <h3>Характеристики</h3>
+            {/* <h3>Характеристики</h3>
             <p>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. A, saepe
               aliquid eveniet dolorem dolor similique temporibus. Unde impedit
               neque eius.
-            </p>
+            </p> */}
           </div>
           <div className={s.commets}></div>
         </div>

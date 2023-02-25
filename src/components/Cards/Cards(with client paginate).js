@@ -6,10 +6,9 @@ import Paginate from '../Paginate/Paginate'
 import s from './cards.module.css'
 
 
-export default function Cards({ goods, searchQuery, onProductLike, setIsLoading, page, setPage, countPage, curPaginate, cardsOnList, setCardsOnList }) {
+export default function Cards({ goods, searchQuery, onProductLike, currentUser, setIsLoading, page, setPage, countPage, curPaginate }) {
     
-    const { currentUser, selectTab, allCardsForSort } = useContext(UserContext)
-    const arrCountProducts = [12, 24, 36, 48]
+    const { selectTab, cards } = useContext(UserContext)
 
     return (
         <main>
@@ -28,26 +27,25 @@ export default function Cards({ goods, searchQuery, onProductLike, setIsLoading,
                     {selectTab === "all" && goods.sort((a, b) => new Date(a.created_at) - new Date(b.created_at)).map((item, index) => (
                         <Card card={item} key={item._id} onProductLike={onProductLike} currentUser={currentUser} setIsLoading={setIsLoading}/>
                     ))}
-                    {selectTab === "new" && allCardsForSort.sort((a, b) => new Date(b.created_at) - new Date(a.created_at)).map((item, index) => (
+                    {selectTab === "new" && goods.sort((a, b) => new Date(b.created_at) - new Date(a.created_at)).map((item, index) => (
                         <Card card={item} key={item._id} onProductLike={onProductLike} currentUser={currentUser} setIsLoading={setIsLoading}/>
                     ))}
-                    {selectTab === "cheap" && allCardsForSort.sort((a, b) => a.price - b.price).map((item, index) => (
+                    {selectTab === "cheap" && goods.sort((a, b) => a.price - b.price).map((item, index) => (
                         <Card card={item} key={item._id} onProductLike={onProductLike} currentUser={currentUser} setIsLoading={setIsLoading}/>
                     ))}
-                    {selectTab === "expens" && allCardsForSort.sort((a, b) => b.price - a.price).map((item, index) => (
+                    {selectTab === "expens" && goods.sort((a, b) => b.price - a.price).map((item, index) => (
                         <Card card={item} key={item._id} onProductLike={onProductLike} currentUser={currentUser} setIsLoading={setIsLoading}/>
                     ))}
-                    {selectTab === "popular" && allCardsForSort.sort((a, b) => b.likes.length - a.likes.length).map((item, index) => (
+                    {selectTab === "popular" && goods.sort((a, b) => b.likes.length - a.likes.length).map((item, index) => (
                         <Card card={item} key={item._id} onProductLike={onProductLike} currentUser={currentUser} setIsLoading={setIsLoading} likes={item.likes.length}/>
                     ))}
-                    {selectTab === "sale" && allCardsForSort.sort((a, b) => b.discount - a.discount).map((item, index) => (
+                    {selectTab === "sale" && goods.sort((a, b) => b.discount - a.discount).map((item, index) => (
                         <Card card={item} key={item._id} onProductLike={onProductLike} currentUser={currentUser} setIsLoading={setIsLoading}/>
                     ))}
                     
                 </div>
                 
-                {selectTab === "all" && !searchQuery && <div className={s.paginate}>
-                    
+                <div className={s.paginate}>
                         {/* <button>&lArr;</button> */}
                            {page > 3 && <><Paginate 
                                 paginateNum={1}
@@ -116,19 +114,7 @@ export default function Cards({ goods, searchQuery, onProductLike, setIsLoading,
                                 </>
                             } 
                             {/* <button>&rArr;</button> */}
-                </div>}
-                            {selectTab === "all" && !searchQuery && <div className={s.form}>
-                                <label htmlFor="count">Количество продуктов на странице</label>
-                                <select id="count" className={s.select} value={cardsOnList} onChange={(e) => setCardsOnList(e.target.value)}>
-                                    {arrCountProducts.map((countLimitPage) => (
-                                        <option key={countLimitPage} value={countLimitPage}>{countLimitPage}</option>
-                                    ))}
-                                    {/* <option value="12">12</option>
-                                    <option value="24">24</option>
-                                    <option value="36">36</option>
-                                    <option value="48">48</option> */}
-                                </select>
-                            </div>}
+                </div>
 
             </div>
         </main>

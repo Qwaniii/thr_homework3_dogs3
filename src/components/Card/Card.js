@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import s from "./card.module.css";
 import { ReactComponent as Like } from "./img/like.svg";
 import cn from "classnames";
 import { Link } from "react-router-dom";
 import Tags from "../Tags/Tags";
+import { UserContext } from "../../Context/UserContext";
 
-export default function Card({ card, onProductLike, currentUser, setIsLoading, likes }) {
+export default function Card({ card, onProductLike, setIsLoading, likes }) {
+  const { currentUser } = useContext(UserContext);
+
   const isLiked = card.likes.some((id) => id === currentUser._id);
 
   function handleLikeClick() {
@@ -30,8 +33,8 @@ export default function Card({ card, onProductLike, currentUser, setIsLoading, l
             <img src={card.pictures} alt="Image"></img> 
         </div>
         <div className={s.descr}>
-          <span className={s.oldprice}>{card.discount > 0 && card.price > 0 && `${Math.round((card.price * 100) / (100 - card.discount))} руб.` } </span>
-          <span className={cn(s.price, {[s.redprice]: card.discount})}>{card.price} руб.</span>
+          <span className={s.oldprice}>{card.discount > 0 && (card.price + " руб.")} </span>
+          <span className={cn(s.price, {[s.redprice]: card.discount})}>{Math.round(card.price - card.price * card.discount / 100)} руб.</span>
           <span className={s.wight}>{card.wight}</span>
           <div className={s.title}>{card.name}</div>
           {/* <p>{card.description}</p> */}

@@ -2,6 +2,7 @@ import React from 'react'
 import s from "./header.module.css"
 import Logo from "../Logo/Logo"
 import Search from "../Search/Search"
+import Accordeon from '../Accordeon/Accordeon'
 
 export default function Header({currentUser, setSearchQuery}) {
   return (
@@ -22,6 +23,7 @@ export default function Header({currentUser, setSearchQuery}) {
               Изменить
             </button>} */}
           </div>
+            <div><Accordeon/></div>
         </div>
       </div>
     </header>
