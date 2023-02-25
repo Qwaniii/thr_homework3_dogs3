@@ -2,17 +2,13 @@ header {
     background-color: yellow;
 }
 
-.container {
-    width: calc(100% - 140px);
-    margin: 0 auto;
-    padding: 20px 0;
-}
 
 .wrapper {
     display: grid;
     grid-template-columns: 1fr 2fr 1fr;
     gap: 20px;
     align-items: center;
+    padding: 20px 0;
 }
 
 .enter {
@@ -41,11 +37,6 @@ header {
     }
 }
 
-@media (min-width: 1200px) {
-    .container {
-        width: calc(100% - 300px);
-    }
-}
 
 
 

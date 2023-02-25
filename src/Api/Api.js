@@ -19,6 +19,15 @@ class Api {
         }).then(onResponce);
     }
 
+    getProductById(prodId) {
+        return fetch(`${this._dataUrl}/products/${prodId}`, {
+            headers: {
+                authorization: this._token,
+                "Content-Type": "application/json"
+            },
+        }).then(onResponce)
+    }
+
     // Получение информации о пользователе 
 
     getUserInfo() {

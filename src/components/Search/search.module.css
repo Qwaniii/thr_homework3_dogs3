@@ -17,3 +17,9 @@
 .search input:focus {
     border: .5px solid rgb(255, 183, 0)
 }
+
+@media (max-width: 790px) {
+    .search input {
+        width: 100%;
+    }
+}

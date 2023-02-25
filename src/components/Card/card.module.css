@@ -7,11 +7,22 @@
   margin: 20px 0;
 } */
 .card {
-  display: grid;
-  grid-template-rows: 13rem 6rem auto auto;
-  align-content: center;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-content: flex-start;
   position: relative;
   margin: 30px 0;
+  box-shadow: none;
+  padding: 20px;
+  box-sizing: border-box;
+  transition: all .5s;
+}
+
+.card:hover {
+  transform: scale(1.07);
+  box-shadow: 0px 10px 15px -8px gray;
+  transition: all .5s;
 }
 
 .discount {
@@ -30,11 +41,27 @@
   font-weight: 600;
 }
 
+.tag {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  z-index: 5;
+}
+
 .likeContainer {
   position: absolute;
-  bottom: 50px;
-  right: 0;
+  bottom: -5px;
+  right: -10px;
   z-index: 10;
+}
+
+.num {
+  position: absolute;
+  bottom: -15px;
+  right: 3px;
 }
 
 .like {
@@ -61,49 +88,69 @@
   fill: rgba(255, 0, 0, 0.7);
 }
 
+.link {
+  text-decoration: none;
+  color: currentColor;
+}
+
 .image {
   position: relative;
-  overflow: hidden;
+
 }
 
 .image img {
-  position: absolute;
-  top: 50%;
+  /* position: absolute; */
+  /* top: 50%;
   left: 50%;
-  width: 75%;
-  transform: translate(-50%, -50%);
-  object-fit: cover;
-  transition: width .6s ease-out;
+  width: 100%;
+  transform: translate(-50%, -50%); */
+  width: 100%;
+  object-fit:contain;
+  margin-bottom: 16px;
 }
 
-.image img:hover {
-  width: 85%;
-}
+
 
 .descr {
+  padding-top: 16px;
     margin-bottom: 20px;
 }
 
 .descr span {
   display: block;
-  font-size: 16px;
+}
+
+.oldprice {
+  font-size: 12px;
+  text-decoration: line-through;
 }
 
 .price {
     font-weight: 600;
+    font-size: 16px;
+}
+
+.redprice {
+  color: red;
+  font-size: 18px;
 }
 
 .wight {
     font-weight: 100;
     color: grey;
+    font-size: 12px;
 }
 
 .title {
-  place-self: center;
+  padding-top: 15px;
+  line-height: 1.25;
 }
 
 .add {
+  margin-top: auto;
+  justify-self: flex-end;
   text-align: center;
+  position: relative;
 }
 
 .add a {
@@ -117,7 +164,24 @@
 }
 
 .add a:hover {
-    background-color:  rgba(220, 205, 0, 0.8);
-    color: rgba(99, 99, 99);
-    transform: scale(1.3);
+    background-color:  rgba(202, 66, 7, 0.536);
+    color: rgb(0, 0, 0);
+    box-shadow: 0 7px 7px -4px gray;
+    font-size: 17px;
+}
+
+
+@media (max-width: 790px) {
+  .card {
+    grid-template-rows: 13rem 7rem auto auto;
+  }
+
+}
+
+@media (min-width: 1200px) {
+  .card {
+    grid-template-rows: 13rem 7rem auto auto;
+  }
+
+
 }

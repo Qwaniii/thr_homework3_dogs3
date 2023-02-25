@@ -1,12 +1,13 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import LogoSrc from "./img/logo.svg"
 
 export default function Logo() {
     return (
         <div>
-            <a href="#">
+            <Link to="/">
                 <img src={LogoSrc} alt="Logo" />
-            </a>
+            </Link>
         </div>
     )
 }

@@ -6,7 +6,7 @@ import Search from "../Search/Search"
 export default function Header({currentUser, setSearchQuery}) {
   return (
     <header>
-      <div className={s.container}>
+      <div className="container">
         <div className={s.wrapper}>
           <div className={s.logo}>
             <Logo />
