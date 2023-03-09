@@ -4,10 +4,12 @@ import api from "../../Api/Api"
 import s from "./review.module.css"
 import cn from "classnames"
 
-const Review = ({ review, anchorReview, setReviewRating }) => {
+const Review = ({ review, anchorReview, setReviewRating, setModalUserReview }) => { 
 
-    const [authorReview, setAuthorReview] = useState({})
     const dateCreated = new Date(review.created_at)
+    const [authorReview, setAuthorReview] = useState({});
+
+  
 
     useEffect(() => {
         api.getReviewAuthor(review.author)
@@ -15,7 +17,6 @@ const Review = ({ review, anchorReview, setReviewRating }) => {
                 setAuthorReview(data)
             })
     }, [])
-
 
     // useEffect(() => {
     //     const readyRating = review.rating.reduce((acc, curVal) => acc + curVal, 0)
@@ -26,7 +27,7 @@ const Review = ({ review, anchorReview, setReviewRating }) => {
     return (
         <div className={s.container}>
             <div className={s.wrapper}>
-                <div className={s.header}>
+                <div className={s.header} >
                     <div className={s.imgWrapper}><img className={s.avatar} src={authorReview.avatar} alt={authorReview.name}></img></div>
                     {authorReview.name}
                 </div>

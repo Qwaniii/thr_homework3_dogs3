@@ -12,6 +12,7 @@ import NotFoundPage from "./Page/NotFoundPage";
 import { UserContext } from "./Context/UserContext";
 import FavoritePage from "./Page/FavoritePage";
 import { FavoriteContext } from "./Context/FavoriteContext";
+import Popup from "./components/Popup/Popup";
 
 function App() {
   const [cards, setCards] = useState([]);
@@ -24,6 +25,7 @@ function App() {
   const [maxPage, setMaxPage] = useState();
   const [cardsOnList, setCardsOnList] = useState(12);
   const [favoriteCards, setFavoriteCards] = useState([]);
+  const [modalUserReview, setModalUserReview] = useState(false)
   const arrMaxPage = [];
 
   const debounceValue = useDebounce(searchQuery, 500);
@@ -136,6 +138,8 @@ function App() {
                 cards={cards}
                 setCards={setCards}
                 handleProductLike={handleProductLike}
+                modalUserReview={modalUserReview}
+                setModalUserReview={setModalUserReview}
               />
             }
           ></Route>
@@ -161,6 +165,8 @@ function App() {
           <Route path="*" element={<NotFoundPage />}></Route>
         </Routes>
         <Footer />
+        <Popup>
+        </Popup>
       </UserContext.Provider>
       </FavoriteContext.Provider>
     </div>

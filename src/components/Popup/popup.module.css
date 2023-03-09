@@ -1,0 +1,44 @@
+
+
+.popup {
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+  overflow-y: scroll;
+  opacity: 0;
+  pointer-events: none;
+  transition: all .3s;
+
+  outline: none;
+}
+
+.popup.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.content {
+  box-sizing: border-box;
+  margin: 120px auto;
+  max-width: calc(100vw - 100px);
+  width: 600px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: white;
+  animation: all .3s linear;
+  transform-origin: 700px 0px;
+  opacity: 0;
+
+
+}
+
+.content.active {
+  opacity: 1;
+  transition: all .3s;
+}
