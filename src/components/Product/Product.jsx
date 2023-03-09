@@ -7,12 +7,16 @@ import { Link, useNavigate } from "react-router-dom";
 import NotFoundPage from "../../Page/NotFoundPage"
 import Spinner from "../Spinner/Spinner";
 import { UserContext } from "../../Context/UserContext";
+import Review  from "../Review/Review";
+import AddReview from "../AddReview/AddReview";
 
 export default function Product({ id, isLoading, setIsLoading, cards, setCards, handleProductLike }) {
 
   const [aboutProduct, setAboutProduct] = useState({});
-  const [errStatus, setErrStatus] = useState(false)
-  const { currentUser } = useContext(UserContext)
+  const [reviewRating, setReviewRating] = useState(0);
+  const [errStatus, setErrStatus] = useState(false);
+  const { currentUser } = useContext(UserContext);
+  const [anchorReview, setAnchorReview] = useState(false);
 
   const isLike = aboutProduct?.likes?.some((id) => id === currentUser._id)
   const navigate = useNavigate()
@@ -28,7 +32,7 @@ export default function Product({ id, isLoading, setIsLoading, cards, setCards, 
         console.log(err);
         setErrStatus(true)
       });
-  }, [id, cards]);
+  }, [id, cards, anchorReview]);
 
   // function handleProductLikeClick() {
   //   api.changeLikeProductStatus(aboutProduct._id, !isLike)
@@ -41,6 +45,8 @@ export default function Product({ id, isLoading, setIsLoading, cards, setCards, 
   //       setCards(newCards);
   //     })
   // }
+
+
 
   return (
     <div>
@@ -77,6 +83,7 @@ export default function Product({ id, isLoading, setIsLoading, cards, setCards, 
                   <Like />
                 </button>
                 <span>В изрбранное</span>
+                {reviewRating}
               </div>
             </div>
           </div>
@@ -92,7 +99,20 @@ export default function Product({ id, isLoading, setIsLoading, cards, setCards, 
               neque eius.
             </p> */}
           </div>
-          <div className={s.commets}></div>
+          <div className={s.review}>
+            <h3 className={s.h3}>Отзывов о товаре ({aboutProduct.reviews.length}) : </h3>
+              <div className={s.revWrapper}>
+                <div className={s.addRev}>
+                  <AddReview
+                    id={id}
+                    setAnchorReview={setAnchorReview}
+                    anchorReview={anchorReview}
+                /></div>
+                <span className={s.rev}>{aboutProduct.reviews.map((review) => (
+                  <Review key={review._id} review={review} anchorReview={anchorReview} setReviewRating={setReviewRating}/>
+                )).reverse()}</span>
+              </div>
+          </div>
         </div>
       </div>) : <Spinner/>}
       {errStatus && <NotFoundPage/>}

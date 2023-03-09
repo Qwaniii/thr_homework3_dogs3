@@ -101,7 +101,6 @@ function App() {
   for (let i = 1; i <= maxPage; i ++) {
     arrMaxPage.push(i)
   }
-  console.log(favoriteCards)
 
   return (
     <div>
