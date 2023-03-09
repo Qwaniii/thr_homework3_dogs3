@@ -82,6 +82,14 @@ export default function Product({
     setReviewRating(sum / length);
   }, [aboutProduct, anchorReview]);
 
+
+  useEffect(() => {
+    const sum = aboutProduct?.reviews?.reduce((res, item) => {
+      return res + item.rating;
+    }, 0);
+    setReviewRating(sum / length);
+  }, [aboutProduct, anchorReview]);
+
   // function handleProductLikeClick() {
   //   api.changeLikeProductStatus(aboutProduct._id, !isLike)
   //     .then((newProduct) => {
