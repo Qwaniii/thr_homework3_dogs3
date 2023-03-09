@@ -180,3 +180,14 @@
 
 
 }
+
+.rating {
+  margin-top: 20px;
+  font-size: 20px;
+}
+
+.numRat {
+  padding: 5px;
+  color: rgb(207, 172, 0);
+  font-weight:600;
+}
