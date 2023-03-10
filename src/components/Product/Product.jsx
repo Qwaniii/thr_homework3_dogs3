@@ -139,14 +139,10 @@ export default function Product({
                 <div className={s.info}>
                   {aboutProduct.discount > 0 && (
                     <div className={s.oldprice}>
-                      {`${Math.round(
-                        (aboutProduct.price * 100) /
-                          (100 - aboutProduct.discount)
-                      )}`}{" "}
-                      руб.
+                      {aboutProduct.discount > 0 && (aboutProduct.price + " руб.")}
                     </div>
                   )}
-                  <div className={s.price}>{aboutProduct.price} руб.</div>
+                  <div className={s.price}>{Math.round(aboutProduct.price - aboutProduct.price * aboutProduct.discount / 100)} руб.</div>
                   <div className={s.wigth}>{aboutProduct.wight}</div>
                   <div className={s.cart}>
                     <a href="#">В корзину</a>

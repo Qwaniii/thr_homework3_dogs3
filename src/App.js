@@ -1,7 +1,7 @@
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import Cards from "./components/Cards/Cards";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import api from "./Api/Api";
 import useDebounce from "./hooks/useDebounse";
 import Product from "./components/Product/Product";
@@ -13,6 +13,7 @@ import { UserContext } from "./Context/UserContext";
 import FavoritePage from "./Page/FavoritePage";
 import { FavoriteContext } from "./Context/FavoriteContext";
 import Popup from "./components/Popup/Popup";
+import Login from "./components/LoginForm/Login";
 
 function App() {
   const [cards, setCards] = useState([]);
@@ -26,12 +27,23 @@ function App() {
   const [cardsOnList, setCardsOnList] = useState(12);
   const [favoriteCards, setFavoriteCards] = useState([]);
   const [modalUserReview, setModalUserReview] = useState(false)
+  const [modalLogin, setModalLogin] = useState(false)
+  const [modalRegistr, setModalRegistr] = useState(false)
+  const [isToken, setIsToken] = useState(false)
   const arrMaxPage = [];
 
   const debounceValue = useDebounce(searchQuery, 500);
   
+  useEffect(() => {
+    const tokenStor = sessionStorage.getItem('token')
+    if(tokenStor) {
+      api.setToken(tokenStor)
+      setIsToken(tokenStor)
+    }
+  }, [])
 
   useEffect(() => {
+   {isToken && 
     api.getAppInfo(page, cardsOnList, debounceValue)
       .then(([cardData, currentUserData]) => {
         setCards(cardData.products);
@@ -40,9 +52,11 @@ function App() {
         setIsLoading(true);
       })
       .catch((err) => console.log(err));
-}, [page, debounceValue, cardsOnList]);
+    }
+}, [page, debounceValue, cardsOnList, isToken]);
 
   useEffect(() => {
+    {isToken &&
     api.getProductList()
     .then((data) => {
       setAllCardsForSort(data.products);
@@ -50,7 +64,9 @@ function App() {
       setFavoriteCards((prevState) => filtredData);
     })
     .catch((err) => console.log(err))
+  }
   }, [currentUser])
+
 
 
 
@@ -79,6 +95,7 @@ function App() {
   // }, [debounceValue]);
 
   function handleProductLike(product) {
+    if(isToken) {
     const isLike = product.likes.some((id) => id === currentUser._id);
     api.changeLikeProductStatus(product._id, !isLike).then((newCard) => {
       // в зависимсоти от того есть лайки или нет отправляем запрос PUT или DELETE
@@ -91,7 +108,9 @@ function App() {
         setFavoriteCards(prevState => prevState.filter((card) => card._id !== newCard._id))
       }
       setCards(newCards);
+    
     });
+  }
   }
 
   const curPaginate = (pagePaginate) => {
@@ -103,12 +122,13 @@ function App() {
   for (let i = 1; i <= maxPage; i ++) {
     arrMaxPage.push(i)
   }
+  
 
   return (
     <div>
       <FavoriteContext.Provider value={{favoriteCards}}>
       <UserContext.Provider value={{currentUser, selectTab, setSelectTab, allCardsForSort}}>
-        <Header currentUser={currentUser} setSearchQuery={setSearchQuery} />
+        <Header currentUser={currentUser} setSearchQuery={setSearchQuery} setModalLogin={setModalLogin} />
         <Routes>
           <Route
             path="thr_homework3_dogs3"
@@ -126,6 +146,8 @@ function App() {
                 curPaginate={curPaginate}
                 cardsOnList={cardsOnList}
                 setCardsOnList={setCardsOnList}
+                isToken={isToken}
+                setIsToken={setIsToken}
               />
             }
           ></Route>
@@ -165,7 +187,8 @@ function App() {
           <Route path="*" element={<NotFoundPage />}></Route>
         </Routes>
         <Footer />
-        <Popup>
+        <Popup popup={modalLogin} setPopup={setModalLogin}>
+          <Login setIsToken={setIsToken} setModalLogin={setModalLogin}/>
         </Popup>
       </UserContext.Provider>
       </FavoriteContext.Provider>

@@ -6,10 +6,15 @@ class Api {
 
     constructor({ dataUrl, token }) {
         this._dataUrl = dataUrl;
-        this._token = `Bearer ${token}`
+        // this._token = `Bearer ${token}`
+        // this._token = `${token}`
     }
 
     //Получение списка продуктов
+
+    setToken(token) {
+        this._token = `Bearer ${token}`
+    }
 
     getProductList() {
         return fetch(`${this._dataUrl}/products`, {
@@ -67,6 +72,16 @@ class Api {
         }).then(onResponce)
     }
 
+    signIn(data) {
+        return fetch(`${this._dataUrl}/signin`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        }).then(onResponce)
+    }
+
     //change info about user
 
     setUserInfo({ name, about }) {
@@ -118,7 +133,8 @@ class Api {
 
 const config = {
     dataUrl: 'https://api.react-learning.ru',
-    token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2UyMTgxNzU5Yjk4YjAzOGY3N2IyN2MiLCJncm91cCI6Imdyb3VwLTEwIiwiaWF0IjoxNjc1NzYxODg2LCJleHAiOjE3MDcyOTc4ODZ9.kbO5ITay5Wc1iGc28jtfJQ6VVMk3StpsVWNFql8W7TE'
+    // token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2UyMTgxNzU5Yjk4YjAzOGY3N2IyN2MiLCJncm91cCI6Imdyb3VwLTEwIiwiaWF0IjoxNjc1NzYxODg2LCJleHAiOjE3MDcyOTc4ODZ9.kbO5ITay5Wc1iGc28jtfJQ6VVMk3StpsVWNFql8W7TE'
+    // token: sessionStorage.getItem('token') || ""
 }
 
 const api = new Api(config)
