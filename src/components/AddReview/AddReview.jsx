@@ -9,6 +9,7 @@ const [objReview, setObjectReview] = useState({})
 
 const handleAddReview = (e, id, data) => {
     e.preventDefault();
+    console.log(objReview)
     api.sendReview(id, data)
         .then((data) => {
             console.log(data)
@@ -43,14 +44,13 @@ console.log(objReview)
                                 <select 
                                     name="rating" 
                                     className={s.innerNum} 
-                                    value={objReview.rating || ""}
+                                    // value={objReview.rating || ""}
                                     onChange={(e) => setObjectReview({...objReview, [e.target.name]: e.target.value})}>
-                                    <option value="">--</option>
                                     <option value={1}>1</option>
                                     <option value={2}>2</option>
                                     <option value={3}>3</option>
                                     <option value={4}>4</option>
-                                    <option value={5}>5</option>
+                                    <option value={5} selected>5</option>
                                 </select>
                             </label>
                         </div>
