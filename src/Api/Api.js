@@ -47,6 +47,26 @@ class Api {
         }).then(onResponce);
     }
 
+    getReviewAuthor(authorId) {
+        return fetch(`${this._dataUrl}/users/${authorId}`, {
+            headers: {
+                authorization: this._token,
+                "Content-Type": "application/json"
+            }
+        }).then(onResponce)
+    }
+
+    sendReview(productId, body) {
+        return fetch(`${this._dataUrl}/products/review/${productId}`, {
+            method: "POST",
+            headers: {
+                authorization: this._token,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(body)
+        }).then(onResponce)
+    }
+
     //change info about user
 
     setUserInfo({ name, about }) {

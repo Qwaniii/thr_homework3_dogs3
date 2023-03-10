@@ -22,8 +22,10 @@ export default function Product({
   setModalUserReview
 }) {
   const [aboutProduct, setAboutProduct] = useState({});
-  const [errStatus, setErrStatus] = useState(false)
-  const { currentUser } = useContext(UserContext)
+  const [reviewRating, setReviewRating] = useState(0);
+  const [errStatus, setErrStatus] = useState(false);
+  const { currentUser } = useContext(UserContext);
+  const [anchorReview, setAnchorReview] = useState(false);
 
   const isLike = aboutProduct?.likes?.some((id) => id === currentUser._id);
   const navigate = useNavigate();
@@ -40,7 +42,15 @@ export default function Product({
         console.log(err);
         setErrStatus(true);
       });
-  }, [id, cards]);
+  }, [id, cards, anchorReview]);
+
+
+  useEffect(() => {
+    const sum = aboutProduct?.reviews?.reduce((res, item) => {
+      return res + item.rating;
+    }, 0);
+    setReviewRating(sum / length);
+  }, [aboutProduct, anchorReview]);
 
 
   useEffect(() => {

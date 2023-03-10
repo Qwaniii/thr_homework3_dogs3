@@ -23,7 +23,7 @@ export default function Header({currentUser, setSearchQuery}) {
               Изменить
             </button>} */}
           </div>
-            <div><Accordeon/></div>
+            {/* <div><Accordeon/></div> */}
         </div>
       </div>
     </header>

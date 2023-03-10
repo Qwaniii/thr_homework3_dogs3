@@ -9,7 +9,7 @@ export default function NotFoundPage() {
         <div >
           Страница не найдена
         </div>
-        <Link to="/" className={s.link}>На главную</Link>
+        <Link to="thr_homework3_dogs3" className={s.link}>На главную</Link>
       </div>
     </div>
   </div>;

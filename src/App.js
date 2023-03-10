@@ -103,7 +103,6 @@ function App() {
   for (let i = 1; i <= maxPage; i ++) {
     arrMaxPage.push(i)
   }
-  console.log(favoriteCards)
 
   return (
     <div>
@@ -112,7 +111,7 @@ function App() {
         <Header currentUser={currentUser} setSearchQuery={setSearchQuery} />
         <Routes>
           <Route
-            index
+            path="thr_homework3_dogs3"
             element={
               <IndexPage
                 cards={cards}
@@ -131,7 +130,7 @@ function App() {
             }
           ></Route>
           <Route
-            path="product/:prodId"
+            path="thr_homework3_dogs3/product/:prodId"
             element={
               <ProductPage
                 isLoading={isLoading}
@@ -145,7 +144,7 @@ function App() {
             }
           ></Route>
           <Route
-            path="favorite"
+            path="thr_homework3_dogs3/favorite"
             element={
               <FavoritePage
                 cards={favoriteCards}

@@ -5,7 +5,7 @@ import LogoSrc from "./img/logo.svg"
 export default function Logo() {
     return (
         <div>
-            <Link to="/">
+            <Link to="thr_homework3_dogs3">
                 <img src={LogoSrc} alt="Logo" />
             </Link>
         </div>
