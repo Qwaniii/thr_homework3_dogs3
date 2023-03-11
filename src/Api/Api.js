@@ -1,4 +1,5 @@
 const onResponce = (res) => {
+    // return res.ok ? res.json() : console.log(res.message);
     return res.ok ? res.json() : Promise.reject(`Error ${res.status}`);
 }
 
@@ -74,6 +75,16 @@ class Api {
 
     signIn(data) {
         return fetch(`${this._dataUrl}/signin`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        }).then(onResponce)
+    }
+
+    signUp(data) {
+        return fetch(`${this._dataUrl}/signup`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

@@ -30,7 +30,7 @@ export default function Card({ card, onProductLike, setIsLoading, likes }) {
 
       <Link to={`product/${card._id}`} onClick={() => setIsLoading(false)} className={s.link}>
         <div className={s.image}>
-            <img src={card.pictures} alt="Image"></img> 
+            <img src={card.pictures} alt={card.title}></img> 
         </div>
         <div className={s.descr}>
           <span className={s.oldprice}>{card.discount > 0 && (card.price + " руб.")} </span>
@@ -41,7 +41,7 @@ export default function Card({ card, onProductLike, setIsLoading, likes }) {
         </div>
       </Link>
       <div className={s.add}>
-        <a href="#">В корзину</a>
+        <span className={s.linkBtn}>В корзину</span>
         <div className={s.likeContainer}>
         <button
           className={cn(s.like, { [s.likeActive]: isLiked })}

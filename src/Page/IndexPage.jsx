@@ -1,5 +1,4 @@
 import React from "react";
-import api from "../Api/Api";
 import Cards from "../components/Cards/Cards";
 import CardsDB from "../components/Cards/CardsDB";
 import Spinner from "../components/Spinner/Spinner";

@@ -1,10 +1,8 @@
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
-import Cards from "./components/Cards/Cards";
 import { useEffect, useState } from "react";
 import api from "./Api/Api";
 import useDebounce from "./hooks/useDebounse";
-import Product from "./components/Product/Product";
 import { Route, Routes } from "react-router";
 import IndexPage from "./Page/IndexPage";
 import ProductPage from "./Page/ProductPage";
@@ -20,6 +18,7 @@ function App() {
   const [selectTab, setSelectTab] = useState("all")
   const [page, setPage] = useState(1);
   const [maxPage, setMaxPage] = useState();
+  // eslint-disable-next-line no-unused-vars
   const [cardsOnList, setCardsonList] = useState(12);
   const arrMaxPage = [];
 
@@ -36,6 +35,7 @@ function App() {
       setCardsForPaginate(cardData.products.slice(startPaginate, startPaginate + cardsOnList))
       setIsLoading(true);
     });
+// eslint-disable-next-line react-hooks/exhaustive-deps
 }, []);
 
   //   api.getProductPaginateList(page, cardsOnList).then((cardData) => {
@@ -87,6 +87,7 @@ function App() {
   
   useEffect(() => {
     setCardsForPaginate(cards.slice(startPaginate, startPaginate + cardsOnList))
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [startPaginate])
 
   console.log(cardsForPaginate)

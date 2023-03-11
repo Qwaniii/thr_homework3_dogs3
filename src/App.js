@@ -1,10 +1,8 @@
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
-import Cards from "./components/Cards/Cards";
 import React, { useEffect, useState } from "react";
 import api from "./Api/Api";
 import useDebounce from "./hooks/useDebounse";
-import Product from "./components/Product/Product";
 import { Route, Routes } from "react-router";
 import IndexPage from "./Page/IndexPage";
 import ProductPage from "./Page/ProductPage";
@@ -14,6 +12,7 @@ import FavoritePage from "./Page/FavoritePage";
 import { FavoriteContext } from "./Context/FavoriteContext";
 import Popup from "./components/Popup/Popup";
 import Login from "./components/LoginForm/Login";
+import Registration from "./components/LoginForm/Registration";
 
 function App() {
   const [cards, setCards] = useState([]);
@@ -29,7 +28,7 @@ function App() {
   const [modalUserReview, setModalUserReview] = useState(false)
   const [modalLogin, setModalLogin] = useState(false)
   const [modalRegistr, setModalRegistr] = useState(false)
-  const [isToken, setIsToken] = useState(false)
+  const [isToken, setIsToken] = useState(null)
   const arrMaxPage = [];
 
   const debounceValue = useDebounce(searchQuery, 500);
@@ -40,10 +39,10 @@ function App() {
       api.setToken(tokenStor)
       setIsToken(tokenStor)
     }
-  }, [])
+  }, [isToken])
 
   useEffect(() => {
-   {isToken && 
+   isToken && 
     api.getAppInfo(page, cardsOnList, debounceValue)
       .then(([cardData, currentUserData]) => {
         setCards(cardData.products);
@@ -52,11 +51,11 @@ function App() {
         setIsLoading(true);
       })
       .catch((err) => console.log(err));
-    }
+    
 }, [page, debounceValue, cardsOnList, isToken]);
 
   useEffect(() => {
-    {isToken &&
+    isToken &&
     api.getProductList()
     .then((data) => {
       setAllCardsForSort(data.products);
@@ -64,8 +63,8 @@ function App() {
       setFavoriteCards((prevState) => filtredData);
     })
     .catch((err) => console.log(err))
-  }
-  }, [currentUser])
+  
+  }, [currentUser, isToken])
 
 
 
@@ -128,7 +127,14 @@ function App() {
     <div>
       <FavoriteContext.Provider value={{favoriteCards}}>
       <UserContext.Provider value={{currentUser, selectTab, setSelectTab, allCardsForSort}}>
-        <Header currentUser={currentUser} setSearchQuery={setSearchQuery} setModalLogin={setModalLogin} />
+        <Header currentUser={currentUser} 
+                setSearchQuery={setSearchQuery} 
+                setModalLogin={setModalLogin}
+                setIsToken={setIsToken} 
+                isToken={isToken}
+                modalRegistr={modalRegistr}
+                setModalRegistr={setModalRegistr}
+        />
         <Routes>
           <Route
             path="thr_homework3_dogs3"
@@ -184,11 +190,29 @@ function App() {
               />
             }
           ></Route>
+          {!isToken && 
+          <>
+          <Route
+            path="thr_homework3_dogs3/login"
+            element={
+              <IndexPage/>
+            }
+          ></Route>
+          <Route
+            path="thr_homework3_dogs3/registration"
+            element={
+              <IndexPage/>
+            }
+          ></Route>
+          </>}
           <Route path="*" element={<NotFoundPage />}></Route>
         </Routes>
         <Footer />
         <Popup popup={modalLogin} setPopup={setModalLogin}>
-          <Login setIsToken={setIsToken} setModalLogin={setModalLogin}/>
+          <Login isToken={isToken} setIsToken={setIsToken} setModalLogin={setModalLogin}/>
+        </Popup>
+        <Popup popup={modalRegistr} setPopup={setModalRegistr}>
+          <Registration isToken={isToken} setIsToken={setIsToken} setModalRegistr={setModalRegistr}/>
         </Popup>
       </UserContext.Provider>
       </FavoriteContext.Provider>

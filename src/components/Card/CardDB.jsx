@@ -1,10 +1,8 @@
-import React, { useContext } from "react";
+import React from "react";
 import s from "./card.module.css";
-import { ReactComponent as Like } from "./img/like.svg";
 import cn from "classnames";
-import { Link } from "react-router-dom";
 import Tags from "../Tags/Tags";
-import { UserContext } from "../../Context/UserContext";
+import { Link } from "react-router-dom";
 
 export default function CardDB({ card, onProductLike, setIsLoading, likes }) {
 
@@ -21,8 +19,9 @@ export default function CardDB({ card, onProductLike, setIsLoading, likes }) {
           <Tags tag={tag} key={index}/>
         )}
       </div>
+      <Link to="/thr_homework3_dogs3/login" className={s.link}>
         <div className={s.image}>
-            <img src={card.pictures} alt="Image"></img> 
+            <img src={card.pictures} alt={card.title}></img> 
         </div>
         <div className={s.descr}>
           <span className={s.oldprice}>{card.discount > 0 && (card.price + " руб.")} </span>
@@ -31,8 +30,9 @@ export default function CardDB({ card, onProductLike, setIsLoading, likes }) {
           <div className={s.title}>{card.name}</div>
           {/* <p>{card.description}</p> */}
         </div>
+      </Link>
       <div className={s.add}>
-        <a href="#">В корзину</a>
+      <Link to="/thr_homework3_dogs3/login" className={s.link}><span className={s.linkBtn}>В корзину</span></Link>
         <div className={s.likeContainer}>
         {/* <button
           className={cn(s.like, { [s.likeActive]: isLiked })}

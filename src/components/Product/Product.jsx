@@ -9,7 +9,6 @@ import Spinner from "../Spinner/Spinner";
 import { UserContext } from "../../Context/UserContext";
 import Review from "../Review/Review";
 import AddReview from "../AddReview/AddReview";
-import Popup from "../Popup/Popup";
 
 export default function Product({
   id,
@@ -42,7 +41,7 @@ export default function Product({
         console.log(err);
         setErrStatus(true);
       });
-  }, [id, cards, anchorReview]);
+  }, [id, cards, anchorReview, setIsLoading]);
 
 
   useEffect(() => {
@@ -50,54 +49,7 @@ export default function Product({
       return res + item.rating;
     }, 0);
     setReviewRating(sum / length);
-  }, [aboutProduct, anchorReview]);
-
-
-  useEffect(() => {
-    const sum = aboutProduct?.reviews?.reduce((res, item) => {
-      return res + item.rating;
-    }, 0);
-    setReviewRating(sum / length);
-  }, [aboutProduct, anchorReview]);
-
-
-  useEffect(() => {
-    const sum = aboutProduct?.reviews?.reduce((res, item) => {
-      return res + item.rating;
-    }, 0);
-    setReviewRating(sum / length);
-  }, [aboutProduct, anchorReview]);
-
-
-  useEffect(() => {
-    const sum = aboutProduct?.reviews?.reduce((res, item) => {
-      return res + item.rating;
-    }, 0);
-    setReviewRating(sum / length);
-  }, [aboutProduct, anchorReview]);
-
-
-  useEffect(() => {
-    const sum = aboutProduct?.reviews?.reduce((res, item) => {
-      return res + item.rating;
-    }, 0);
-    setReviewRating(sum / length);
-  }, [aboutProduct, anchorReview]);
-
-
-  useEffect(() => {
-    const sum = aboutProduct?.reviews?.reduce((res, item) => {
-      return res + item.rating;
-    }, 0);
-    setReviewRating(sum / length);
-  }, [aboutProduct, anchorReview]);
-
-
-  useEffect(() => {
-    const sum = aboutProduct?.reviews?.reduce((res, item) => {
-      return res + item.rating;
-    }, 0);
-    setReviewRating(sum / length);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [aboutProduct, anchorReview]);
 
   // function handleProductLikeClick() {
@@ -129,7 +81,7 @@ export default function Product({
               </div>
               <div className={s.main}>
                 <div className={s.image}>
-                  <img src={aboutProduct.pictures}></img>
+                  <img src={aboutProduct.pictures} alt={aboutProduct.title}></img>
                   {aboutProduct.discount > 0 && (
                     <div className={`${s.sale} ${s.backgroundSale}`}>
                       - {aboutProduct.discount}%
@@ -145,7 +97,7 @@ export default function Product({
                   <div className={s.price}>{Math.round(aboutProduct.price - aboutProduct.price * aboutProduct.discount / 100)} руб.</div>
                   <div className={s.wigth}>{aboutProduct.wight}</div>
                   <div className={s.cart}>
-                    <a href="#">В корзину</a>
+                    <span className={s.link}>В корзину</span>
                   </div>
                   <div className={s.likeContainer}>
                     <button
