@@ -19,10 +19,6 @@ const handleAddReview = (e, id, data) => {
     setObjectReview({})
 }
 
-
-
-console.log(objReview)
-
     return (
         <div className={s.container}>
             <div className={s.wrapper}>
@@ -44,13 +40,14 @@ console.log(objReview)
                                 <select 
                                     name="rating" 
                                     className={s.innerNum} 
+                                    defaultValue={5}
                                     // value={objReview.rating || ""}
                                     onChange={(e) => setObjectReview({...objReview, [e.target.name]: e.target.value})}>
                                     <option value={1}>1</option>
                                     <option value={2}>2</option>
                                     <option value={3}>3</option>
                                     <option value={4}>4</option>
-                                    <option value={5} selected>5</option>
+                                    <option value={5}>5</option>
                                 </select>
                             </label>
                         </div>

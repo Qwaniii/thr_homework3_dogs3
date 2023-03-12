@@ -8,7 +8,7 @@ import { ReactComponent as Close} from "./img/close.svg"
 import { ReactComponent as EyeOpen} from "./img/eye-open.svg"
 import { ReactComponent as EyeClose} from "./img/eye-close.svg"
 
-export default function Registration({ isToken, setIsToken, setModalRegistr }) {
+export default function Registration({ isToken, setIsToken, setModalRegistr, modalRegistr }) {
   const {
     register,
     handleSubmit,
@@ -27,11 +27,17 @@ export default function Registration({ isToken, setIsToken, setModalRegistr }) {
   const [anchorSuccess, setAnchorSuccess] = useState(true)
   const [eyeOpen, setEyeOpen] = useState(false)
   const [name, setName] = useState("")
+  const [error, setError] = useState("")
+
+
 
   useEffect(() => {
     setAnchorSuccess(true)
     setEyeOpen(false)
-  }, [setEyeOpen, setAnchorSuccess])
+    setError("")
+    reset()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [setEyeOpen, setAnchorSuccess, modalRegistr])
 
   const onSubmit = (data) => {
     // console.log({...data, group: "group-10"})
@@ -42,12 +48,19 @@ export default function Registration({ isToken, setIsToken, setModalRegistr }) {
         setAnchorSuccess(false)
         setTimeout(() => {
           setModalRegistr(false)
-          reset()
-          navigate("/thr_homework3_dogs3/login")
-          setAnchorSuccess(true)
+          // setAnchorSuccess(true)
         }, 5000) 
+        setTimeout(() => {
+          navigate("/thr_homework3_dogs3/login")
+        }, 5500)
       })
-      .catch((err) => console.log(err))
+      .catch((res) => {
+        console.log(res.status)
+        res.json().then((data) => {
+          console.log(data.message);
+          setError(data.message)
+        })
+      })
   }
 
   useEffect(() => {
@@ -111,6 +124,7 @@ export default function Registration({ isToken, setIsToken, setModalRegistr }) {
         <div onClick={() => setModalRegistr(false)}>
           <Close className={s.close}/>
         </div>
+        {error && <div className={s.fetchError}>{error}</div>}
       </div>
       :
       <div className={s.success}>

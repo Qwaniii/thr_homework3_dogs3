@@ -193,3 +193,11 @@
   background-color: rgba(251, 255, 0, 0.5);
   transition: all .3s;
 }
+
+.fetchError {
+  position: absolute;
+  bottom: 0;
+  color: red;
+  word-wrap: break-word;
+  hyphens: manual;
+}

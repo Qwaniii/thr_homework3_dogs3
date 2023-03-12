@@ -21,7 +21,7 @@ export default function Product({
   setModalUserReview
 }) {
   const [aboutProduct, setAboutProduct] = useState({});
-  const [reviewRating, setReviewRating] = useState(0);
+  const [reviewRating, setReviewRating] = useState(5);
   const [errStatus, setErrStatus] = useState(false);
   const { currentUser } = useContext(UserContext);
   const [anchorReview, setAnchorReview] = useState(false);
@@ -29,6 +29,13 @@ export default function Product({
   const isLike = aboutProduct?.likes?.some((id) => id === currentUser._id);
   const navigate = useNavigate();
   const length = aboutProduct?.reviews?.length;
+
+  useEffect(() => {
+    const tokenStor = sessionStorage.getItem('token')
+    if(tokenStor) {
+      api.setToken(tokenStor)
+    }
+  }, [id])
 
   useEffect(() => {
     api
@@ -64,7 +71,6 @@ export default function Product({
   //     })
   // }
 
-  console.log(aboutProduct)
 
   return (
     <div>
@@ -111,9 +117,18 @@ export default function Product({
                   {aboutProduct.reviews.length > 0 && <div className={s.rating}>
                     Рейтинг товара:{" "}
                     <span className={s.numRat}>
-                      {Math.floor(reviewRating * 100) / 100}
+                      {(Math.floor(reviewRating * 100) / 100).toString()}
                     </span>
                   </div>}
+                  <div className={s.delivery}>
+                    <p>Доставка по всему миру</p>
+                    <p>Доставка курьером от <b>300 руб.</b></p>
+                  </div>
+                  <div className={s.garanty}>
+                    <b>Гарантия качества</b>
+                    <p>Если вам не понравилось качество нашей продукции, мы вернем Вам деньги, либо сделаем все возможное, чтобы удовлетворить ваши нужды</p>
+
+                  </div>
                 </div>
               </div>
               <div className={s.about}>

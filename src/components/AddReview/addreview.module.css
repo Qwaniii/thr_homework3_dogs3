@@ -1,6 +1,6 @@
 .container {
     padding : 20px;
-    background-color: rgba(255, 255, 0, 0.6);
+    /* background-color: rgba(255, 255, 0, 0.6); */
     border-radius: 10px;
 
 }
@@ -59,10 +59,15 @@
     border-radius: 5px;
     outline: none;
     border: 1px solid white;
+    cursor: pointer;
 }
 
 .innerNum:focus {
     border: .3px solid gray;
+}
+
+.innerNum:hover {
+    background-color: rgb(245, 245, 245);
 }
 
 .btn {

@@ -192,3 +192,28 @@
   color: rgb(207, 172, 0);
   font-weight:600;
 }
+
+.delivery {
+  font-size: 14px;
+  margin-top: 60px;
+  padding: 15px;
+  box-sizing: border-box;
+  border-radius: 8px;
+  background-color: rgba(128, 128, 128, 0.1);
+  line-height: 2rem;
+}
+
+.delivery::first-line {
+  font-size: 16px;
+  
+}
+
+.garanty {
+  margin-top: 20px;
+  padding: 15px;
+  box-sizing: border-box;
+  border-radius: 8px;
+  background-color: rgba(128, 128, 128, 0.1);
+  line-height: 1.5rem;
+}
+

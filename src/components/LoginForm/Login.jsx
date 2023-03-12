@@ -9,7 +9,7 @@ import { ReactComponent as Close} from "./img/close.svg"
 import { ReactComponent as EyeOpen} from "./img/eye-open.svg"
 import { ReactComponent as EyeClose} from "./img/eye-close.svg"
 
-export default function Login({ isToken, setIsToken, setModalLogin }) {
+export default function Login({ isToken, setIsToken, setModalLogin, modalLogin }) {
   const {
     register,
     handleSubmit,
@@ -28,11 +28,16 @@ export default function Login({ isToken, setIsToken, setModalLogin }) {
   const [name, setName] = useState("")
   const [anchorSuccess, setAnchorSuccess] = useState(true)
   const [eyeOpen, setEyeOpen] = useState(false)
+  const [error, setError] = useState("")
+
 
   useEffect(() => {
     setAnchorSuccess(true)
     setEyeOpen(false)
-  }, [setAnchorSuccess, setEyeOpen])
+    setError("")
+    reset()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [setAnchorSuccess, setEyeOpen, modalLogin])
 
 
   const onSubmit = (data) => {
@@ -43,15 +48,20 @@ export default function Login({ isToken, setIsToken, setModalLogin }) {
         api.setToken(res.token)
         setIsToken(res.token)
         setName(res.data.name)
-        setAnchorSuccess(false)          
+        setAnchorSuccess(false)       
         navigate("/thr_homework3_dogs3")
         setTimeout(() => {
           setModalLogin(false)
+          // setAnchorSuccess(true)
         }, 2000)
-        reset()
-        setAnchorSuccess(true)
       })
-      .catch((res) => console.log(res))
+      .catch((res) => {
+        console.log(res.status)
+        res.json().then((data) => {
+          console.log(data.message);
+          setError(data.message)
+        })
+  })
   }
 
   useEffect(() => {
@@ -113,6 +123,7 @@ export default function Login({ isToken, setIsToken, setModalLogin }) {
         <div onClick={() => setModalLogin(false)}>
           <Close className={s.close}/>
         </div>
+        {error && <div className={s.fetchError}>{error}</div>}
       </div>
       :
       <div className={s.success}>

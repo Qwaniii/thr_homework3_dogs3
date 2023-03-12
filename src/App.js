@@ -137,7 +137,7 @@ function App() {
         />
         <Routes>
           <Route
-            path="thr_homework3_dogs3"
+            path="/thr_homework3_dogs3"
             element={
               <IndexPage
                 cards={cards}
@@ -209,10 +209,10 @@ function App() {
         </Routes>
         <Footer />
         <Popup popup={modalLogin} setPopup={setModalLogin}>
-          <Login isToken={isToken} setIsToken={setIsToken} setModalLogin={setModalLogin}/>
+          <Login isToken={isToken} setIsToken={setIsToken} setModalLogin={setModalLogin} modalLogin={modalLogin}/>
         </Popup>
         <Popup popup={modalRegistr} setPopup={setModalRegistr}>
-          <Registration isToken={isToken} setIsToken={setIsToken} setModalRegistr={setModalRegistr}/>
+          <Registration isToken={isToken} setIsToken={setIsToken} setModalRegistr={setModalRegistr} modalRegistr={modalRegistr}/>
         </Popup>
       </UserContext.Provider>
       </FavoriteContext.Provider>
