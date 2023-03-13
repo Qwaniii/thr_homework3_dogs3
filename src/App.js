@@ -31,6 +31,8 @@ function App() {
   const [modalRegistr, setModalRegistr] = useState(false)
   const [isToken, setIsToken] = useState(null)
   const [myReviewArr, setMyReviewArr] = useState([])
+  const [anchorReview, setAnchorReview] = useState(false);
+
   
   const arrMaxPage = [];
 
@@ -67,8 +69,16 @@ function App() {
     })
     .catch((err) => console.log(err))
   
-  }, [currentUser, isToken])
+  }, [currentUser, isToken, allCardsForSort])
 
+  useEffect(() => {
+    api.getAllReview()
+        .then((data) => {
+            console.log(data)
+            const myData = data.filter((item) => item.author._id === currentUser._id)
+            setMyReviewArr(myData)
+        })
+  }, [currentUser, setMyReviewArr, anchorReview])
 
 
 
@@ -172,6 +182,8 @@ function App() {
                 handleProductLike={handleProductLike}
                 modalUserReview={modalUserReview}
                 setModalUserReview={setModalUserReview}
+                anchorReview={anchorReview}
+                setAnchorReview={setAnchorReview}
               />
             }
           ></Route>

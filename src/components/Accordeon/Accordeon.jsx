@@ -27,7 +27,7 @@ export default function Accordeon({ children, myReviewArr }) {
             </div>
             <div className={s.link}>
               <Link to="thr_homework3_dogs3/favorite" onClick={toggle} className={s.favorite}>&#10084;  {favoriteCards.length}</Link>
-              <Link to="thr_homework3_dogs3/my-review" onClick={toggle} className={s.review}>&#9998; {myReviewArr.length}</Link>
+              <Link to="thr_homework3_dogs3/my-review" onClick={toggle} className={s.review}>&#9998; {(myReviewArr.length).toString()}</Link>
             </div>
           </div>
           <div className={s.close} onClick={toggle}>

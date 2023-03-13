@@ -18,13 +18,14 @@ export default function Product({
   setCards,
   handleProductLike,
   modalUserReview,
-  setModalUserReview
+  setModalUserReview,
+  anchorReview,
+  setAnchorReview
 }) {
   const [aboutProduct, setAboutProduct] = useState({});
   const [reviewRating, setReviewRating] = useState(5);
   const [errStatus, setErrStatus] = useState(false);
   const { currentUser } = useContext(UserContext);
-  const [anchorReview, setAnchorReview] = useState(false);
 
   const isLike = aboutProduct?.likes?.some((id) => id === currentUser._id);
   const navigate = useNavigate();
@@ -83,7 +84,7 @@ export default function Product({
                   Назад
                 </Link>
                 <h2 className="div">{aboutProduct.name}</h2>
-                <p className="div">Артикул {aboutProduct._id.slice(5,12)}</p>
+                <p className="div">Артикул {aboutProduct?._id?.slice(5,12)}</p>
               </div>
               <div className={s.main}>
                 <div className={s.image}>
@@ -114,7 +115,7 @@ export default function Product({
                     </button>
                     <span>В изрбранное</span>
                   </div>
-                  {aboutProduct.reviews.length > 0 && <div className={s.rating}>
+                  {aboutProduct?.reviews?.length > 0 && <div className={s.rating}>
                     Рейтинг товара:{" "}
                     <span className={s.numRat}>
                       {(Math.floor(reviewRating * 100) / 100).toString()}
@@ -145,7 +146,7 @@ export default function Product({
               </div>
               <div className={s.review}>
                 <h3 className={s.h3}>
-                  Отзывов о товаре ({aboutProduct.reviews.length}) :{" "}
+                  Отзывов о товаре ({aboutProduct?.reviews?.length}) :{" "}
                 </h3>
                 <div className={s.revWrapper}>
                   <div className={s.addRev}>
@@ -156,8 +157,7 @@ export default function Product({
                     />
                   </div>
                   <span className={s.rev}>
-                    {aboutProduct.reviews
-                      .map((review) => (
+                    {aboutProduct?.reviews?.map((review) => (
                         <Review
                           key={review._id}
                           review={review}
