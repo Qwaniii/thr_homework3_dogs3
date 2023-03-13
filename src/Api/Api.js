@@ -73,6 +73,15 @@ class Api {
         }).then(onResponce)
     }
 
+    getAllReview() {
+        return fetch(`${this._dataUrl}/products/review`, {
+            headers: {
+                authorization: this._token,
+                "Content-Type": "application/json"
+            }
+        }).then(onResponce)
+    }
+
     signIn(data) {
         return fetch(`${this._dataUrl}/signin`, {
             method: "POST",

@@ -13,6 +13,7 @@ import { FavoriteContext } from "./Context/FavoriteContext";
 import Popup from "./components/Popup/Popup";
 import Login from "./components/LoginForm/Login";
 import Registration from "./components/LoginForm/Registration";
+import MyReviewPage from "./Page/MyReviewPage";
 
 function App() {
   const [cards, setCards] = useState([]);
@@ -29,6 +30,8 @@ function App() {
   const [modalLogin, setModalLogin] = useState(false)
   const [modalRegistr, setModalRegistr] = useState(false)
   const [isToken, setIsToken] = useState(null)
+  const [myReviewArr, setMyReviewArr] = useState([])
+  
   const arrMaxPage = [];
 
   const debounceValue = useDebounce(searchQuery, 500);
@@ -134,6 +137,7 @@ function App() {
                 isToken={isToken}
                 modalRegistr={modalRegistr}
                 setModalRegistr={setModalRegistr}
+                myReviewArr={myReviewArr}
         />
         <Routes>
           <Route
@@ -187,6 +191,15 @@ function App() {
                 curPaginate={curPaginate}
                 cardsOnList={cardsOnList}
                 setCardsOnList={setCardsOnList}
+              />
+            }
+          ></Route>
+          <Route
+            path="thr_homework3_dogs3/my-review"
+            element={
+              <MyReviewPage
+                myReviewArr={myReviewArr}
+                setMyReviewArr={setMyReviewArr}
               />
             }
           ></Route>

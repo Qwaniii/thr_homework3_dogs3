@@ -6,6 +6,7 @@ import api from '../../Api/Api'
 import { useNavigate } from 'react-router'
 import { Link } from 'react-router-dom'
 import { ReactComponent as Exit } from "./img/exit.svg"
+import Accordeon from "../Accordeon/Accordeon"
 
 export default function Header({currentUser, 
                                 setSearchQuery, 
@@ -13,7 +14,8 @@ export default function Header({currentUser,
                                 setIsToken,
                                 isToken,
                                 modalRegistr,
-                                setModalRegistr
+                                setModalRegistr,
+                                myReviewArr
                               }) {
 
   const navigate = useNavigate()
@@ -49,7 +51,13 @@ export default function Header({currentUser,
               {/* {currentUser.name && <span className={s.name}> <b>Имя:</b> {currentUser.name} <span className={s.about}><b>Должность: </b>{currentUser.about}</span></span>} */}
             </div>
             <div onClick={(e) => handleLogOut(e)}><Exit className={s.exit}/></div>
-
+            <div className={s.accordeon}>
+              <Accordeon myReviewArr={myReviewArr}> 
+                <div className={s.accAvatar}><img c src={currentUser.avatar} alt={currentUser.name}></img></div>
+                <div>{currentUser.name}</div>
+                <div>{currentUser.about}</div>
+              </Accordeon> 
+            </div>
             {/* {currentUser.name && <button className={s.btn}>
               Изменить
             </button>} */}
@@ -59,7 +67,6 @@ export default function Header({currentUser,
             <Link to="thr_homework3_dogs3/login" className={s.linkwrap}><button onClick={() => setModalLogin(true)} className={s.enterBtn}>Войти</button></Link>
             <Link to="thr_homework3_dogs3/registration" className={s.linkwrap}><button onClick={() => setModalRegistr(true)} className={s.enterBtn}>Регистрация</button></Link>
           </div>}
-            {/* <div><Accordeon/></div> */}
         </div>
       </div>
     </header>
