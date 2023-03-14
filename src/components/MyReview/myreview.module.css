@@ -92,7 +92,7 @@
   bottom: -24px;
   right: 40%;
   cursor: pointer;
-  transition: all .8s ease-out;
+  transition: all .6s ease-out;
 }
 
 .updown:hover, 
@@ -101,7 +101,7 @@
 }
 
 .updown.active {
-  transition: all .8s ease;
+  transition: all .5s ease-out;
   transform: rotate(90deg);
 }
 
@@ -124,12 +124,14 @@
 .nonActive {
   max-height: 0;
   overflow: hidden;
-  transition: max-height 1s ease;
+  transition: max-height .5s ease-out;
 
 }
 
 .nonActive.active {
-  max-height: 500px;
+  max-height: 100vh;
+  transition: max-height 1s ease;
+
 }
 
 .prodWrapper {

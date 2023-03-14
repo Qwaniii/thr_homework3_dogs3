@@ -18,7 +18,7 @@ class Api {
     }
 
     getProductList() {
-        return fetch(`${this._dataUrl}/products`, {
+        return fetch(`${this._dataUrl}/products?limit=600`, {
             headers: {
                 authorization: this._token,
             },
@@ -26,6 +26,7 @@ class Api {
     }
 
     getProductPaginateList(page, limit, searchQuery) {
+        // return fetch(`${this._dataUrl}/products?page=${page}&limit=${limit}&query=${searchQuery}`, {
         return fetch(`${this._dataUrl}/products?page=${page}&limit=${limit}&query=${searchQuery}`, {
             headers: {
                 authorization: this._token,

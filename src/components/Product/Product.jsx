@@ -41,14 +41,14 @@ export default function Product({
   useEffect(() => {
     api
       .getProductById(id)
-      .then((data) => {
-        setAboutProduct(data);
-        setIsLoading(true);
-      })
-      .catch((err) => {
-        console.log(err);
-        setErrStatus(true);
-      });
+        .then((data) => {
+          setAboutProduct(data);
+          setIsLoading(true);
+        })
+        .catch((err) => {
+          console.log(err);
+          setErrStatus(true);
+        });
   }, [id, cards, anchorReview, setIsLoading]);
 
 

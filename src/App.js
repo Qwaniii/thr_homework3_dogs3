@@ -14,14 +14,17 @@ import Popup from "./components/Popup/Popup";
 import Login from "./components/LoginForm/Login";
 import Registration from "./components/LoginForm/Registration";
 import MyReviewPage from "./Page/MyReviewPage";
+import NewProduct from "./components/NewProduct/NewProduct";
 
 function App() {
   const [cards, setCards] = useState([]);
   const [allCardsForSort, setAllCardsForSort] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [totalSearch, setTotalSearch] = useState(0)
   const [currentUser, setCurrentUser] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [selectTab, setSelectTab] = useState("all")
+  const [cardsForPaginate, setCardsForPaginate] = useState([]);
   const [page, setPage] = useState(1);
   const [maxPage, setMaxPage] = useState();
   const [cardsOnList, setCardsOnList] = useState(12);
@@ -32,11 +35,16 @@ function App() {
   const [isToken, setIsToken] = useState(null)
   const [myReviewArr, setMyReviewArr] = useState([])
   const [anchorReview, setAnchorReview] = useState(false);
+  const [anchorPaginate, setAnchorPaginate] = useState(true)
+  const [userRegistration, setUserRegistration] = useState(null)
 
   
   const arrMaxPage = [];
 
   const debounceValue = useDebounce(searchQuery, 500);
+
+  const startPaginate = (cardsOnList * page) - cardsOnList;
+
   
   useEffect(() => {
     const tokenStor = sessionStorage.getItem('token')
@@ -50,7 +58,9 @@ function App() {
    isToken && 
     api.getAppInfo(page, cardsOnList, debounceValue)
       .then(([cardData, currentUserData]) => {
+        console.log(cardData)
         setCards(cardData.products);
+        setTotalSearch(cardData.total)
         setMaxPage(Math.ceil(cardData.total / cardsOnList))
         setCurrentUser(currentUserData);
         setIsLoading(true);
@@ -62,23 +72,27 @@ function App() {
   useEffect(() => {
     isToken &&
     api.getProductList()
-    .then((data) => {
-      setAllCardsForSort(data.products);
-      const filtredData = (data.products)?.filter((post) => post?.likes?.some((id) => id === currentUser._id));
-      setFavoriteCards((prevState) => filtredData);
-    })
-    .catch((err) => console.log(err))
+      .then((data) => {
+        console.log(data)
+        setAllCardsForSort(data.products);
+        const filtredData = (data.products)?.filter((post) => post?.likes?.some((id) => id === currentUser._id));
+        setFavoriteCards(filtredData);
+      })
+      .catch((err) => console.log(err))
   
-  }, [currentUser, isToken, allCardsForSort])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentUser, isToken])
 
   useEffect(() => {
+    isToken &&
     api.getAllReview()
         .then((data) => {
             console.log(data)
             const myData = data.filter((item) => item.author._id === currentUser._id)
             setMyReviewArr(myData)
         })
-  }, [currentUser, setMyReviewArr, anchorReview])
+        .catch((err) => console.log(err.status))
+  }, [currentUser, setMyReviewArr, anchorReview, isToken])
 
 
 
@@ -120,7 +134,24 @@ function App() {
         setFavoriteCards(prevState => prevState.filter((card) => card._id !== newCard._id))
       }
       setCards(newCards);
-    
+    });
+  }
+  }
+
+  function handleProductLikeForAllProduct(product) {
+    if(isToken) {
+    const isLike = product.likes.some((id) => id === currentUser._id);
+    api.changeLikeProductStatus(product._id, !isLike).then((newCard) => {
+      // в зависимсоти от того есть лайки или нет отправляем запрос PUT или DELETE
+      const newCards = cardsForPaginate.map((c) => {
+        return c._id === newCard._id ? newCard : c;
+      });
+      if (!isLike) {
+        setFavoriteCards(prevState => [...prevState, newCard])
+      } else {
+        setFavoriteCards(prevState => prevState.filter((card) => card._id !== newCard._id))
+      }
+      setCardsForPaginate(newCards);
     });
   }
   }
@@ -129,13 +160,45 @@ function App() {
     setPage(pagePaginate)
   }
 
+  const curPaginateOnClient = (pagePaginate) => {
+    setPage(pagePaginate)
+    // setCardsForPaginate(allCardsForSort.slice(startPaginate, startPaginate + cardsOnList))
+
+  }
+
+
+  useEffect(() => {
+    if (selectTab === "new") {
+      setCardsForPaginate(allCardsForSort
+        .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+        .slice(startPaginate, startPaginate + cardsOnList))}
+    else if (selectTab === "cheap") {
+      setCardsForPaginate(allCardsForSort
+        .sort((a, b) => (Math.round(a.price - a.price * a.discount / 100)) - (Math.round(b.price - b.price * b.discount / 100)))
+        .slice(startPaginate, startPaginate + cardsOnList))}
+    else if (selectTab === "expens") {
+      setCardsForPaginate(allCardsForSort
+        .sort((a, b) => (Math.round(b.price - b.price * b.discount / 100)) - (Math.round(a.price - a.price * a.discount / 100)))
+        .slice(startPaginate, startPaginate + cardsOnList))}
+    else if (selectTab === "popular") {
+      setCardsForPaginate(allCardsForSort
+        .sort((a, b) => b.likes.length - a.likes.length)
+        .slice(startPaginate, startPaginate + cardsOnList))}
+    else if (selectTab === "sale") {
+      setCardsForPaginate(allCardsForSort
+        .sort((a, b) => b.discount - a.discount)
+        .slice(startPaginate, startPaginate + cardsOnList))}
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [startPaginate, selectTab])
+
+
+
 // Создание массива для пагинации страниц 
 
   for (let i = 1; i <= maxPage; i ++) {
     arrMaxPage.push(i)
   }
   
-
   return (
     <div>
       <FavoriteContext.Provider value={{favoriteCards}}>
@@ -161,6 +224,7 @@ function App() {
                 isLoading={isLoading}
                 setIsLoading={setIsLoading}
                 countPage={arrMaxPage}
+                maxPage={maxPage}
                 page={page}
                 setPage={setPage}
                 curPaginate={curPaginate}
@@ -168,6 +232,12 @@ function App() {
                 setCardsOnList={setCardsOnList}
                 isToken={isToken}
                 setIsToken={setIsToken}
+                handleProductLikeForAllProduct={handleProductLikeForAllProduct}
+                totalSearch={totalSearch}
+                anchorPaginate={anchorPaginate}
+                setAnchorPaginate={setAnchorPaginate}
+                cardsForPaginate={cardsForPaginate}
+                curPaginateOnClient={curPaginateOnClient}
               />
             }
           ></Route>
@@ -192,6 +262,7 @@ function App() {
             element={
               <FavoritePage
                 cards={favoriteCards}
+                cardsForPaginate={favoriteCards}
                 searchQuery={searchQuery}
                 handleProductLike={handleProductLike}
                 currentUser={currentUser}
@@ -215,6 +286,14 @@ function App() {
               />
             }
           ></Route>
+          <Route
+            path="thr_homework3_dogs3/add-product"
+            element={
+              <NewProduct
+
+              />
+            }
+          ></Route>
           {!isToken && 
           <>
           <Route
@@ -234,10 +313,24 @@ function App() {
         </Routes>
         <Footer />
         <Popup popup={modalLogin} setPopup={setModalLogin}>
-          <Login isToken={isToken} setIsToken={setIsToken} setModalLogin={setModalLogin} modalLogin={modalLogin}/>
+          <Login i
+            sToken={isToken} 
+            setIsToken={setIsToken} 
+            setModalLogin={setModalLogin}
+            modalLogin={modalLogin}
+            userRegistration={userRegistration}
+            setUserRegistration={setUserRegistration}
+            />
         </Popup>
         <Popup popup={modalRegistr} setPopup={setModalRegistr}>
-          <Registration isToken={isToken} setIsToken={setIsToken} setModalRegistr={setModalRegistr} modalRegistr={modalRegistr}/>
+          <Registration 
+            isToken={isToken} 
+            setIsToken={setIsToken} 
+            setModalRegistr={setModalRegistr} 
+            modalRegistr={modalRegistr}
+            userRegistration={userRegistration}
+            setUserRegistration={setUserRegistration}
+            />
         </Popup>
       </UserContext.Provider>
       </FavoriteContext.Provider>

@@ -9,7 +9,7 @@ import { ReactComponent as Close} from "./img/close.svg"
 import { ReactComponent as EyeOpen} from "./img/eye-open.svg"
 import { ReactComponent as EyeClose} from "./img/eye-close.svg"
 
-export default function Login({ isToken, setIsToken, setModalLogin, modalLogin }) {
+export default function Login({ isToken, setIsToken, setModalLogin, modalLogin, userRegistration, setUserRegistration }) {
   const {
     register,
     handleSubmit,
@@ -32,12 +32,39 @@ export default function Login({ isToken, setIsToken, setModalLogin, modalLogin }
 
 
   useEffect(() => {
+    if (!isToken) {
     setAnchorSuccess(true)
+    }
     setEyeOpen(false)
     setError("")
     reset()
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [setAnchorSuccess, setEyeOpen, modalLogin])
+  }, [setAnchorSuccess, setEyeOpen, modalLogin, isToken])
+
+  useEffect(() => {
+    if (userRegistration) {
+      api.signIn(userRegistration)
+        .then((res) => {
+          console.log(res)
+          sessionStorage.setItem('token', res.token)
+          api.setToken(res.token)
+          setIsToken(res.token) 
+          navigate("/thr_homework3_dogs3")
+          setUserRegistration(null)
+          // setTimeout(() => {
+          //   setModalLogin(false)
+          // }, 2000)
+        })
+        .catch((res) => {
+          console.log(res.status)
+          res.json().then((data) => {
+            console.log(data.message);
+            setError(data.message)
+          })
+        }) 
+      }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userRegistration])
 
 
   const onSubmit = (data) => {
@@ -61,7 +88,7 @@ export default function Login({ isToken, setIsToken, setModalLogin, modalLogin }
           console.log(data.message);
           setError(data.message)
         })
-  })
+    })
   }
 
   useEffect(() => {

@@ -15,13 +15,16 @@ export default function FavoritePage({
   curPaginate,
   cardsOnList,
   setCardsOnList,
+  cardsForPaginate
 }) {
 
   return (
     <div>
       {isLoading ? (
+        <>
         <Cards
           goods={cards}
+          cardsForPaginate={cardsForPaginate}
           searchQuery={searchQuery}
           onProductLike={handleProductLike}
           currentUser={currentUser}
@@ -33,6 +36,7 @@ export default function FavoritePage({
           cardsOnList={cardsOnList}
           setCardsOnList={setCardsOnList}
         />
+        </>
       ) : (
         <Spinner />
       )}

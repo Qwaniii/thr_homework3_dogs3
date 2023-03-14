@@ -8,17 +8,24 @@ export default function IndexPage({
   cards,
   searchQuery,
   handleProductLike,
+  handleProductLikeForAllProduct,
   currentUser,
   isLoading,
   setIsLoading,
   page,
   setPage,
+  maxPage,
   countPage,
   curPaginate,
   cardsOnList,
   setCardsOnList,
   isToken,
-  setIsToken
+  setIsToken,
+  totalSearch,
+  anchorPaginate,
+  setAnchorPaginate,
+  cardsForPaginate,
+  curPaginateOnClient
 }) {
 
   return (
@@ -31,14 +38,21 @@ export default function IndexPage({
           goods={cards}
           searchQuery={searchQuery}
           onProductLike={handleProductLike}
+          onProductLikeAllProducts={handleProductLikeForAllProduct}
           currentUser={currentUser}
           setIsLoading={setIsLoading}
           page={page}
           setPage={setPage}
+          maxPage={maxPage}
           countPage={countPage}
           curPaginate={curPaginate}
           cardsOnList={cardsOnList}
           setCardsOnList={setCardsOnList}
+          totalSearch={totalSearch}
+          anchorPaginate={anchorPaginate}
+          setAnchorPaginate={setAnchorPaginate}
+          cardsForPaginate={cardsForPaginate}
+          curPaginateOnClient={curPaginateOnClient}
         /> : <Spinner/>}
       </div> 
     :

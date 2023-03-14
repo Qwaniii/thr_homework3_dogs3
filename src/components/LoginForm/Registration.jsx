@@ -8,7 +8,7 @@ import { ReactComponent as Close} from "./img/close.svg"
 import { ReactComponent as EyeOpen} from "./img/eye-open.svg"
 import { ReactComponent as EyeClose} from "./img/eye-close.svg"
 
-export default function Registration({ isToken, setIsToken, setModalRegistr, modalRegistr }) {
+export default function Registration({ isToken, setIsToken, setModalRegistr, modalRegistr, userRegistration, setUserRegistration }) {
   const {
     register,
     handleSubmit,
@@ -32,12 +32,14 @@ export default function Registration({ isToken, setIsToken, setModalRegistr, mod
 
 
   useEffect(() => {
+    if (!isToken) {
     setAnchorSuccess(true)
+    }
     setEyeOpen(false)
     setError("")
     reset()
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [setEyeOpen, setAnchorSuccess, modalRegistr])
+  }, [setEyeOpen, setAnchorSuccess, modalRegistr, isToken])
 
   const onSubmit = (data) => {
     // console.log({...data, group: "group-10"})
@@ -45,14 +47,14 @@ export default function Registration({ isToken, setIsToken, setModalRegistr, mod
       .then((res) => {
         console.log(res)
         setName(res.name) 
+        setUserRegistration((prevState) => ({...prevState, email: res.email, password: data.password}))
         setAnchorSuccess(false)
         setTimeout(() => {
           setModalRegistr(false)
-          // setAnchorSuccess(true)
-        }, 5000) 
-        setTimeout(() => {
-          navigate("/thr_homework3_dogs3/login")
-        }, 5500)
+        }, 3000) 
+        // setTimeout(() => {
+        //   navigate("/thr_homework3_dogs3/login")
+        // }, 5500)
       })
       .catch((res) => {
         console.log(res.status)
@@ -129,8 +131,8 @@ export default function Registration({ isToken, setIsToken, setModalRegistr, mod
       :
       <div className={s.success}>
         <p>Успешная регистрация!</p>
+        <p style={{fontSize: 20, paddingBottom: 5}}>Добро пожаловать,</p>
         <h4>{name || "Гость"}!</h4>
-        <p>Теперь необходимо <b>войти</b> на сайт</p>
       </div>}
     </div>
   );

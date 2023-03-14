@@ -20,7 +20,7 @@ export default function Popup({ popup, setPopup, children }) {
 
   return (
     <div>
-      <div className={cn(s.popup, {[s.active]: popup})} onClick={(e) => setPopup(false)}>
+      <div className={cn(s.popup, {[s.active]: popup})} onClick={() => setPopup(false)}>
         <div className={cn(s.content, {[s.active]: popup})} onClick={(e) => e.stopPropagation()}>
           {children}
         </div>

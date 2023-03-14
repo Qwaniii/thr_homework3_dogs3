@@ -53,7 +53,7 @@ export default function Header({currentUser,
             <div onClick={(e) => handleLogOut(e)}><Exit className={s.exit}/></div>
             <div className={s.accordeon}>
               <Accordeon myReviewArr={myReviewArr}> 
-                <div className={s.accAvatar}><img c src={currentUser.avatar} alt={currentUser.name}></img></div>
+                <div className={s.accAvatar}><img src={currentUser.avatar} alt={currentUser.name}></img></div>
                 <div>{currentUser.name}</div>
                 <div>{currentUser.about}</div>
               </Accordeon> 
