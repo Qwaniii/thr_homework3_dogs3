@@ -6,13 +6,13 @@ import { Link } from "react-router-dom";
 import Tags from "../Tags/Tags";
 import { UserContext } from "../../Context/UserContext";
 
-export default function Card({ card, onProductLike, setIsLoading, likes }) {
+export default function Card({ card, onProductLike, setIsLoading, likes, goods }) {
   const { currentUser } = useContext(UserContext);
 
   const isLiked = card.likes.some((id) => id === currentUser._id);
 
   function handleLikeClick() {
-    onProductLike(card);
+    onProductLike(card, goods);
   }
 
   return (

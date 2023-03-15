@@ -25,6 +25,17 @@ class Api {
         }).then(onResponce);
     }
 
+    addNewProduct(data) {
+        return fetch(`${this._dataUrl}/products`, {
+            method: "POST",
+            headers: {
+                authorization: this._token,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        }).then(onResponce)
+    }
+
     getProductPaginateList(page, limit, searchQuery) {
         // return fetch(`${this._dataUrl}/products?page=${page}&limit=${limit}&query=${searchQuery}`, {
         return fetch(`${this._dataUrl}/products?page=${page}&limit=${limit}&query=${searchQuery}`, {

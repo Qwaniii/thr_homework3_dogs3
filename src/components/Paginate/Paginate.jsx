@@ -7,7 +7,7 @@ export default function Paginate({ page, setPage, paginateNum, curPaginate }) {
   const toUp = () => {
     window.scrollTo({
       top: 0,
-      behavior: "smooth"
+      behavior: "auto"
     })
   }
 

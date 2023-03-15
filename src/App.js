@@ -35,7 +35,8 @@ function App() {
   const [isToken, setIsToken] = useState(null)
   const [myReviewArr, setMyReviewArr] = useState([])
   const [anchorReview, setAnchorReview] = useState(false);
-  const [anchorPaginate, setAnchorPaginate] = useState(true)
+  const [anchorPaginate, setAnchorPaginate] = useState(true);
+  const [anchorNewProduct, setAnchorNewProduct] = useState(false);
   const [userRegistration, setUserRegistration] = useState(null)
 
   
@@ -67,7 +68,7 @@ function App() {
       })
       .catch((err) => console.log(err));
     
-}, [page, debounceValue, cardsOnList, isToken]);
+}, [page, debounceValue, cardsOnList, isToken, anchorNewProduct]);
 
   useEffect(() => {
     isToken &&
@@ -120,12 +121,12 @@ function App() {
     // const newState = (cardData.products).filter((item) => (item.name.toLowerCase()).includes(searchQuery.toLowerCase())) --- поиск товаров без сервера
   // }, [debounceValue]);
 
-  function handleProductLike(product) {
+  function handleProductLike(product, data) {
     if(isToken) {
     const isLike = product.likes.some((id) => id === currentUser._id);
     api.changeLikeProductStatus(product._id, !isLike).then((newCard) => {
       // в зависимсоти от того есть лайки или нет отправляем запрос PUT или DELETE
-      const newCards = cards.map((c) => {
+      const newCards = data.map((c) => {
         return c._id === newCard._id ? newCard : c;
       });
       if (!isLike) {
@@ -134,6 +135,7 @@ function App() {
         setFavoriteCards(prevState => prevState.filter((card) => card._id !== newCard._id))
       }
       setCards(newCards);
+      setAllCardsForSort(newCards);
     });
   }
   }
@@ -152,6 +154,8 @@ function App() {
         setFavoriteCards(prevState => prevState.filter((card) => card._id !== newCard._id))
       }
       setCardsForPaginate(newCards);
+      setCards(newCards);
+
     });
   }
   }
@@ -189,7 +193,7 @@ function App() {
         .sort((a, b) => b.discount - a.discount)
         .slice(startPaginate, startPaginate + cardsOnList))}
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [startPaginate, selectTab])
+  }, [startPaginate, selectTab, favoriteCards])
 
 
 
@@ -290,7 +294,11 @@ function App() {
             path="thr_homework3_dogs3/add-product"
             element={
               <NewProduct
-
+                isToken={isToken}
+                setIsToken={setIsToken}
+                setCards={setCards}
+                anchor={anchorNewProduct}
+                setAnchor={setAnchorNewProduct}
               />
             }
           ></Route>

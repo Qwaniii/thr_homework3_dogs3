@@ -109,7 +109,7 @@ export default function Product({
                   <div className={s.likeContainer}>
                     <button
                       className={cn(s.like, { [s.likeActive]: isLike })}
-                      onClick={() => handleProductLike(aboutProduct)}
+                      onClick={() => handleProductLike(aboutProduct, cards)}
                     >
                       <Like />
                     </button>

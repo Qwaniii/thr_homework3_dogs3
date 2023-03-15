@@ -49,7 +49,7 @@ export default function Cards({
                   Избранные товары:
                 </div>
               ) : (
-                <Options setAnchorPaginate={setAnchorPaginate} />
+                <Options setAnchorPaginate={setAnchorPaginate} setPage={setPage} />
               )}
             </div>
           )}
@@ -65,6 +65,7 @@ export default function Cards({
                   onProductLike={onProductLike}
                   currentUser={currentUser}
                   setIsLoading={setIsLoading}
+                  goods={goods}
                 />
               ))}
           {selectTab === "new" &&
@@ -74,9 +75,10 @@ export default function Cards({
                 <Card
                   card={item}
                   key={item._id}
-                  onProductLike={onProductLikeAllProducts}
+                  onProductLike={onProductLike}
                   currentUser={currentUser}
                   setIsLoading={setIsLoading}
+                  goods={cardsForPaginate}
                 />
               ))}
           {selectTab === "cheap" &&
@@ -128,9 +130,8 @@ export default function Cards({
 
         {!(location.pathname === "/thr_homework3_dogs3/favorite") && !(countPage.length === 1) &&
           <div className={s.paginate}>
-            {maxPage <= 3 && page < 4 &&
+            {maxPage <= 5 && 
                 countPage
-                .slice(0, 4)
                 .map((paginateNum) => (
                     <Paginate
                     key={paginateNum}
@@ -140,7 +141,8 @@ export default function Cards({
                     curPaginate={curPaginate}
                     />
                 ))}
-              {maxPage > 3 && page > 3 && 
+
+              {maxPage > 5 && page > 3 && 
                             <>
                                 <Paginate
                                 paginateNum={1}
@@ -150,7 +152,7 @@ export default function Cards({
                                 />{" "}
                                 <span className={s.dot}>...</span>
                             </>}
-              { maxPage > 3 && page < 3 &&
+              { maxPage > 5 && page < 3 &&
                       countPage
                           .slice(0, 3)
                           .map((paginateNum) => (
@@ -162,9 +164,9 @@ export default function Cards({
                               curPaginate={curPaginate}
                     />
                   ))}
-            {maxPage > 3 && page === 3 &&
+            {maxPage > 5 && page === 3 &&
                     countPage
-                        .slice(0, page + 2)
+                        .slice(0, page + 1)
                         .map((paginateNum) => (
                         <Paginate
                             key={paginateNum}
@@ -174,32 +176,7 @@ export default function Cards({
                             curPaginate={curPaginate}
                         />
                         ))}
-            {maxPage > 3 && (page === 4) &&
-                    countPage
-                        .slice(2, page + 2)
-                        .map((paginateNum) => (
-                        <Paginate
-                            key={paginateNum}
-                            paginateNum={paginateNum}
-                            page={page}
-                            setPage={setPage}
-                            curPaginate={curPaginate}
-                        />
-                        ))}
-            {maxPage > 3 && (page === 5) &&
-                    countPage
-                        .slice(2, page + 2)
-                        .map((paginateNum) => (
-                        <Paginate
-                            key={paginateNum}
-                            paginateNum={paginateNum}
-                            page={page}
-                            setPage={setPage}
-                            curPaginate={curPaginate}
-                        />
-                        ))}
-            {maxPage > 5 && page > 3 &&
-                    page < countPage.length - 2 &&
+            {maxPage > 5 && page > 3 && page < countPage.length - 2 &&
                     countPage
                         .slice(page - 2, page + 1)
                         .map((paginateNum) => (
@@ -211,7 +188,7 @@ export default function Cards({
                             curPaginate={curPaginate}
                         />
                         ))}
-            {maxPage > 5 && page > countPage.length - 3 &&
+            {maxPage > 5 && page > 3 && page > countPage.length - 3 &&
                     countPage
                         .slice(page - 2, countPage.length + 2)
                         .map((paginateNum) => (
@@ -222,20 +199,8 @@ export default function Cards({
                             setPage={setPage}
                             curPaginate={curPaginate}
                         />
-                        ))}
-            {/* {(maxPage = (4 || 5)) && page > countPage.length - 3 &&
-                    countPage
-                        .slice(page - 2, countPage.length + 2)
-                        .map((paginateNum) => (
-                        <Paginate
-                            key={paginateNum}
-                            paginateNum={paginateNum}
-                            page={page}
-                            setPage={setPage}
-                            curPaginate={curPaginate}
-                        />
-                        ))} */}
-            {maxPage > 3 && page < countPage.length - 2 && (
+                        ))} 
+            {maxPage > 5 && page < countPage.length - 2 && (
                 <>
                     <span className={s.dot}>...</span>
                     <Paginate
@@ -256,7 +221,7 @@ export default function Cards({
               id="count"
               className={s.select}
               value={cardsOnList}
-              onChange={(e) => setCardsOnList(e.target.value)}
+              onChange={(e) => {setCardsOnList(e.target.value); setPage(1)}}
             >
               {arrCountProducts.map((countLimitPage) => (
                 <option key={countLimitPage} value={countLimitPage}>
