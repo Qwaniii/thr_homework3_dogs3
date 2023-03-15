@@ -16,7 +16,8 @@ const Review = ({ review, anchorReview, setReviewRating, setModalUserReview }) =
             .then((data) => {
                 setAuthorReview(data)
             })
-    }, [])
+            .catch((err) => console.log(err))
+    }, [review.author])
 
     // useEffect(() => {
     //     const readyRating = review.rating.reduce((acc, curVal) => acc + curVal, 0)
