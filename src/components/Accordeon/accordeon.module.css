@@ -161,7 +161,7 @@
 }
 
 .newPost::after {
-  content: "добавить пост";
+  content: "добавить продукт";
   font-size: 13px;
   height: 1px;
   width: 120%;

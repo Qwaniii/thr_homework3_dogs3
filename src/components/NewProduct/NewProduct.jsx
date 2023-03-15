@@ -50,7 +50,7 @@ const NewProduct = ({ isToken, setIsToken, setCards, anchor, setAnchor }) => {
 
   return (
     <div className="container">
-      {/* <h3>Добавление нового продукта</h3> */}
+      <h3 className={s.title}>Добавление нового продукта</h3>
       <div className={s.wrapper}>
         <form className={s.newproduct} onSubmit={handleSubmit(onSubmit)}>
           <img className={s.image} src={watch("pictures") || "https://талисман-ростов.рф/wp-content/uploads/woocommerce-placeholder.png"} alt="изображение" ></img>

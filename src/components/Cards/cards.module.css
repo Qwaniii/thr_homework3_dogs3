@@ -45,18 +45,25 @@
 }
 
 .select {
+    cursor: pointer;
+    box-sizing: border-box;
     padding: 3px;
     font-size: 18px;
     border-radius: 5px;
-    border: .3px solid gray;
+    border: .3px solid rgba(128, 128, 128, 0.4);
     transition: all .4s ;
+}
+
+select:hover {
+    transform: scale(1.1);
+    transition: all .4s ;
+
 }
 
 .select:focus {
     outline: none;
-    background-color: rgba(11, 11, 11, 0.3);
-    color: white;
-    transition: ALL .4s;
+    border: .3px solid black;
+    transition: all .4s;
 }
 
 .logout {

@@ -15,7 +15,10 @@ export default function Header({currentUser,
                                 isToken,
                                 modalRegistr,
                                 setModalRegistr,
-                                myReviewArr
+                                myReviewArr,
+                                anchorPaginate,
+                                setAnchorPaginate,
+                                setSelectTab
                               }) {
 
   const navigate = useNavigate()
@@ -33,10 +36,10 @@ export default function Header({currentUser,
       <div className="container">
         <div className={s.wrapper}>
           <div className={s.logo}>
-            <Logo />
+            <Logo setSelectTab={setSelectTab} setAnchorPaginate={setAnchorPaginate}/>
           </div>
           <div className={s.search}>
-            <Search setSearchQuery={setSearchQuery} isToken={isToken}/>
+            <Search setSearchQuery={setSearchQuery} isToken={isToken} anchorPaginate={anchorPaginate}/>
           </div>
           {isToken 
           ? 

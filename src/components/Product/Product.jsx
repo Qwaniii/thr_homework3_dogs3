@@ -20,7 +20,10 @@ export default function Product({
   modalUserReview,
   setModalUserReview,
   anchorReview,
-  setAnchorReview
+  setAnchorReview,
+  anchorPaginate,
+  handleProductLikeForAllProduct,
+  allCardsForSort
 }) {
   const [aboutProduct, setAboutProduct] = useState({});
   const [reviewRating, setReviewRating] = useState(5);
@@ -49,7 +52,7 @@ export default function Product({
           console.log(err);
           setErrStatus(true);
         });
-  }, [id, cards, anchorReview, setIsLoading]);
+  }, [id, cards, anchorReview, setIsLoading, allCardsForSort]);
 
 
   useEffect(() => {
@@ -71,7 +74,6 @@ export default function Product({
   //       setCards(newCards);
   //     })
   // }
-
 
   return (
     <div>
@@ -109,7 +111,7 @@ export default function Product({
                   <div className={s.likeContainer}>
                     <button
                       className={cn(s.like, { [s.likeActive]: isLike })}
-                      onClick={() => handleProductLike(aboutProduct, cards)}
+                      onClick={() => {anchorPaginate ? handleProductLike(aboutProduct) : handleProductLikeForAllProduct(aboutProduct)}}
                     >
                       <Like />
                     </button>

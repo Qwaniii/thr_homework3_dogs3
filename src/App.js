@@ -121,31 +121,30 @@ function App() {
     // const newState = (cardData.products).filter((item) => (item.name.toLowerCase()).includes(searchQuery.toLowerCase())) --- поиск товаров без сервера
   // }, [debounceValue]);
 
-  function handleProductLike(product, data) {
+  function handleProductLike(product) {
     if(isToken) {
-    const isLike = product.likes.some((id) => id === currentUser._id);
-    api.changeLikeProductStatus(product._id, !isLike).then((newCard) => {
-      // в зависимсоти от того есть лайки или нет отправляем запрос PUT или DELETE
-      const newCards = data.map((c) => {
-        return c._id === newCard._id ? newCard : c;
+      const isLike = product.likes.some((id) => id === currentUser._id);
+      api.changeLikeProductStatus(product._id, !isLike).then((newCard) => {
+        // в зависимсоти от того есть лайки или нет отправляем запрос PUT или DELETE
+        const newCards = cards.map((c) => {
+          return c._id === newCard._id ? newCard : c;
+        });
+        if (!isLike) {
+          setFavoriteCards(prevState => [...prevState, newCard])
+        } else {
+          setFavoriteCards(prevState => prevState.filter((card) => card._id !== newCard._id))
+        }
+        setCards(newCards);
       });
-      if (!isLike) {
-        setFavoriteCards(prevState => [...prevState, newCard])
-      } else {
-        setFavoriteCards(prevState => prevState.filter((card) => card._id !== newCard._id))
-      }
-      setCards(newCards);
-      setAllCardsForSort(newCards);
-    });
-  }
-  }
+    }
+    }
 
   function handleProductLikeForAllProduct(product) {
     if(isToken) {
     const isLike = product.likes.some((id) => id === currentUser._id);
     api.changeLikeProductStatus(product._id, !isLike).then((newCard) => {
       // в зависимсоти от того есть лайки или нет отправляем запрос PUT или DELETE
-      const newCards = cardsForPaginate.map((c) => {
+      const newCards = allCardsForSort.map((c) => {
         return c._id === newCard._id ? newCard : c;
       });
       if (!isLike) {
@@ -153,9 +152,7 @@ function App() {
       } else {
         setFavoriteCards(prevState => prevState.filter((card) => card._id !== newCard._id))
       }
-      setCardsForPaginate(newCards);
-      setCards(newCards);
-
+      setAllCardsForSort(newCards);
     });
   }
   }
@@ -215,6 +212,10 @@ function App() {
                 modalRegistr={modalRegistr}
                 setModalRegistr={setModalRegistr}
                 myReviewArr={myReviewArr}
+                anchorPaginate={anchorPaginate}
+                setAnchorPaginate={setAnchorPaginate}
+                setSelectTab={setSelectTab}
+
         />
         <Routes>
           <Route
@@ -258,6 +259,9 @@ function App() {
                 setModalUserReview={setModalUserReview}
                 anchorReview={anchorReview}
                 setAnchorReview={setAnchorReview}
+                anchorPaginate={anchorPaginate}
+                handleProductLikeForAllProduct={handleProductLikeForAllProduct}
+                allCardsForSort={allCardsForSort}
               />
             }
           ></Route>
@@ -294,12 +298,12 @@ function App() {
             path="thr_homework3_dogs3/add-product"
             element={
               <NewProduct
-                isToken={isToken}
-                setIsToken={setIsToken}
-                setCards={setCards}
-                anchor={anchorNewProduct}
-                setAnchor={setAnchorNewProduct}
-              />
+              isToken={isToken}
+              setIsToken={setIsToken}
+              setCards={setCards}
+              anchor={anchorNewProduct}
+              setAnchor={setAnchorNewProduct}
+            />
             }
           ></Route>
           {!isToken && 
@@ -321,7 +325,7 @@ function App() {
         </Routes>
         <Footer />
         <Popup popup={modalLogin} setPopup={setModalLogin}>
-          <Login i
+          <Login 
             sToken={isToken} 
             setIsToken={setIsToken} 
             setModalLogin={setModalLogin}

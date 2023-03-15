@@ -30,16 +30,16 @@ export default function Login({ isToken, setIsToken, setModalLogin, modalLogin, 
   const [eyeOpen, setEyeOpen] = useState(false)
   const [error, setError] = useState("")
 
-
   useEffect(() => {
-    if (!isToken) {
-    setAnchorSuccess(true)
+    const token = sessionStorage.getItem('token')
+    if (!token) {
+      setAnchorSuccess(true)
     }
     setEyeOpen(false)
     setError("")
     reset()
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [setAnchorSuccess, setEyeOpen, modalLogin, isToken])
+  }, [setAnchorSuccess, setEyeOpen, modalLogin])
 
   useEffect(() => {
     if (userRegistration) {
@@ -79,7 +79,6 @@ export default function Login({ isToken, setIsToken, setModalLogin, modalLogin, 
         navigate("/thr_homework3_dogs3")
         setTimeout(() => {
           setModalLogin(false)
-          // setAnchorSuccess(true)
         }, 2000)
       })
       .catch((res) => {

@@ -32,8 +32,9 @@ export default function Registration({ isToken, setIsToken, setModalRegistr, mod
 
 
   useEffect(() => {
-    if (!isToken) {
-    setAnchorSuccess(true)
+    const token = sessionStorage.getItem('token')
+    if (!token) {
+      setAnchorSuccess(true)
     }
     setEyeOpen(false)
     setError("")

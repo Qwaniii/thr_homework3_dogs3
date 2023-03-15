@@ -11,7 +11,10 @@ export default function ProductPage({
   modalUserReview,
   setModalUserReview,
   anchorReview,
-  setAnchorReview
+  setAnchorReview,
+  anchorPaginate,
+  handleProductLikeForAllProduct,
+  allCardsForSort
 }) {
   const id = useParams();
 
@@ -28,6 +31,9 @@ export default function ProductPage({
         setModalUserReview={setModalUserReview}
         anchorReview={anchorReview}
         setAnchorReview={setAnchorReview}
+        anchorPaginate={anchorPaginate}
+        handleProductLikeForAllProduct={handleProductLikeForAllProduct}
+        allCardsForSort={allCardsForSort}
       />
     </div>
   );

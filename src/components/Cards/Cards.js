@@ -75,10 +75,9 @@ export default function Cards({
                 <Card
                   card={item}
                   key={item._id}
-                  onProductLike={onProductLike}
+                  onProductLike={onProductLikeAllProducts}
                   currentUser={currentUser}
                   setIsLoading={setIsLoading}
-                  goods={cardsForPaginate}
                 />
               ))}
           {selectTab === "cheap" &&
