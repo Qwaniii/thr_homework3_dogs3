@@ -1,22 +1,29 @@
 .wrapper {
-  background-color: rgba(220, 220, 220, 0.8);
+  background-color: rgba(242, 242, 242);
   border-radius: 30px;
   width: 30px;
   height: 30px;
   display: flex;
   justify-content:  center;
   align-items: center;
-  border: .3px solid gray;
+  border: 1px solid rgba(255, 255, 0, 0.6);
   cursor: pointer;
   transition: all .3s;
-  color: white;
+  color: rgb(83, 83, 83, 0.7);
   font-weight: 600;
 }
 
 .wrapper:hover {
-  background-color: rgb(81, 81, 81);
-  color: white;
+  color: rgb(0, 0, 0);
+  transform: scale(1.2);
   transition: all .3s;
+}
+
+.wrapper:active {
+  transform: scale(.9);
+  background-color: rgba(255, 255, 0, 0.5);
+  transition: all .3s;
+
 }
 
 .linkPage {
@@ -25,8 +32,8 @@
 }
 
 .current {
-  color: rgb(18, 18, 18);
+  color: rgba(0, 0, 0);
   font-size: 20px;
-  background-color: darkgray;
+  background-color: rgba(211, 211, 211, 1);
   transition: all .3s;
 }

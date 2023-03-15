@@ -4,9 +4,16 @@ import cn from "classnames"
 
 export default function Paginate({ page, setPage, paginateNum, curPaginate }) {
 
+  const toUp = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "auto"
+    })
+  }
+
   return (
     <div>
-        <div onClick={()=>curPaginate(paginateNum)} className={s.linkPage}>
+        <div onClick={()=>{curPaginate(paginateNum); toUp()}} className={s.linkPage}>
           <div className={cn(s.wrapper, {[s.current]: paginateNum === page})}>
               {paginateNum}
           </div>

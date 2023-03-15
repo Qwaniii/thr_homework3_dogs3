@@ -73,7 +73,7 @@
   padding: 20px 2px;
 }
 
-.cart a {
+.link {
   padding: 10px 15px;
   background-color: rgb(255, 255, 43, 0.7);
   border-radius: 20px;
@@ -81,9 +81,10 @@
   text-decoration: none;
   color: black;
   transition: all .1s linear;
+  cursor: pointer;
 }
 
-.cart a:hover {
+.link:hover {
   background-color:  rgba(202, 66, 7, 0.536);
   color: rgb(0, 0, 0);
   box-shadow: 0 7px 7px -4px gray;
@@ -147,3 +148,72 @@
 .character p {
   padding: 20px 0;
 }
+
+
+.h3 {
+
+  margin-bottom: 50px;
+  position: relative;
+}
+
+.h3::after {
+  content: "";
+  width: 100%;
+  height: 1px;
+  border-top: .3px solid rgba(128, 128, 128, 0.5);
+  position: absolute;
+  bottom: -20px;
+  left: 0;
+}
+
+.revWrapper {
+  display: flex;
+  box-sizing: border-box;
+  gap: 30px;
+}
+
+.addRev {
+  width: 50%;
+}
+
+.rev {
+  width: 50%;
+
+
+}
+
+.rating {
+  margin-top: 20px;
+  font-size: 20px;
+}
+
+.numRat {
+  padding: 5px;
+  color: rgb(207, 172, 0);
+  font-weight:600;
+}
+
+.delivery {
+  font-size: 14px;
+  margin-top: 60px;
+  padding: 15px;
+  box-sizing: border-box;
+  border-radius: 8px;
+  background-color: rgba(128, 128, 128, 0.1);
+  line-height: 2rem;
+}
+
+.delivery::first-line {
+  font-size: 16px;
+  
+}
+
+.garanty {
+  margin-top: 20px;
+  padding: 15px;
+  box-sizing: border-box;
+  border-radius: 8px;
+  background-color: rgba(128, 128, 128, 0.1);
+  line-height: 1.5rem;
+}
+

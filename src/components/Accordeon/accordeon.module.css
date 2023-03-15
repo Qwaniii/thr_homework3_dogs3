@@ -1,37 +1,81 @@
-/* .wrapper {
-  position: fixed;
-  top: 0;
-  width: 200px;
-  height: 500px;
-} */
+.accordeon {
+  cursor: pointer;
+  width: 20px;
+  height: 30px;
+  transition: all .3s;
+}
+
+.accordeon:hover {
+  transform: scale(1.1);
+  transition: all .3s;
+}
+
+.accordeon:active {
+  transform: scale(0.9);
+  transition: all .5s;
+}
 
 .window {
   position: fixed;
-  top: 1%;
-  left: 1%;
-  height: 98vh;
-  width: 220px;
-  opacity: 0;
-  background-color: rgb(237, 237, 237);
-  border-radius: 15px;
-  z-index: 100;
-  transition: all 1s;
+  top: -200px;
+  right: 0;
+  height: 165px;
+  width: 100%;
+  /* opacity: 0; */
+  background-color: rgb(254, 255, 199);
+  border-bottom: 0px solid yellow;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  z-index: 1000;
+  transition: all .5s;
+  box-shadow: 0px 25px 10px 0px rgb(145, 145, 145);
 }
 
 .window.active {
   opacity: 1;
-  transition: all 1s;
+  border-bottom: 1px solid yellow;
+  top: 0;
+  transition: all .3s;
+}
+
+.wrapperUser {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.user {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 20%;
+  box-sizing: border-box;
+}
+
+.user::after {
+  content: "";
+  height: 100%;
+  width: 1px;
+  border-left: 1px solid rgba(128, 128, 128, 0.5);
+  position: absolute;
+  right: 0;
 }
 
 .link {
+  width: 80%;
   display: flex;
-  flex-direction: column;
-  justify-content: start;
+
+  justify-content: flex-start;
   align-items: center;
+  gap: 40px;
   margin: 20px;
 }
 
 .favorite {
+  margin-left: 20px;
   padding: 15px;
   text-decoration: none;
   cursor: pointer;
@@ -39,14 +83,111 @@
   font-size: 20px;
   border-radius: 10px;
   position: relative;
+  transition: all .3s;
+
 }
 
+.favorite:hover {
+  color: rgb(150, 150, 150);
+  transition: all .3s;
+
+}
+
+
 .favorite::after {
-  content: "";
+  content: "в избранном";
+  font-size: 13px;
   height: 1px;
-  width: 100%;
+  width: 120%;
+  transform: translate(-9%);
   position: absolute;
   bottom: 0;
   left: 0;
   border-top: 2px solid gray;
+  text-align: center;
+}
+
+.review {
+  margin-left: 20px;
+  padding: 15px;
+  text-decoration: none;
+  cursor: pointer;
+  color: currentColor;
+  font-size: 20px;
+  border-radius: 10px;
+  position: relative;
+  transition: all .3s;
+
+}
+
+.review:hover {
+  color: rgb(150, 150, 150);
+  transition: all .3s;
+
+}
+
+
+.review::after {
+  content: "отзывы";
+  font-size: 13px;
+  height: 1px;
+  width: 120%;
+  transform: translate(-9%);
+  position: absolute;
+  text-align: center;
+  bottom: 0;
+  left: 0;
+  border-top: 2px solid gray;
+}
+
+
+.newPost {
+  margin-left: 20px;
+  padding: 15px;
+  text-decoration: none;
+  cursor: pointer;
+  color: currentColor;
+  font-size: 20px;
+  border-radius: 10px;
+  position: relative;
+  transition: all .3s;
+
+}
+
+.newPost:hover {
+  color: rgb(150, 150, 150);
+  transition: all .3s;
+
+}
+
+.newPost::after {
+  content: "добавить продукт";
+  font-size: 13px;
+  height: 1px;
+  width: 120%;
+  transform: translate(-9%);
+  position: absolute;
+  text-align: center;
+  bottom: 0;
+  left: 0;
+  border-top: 2px solid gray;
+}
+
+.close {
+  cursor: pointer;
+  text-align: center;
+  color: white;
+  transition: all .3s;
+
+}
+
+.close:hover {
+  color: rgb(204, 204, 204);
+  transition: all .3s;
+}
+
+.close:active {
+  color: yellow;
+  transition: all .3s;
+
 }

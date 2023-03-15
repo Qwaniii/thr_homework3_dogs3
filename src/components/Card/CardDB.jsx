@@ -1,19 +1,11 @@
-import React, { useContext } from "react";
+import React from "react";
 import s from "./card.module.css";
-import { ReactComponent as Like } from "./img/like.svg";
 import cn from "classnames";
-import { Link } from "react-router-dom";
 import Tags from "../Tags/Tags";
-import { UserContext } from "../../Context/UserContext";
+import { Link } from "react-router-dom";
 
-export default function Card({ card, onProductLike, setIsLoading, likes }) {
-  const { currentUser } = useContext(UserContext);
+export default function CardDB({ card, onProductLike, setIsLoading, likes }) {
 
-  const isLiked = card.likes.some((id) => id === currentUser._id);
-
-  function handleLikeClick() {
-    onProductLike(card);
-  }
 
   return (
     <div className={s.card}>
@@ -27,8 +19,7 @@ export default function Card({ card, onProductLike, setIsLoading, likes }) {
           <Tags tag={tag} key={index}/>
         )}
       </div>
-
-      <Link to={`product/${card._id}`} onClick={() => setIsLoading(false)} className={s.link}>
+      <Link to="/thr_homework3_dogs3/login" className={s.link}>
         <div className={s.image}>
             <img src={card.pictures} alt={card.title}></img> 
         </div>
@@ -41,15 +32,15 @@ export default function Card({ card, onProductLike, setIsLoading, likes }) {
         </div>
       </Link>
       <div className={s.add}>
-        <span className={s.linkBtn}>В корзину</span>
+      <Link to="/thr_homework3_dogs3/login" className={s.link}><span className={s.linkBtn}>В корзину</span></Link>
         <div className={s.likeContainer}>
-        <button
+        {/* <button
           className={cn(s.like, { [s.likeActive]: isLiked })}
           onClick={handleLikeClick}
         >
           <Like /> 
-        </button>
-        <span className={s.num}>{likes > 0 && likes}</span>
+        </button> */}
+        {/* <span className={s.num}>{likes > 0 && likes}</span> */}
       </div>
       </div>
     </div>

@@ -1,0 +1,181 @@
+.wrapper {
+  position: relative;
+}
+
+.cardReview {
+  padding: 20px 30px;
+  display: flex;
+  width: 100%;
+  border-bottom-left-radius: 30px;
+  border-bottom: 1px solid gray;
+  margin-bottom: 30px;
+  position: relative;
+  z-index: 10;
+  /* background-color: white; */
+
+}
+
+.userInfo {
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  position: relative;
+}
+
+.userInfo::after {
+  position: absolute;
+  right: 0;
+  content: "";
+  height: 100%;
+  width: 1px;
+  border-left: 1px solid rgba(128, 128, 128, 0.5);
+}
+
+.avatar {
+  width: 100px;
+  height: 100px;
+}
+
+.avatar > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.myReview {
+  width: 80%;
+  padding: 0px 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.date {
+  color: gray;
+  font-size: 14px;
+  align-self: flex-end;
+}
+
+.innerReview {
+  height: 100%;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.rate {
+  display: flex;
+  align-items: center;
+ 
+
+}
+
+.rating {
+  margin-left: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  width: 40px;
+  height: 40px;
+  padding: 7px;
+  background-color: rgba(128, 128, 128, 0.3);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.updown {
+  font-size: 20px;
+  position: absolute;
+  bottom: -24px;
+  right: 40%;
+  cursor: pointer;
+  transition: all .6s ease-out;
+}
+
+.updown:hover, 
+.updown:active {
+  color: gray;
+}
+
+.updown.active {
+  transition: all .5s ease-out;
+  transform: rotate(90deg);
+}
+
+.product {
+  position: absolute;
+  bottom: -20px;
+  right: 45%;
+  cursor: pointer;
+  transition: all .3s;
+}
+
+.product:hover, 
+.product:active {
+  color: gray;
+  transition: all .3s;
+
+}
+
+
+.nonActive {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .5s ease-out;
+
+}
+
+.nonActive.active {
+  max-height: 100vh;
+  transition: max-height 1s ease;
+
+}
+
+.prodWrapper {
+  display: flex;
+  gap: 30px;
+  border-bottom: 1px solid black;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  background-color: rgba(255, 255, 0, 0.1);
+
+}
+
+.prodImg {
+  padding: 5px 10px;
+  width: 300px;
+  transition: all .3s;
+
+}
+
+.prodImg:hover {
+  filter: brightness(.9);
+  transition: all .3s;
+}
+
+.prodImg > img {
+  width: 100%;
+  height: 100%;
+}
+
+.prodInfo {
+  padding: 20px;
+}
+
+.link {
+  text-decoration: none;
+  color: inherit;  
+  transition: all .3s;
+
+}
+
+.link:hover {
+  color: gray;
+  transition: all .3s;
+
+}

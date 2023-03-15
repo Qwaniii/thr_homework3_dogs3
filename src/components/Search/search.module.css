@@ -18,6 +18,14 @@
     border: .5px solid rgb(255, 183, 0)
 }
 
+.search input:disabled {
+    background-color: rgba(172, 172, 172, 0.5);
+}
+
+.search input:disabled::placeholder {
+    color: rgba(128, 128, 128, 0.5);
+}
+
 @media (max-width: 790px) {
     .search input {
         width: 100%;

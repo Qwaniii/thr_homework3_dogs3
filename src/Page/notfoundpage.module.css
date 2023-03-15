@@ -1,26 +1,28 @@
 .page {
   width: 100wh;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   color: gray;
-  text-align: center;
-  padding: 250px 0;
   position: relative;
   font-size: 25px;
 }
 
 .page div {
   font-size: 40px;
-  padding-bottom: 150px;
+  padding-bottom: 80px;
 }
 
 .page::before {
   content: "\2718";
   color: gray;
   font-size: 200px;
-  position: absolute;
+  /* position: absolute;
   top: 0;
   left: 0;
-  right: 0;
+  right: 0; */
 }
 
 .link {
