@@ -18,7 +18,8 @@ export default function Header({currentUser,
                                 myReviewArr,
                                 anchorPaginate,
                                 setAnchorPaginate,
-                                setSelectTab
+                                setSelectTab,
+                                basket
                               }) {
 
   const navigate = useNavigate()
@@ -48,14 +49,16 @@ export default function Header({currentUser,
               {/* {!currentUser.email && `Войти`} */}
               {currentUser && 
               <>
-              <span className={s.email}><b>E-mail: </b>{currentUser.email}</span>
-              <span className={s.name}> <b>Имя:</b> {currentUser.name}</span>
+              <div className={s.info}>
+                <span className={s.email}><b>E-mail: </b>{currentUser.email}</span>
+                <span className={s.name}> <b>Имя:</b> {currentUser.name}</span>
+              </div>
               </>}
               {/* {currentUser.name && <span className={s.name}> <b>Имя:</b> {currentUser.name} <span className={s.about}><b>Должность: </b>{currentUser.about}</span></span>} */}
             </div>
             <div onClick={(e) => handleLogOut(e)}><Exit className={s.exit}/></div>
             <div className={s.accordeon}>
-              <Accordeon myReviewArr={myReviewArr}> 
+              <Accordeon myReviewArr={myReviewArr} basket={basket}> 
                 <div className={s.accAvatar}><img src={currentUser.avatar} alt={currentUser.name}></img></div>
                 <div>{currentUser.name}</div>
                 <div>{currentUser.about}</div>

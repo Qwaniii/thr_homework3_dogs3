@@ -1,0 +1,37 @@
+.wrapper {
+    position: relative;
+    padding: 50px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    font-size: 20px;
+}
+
+.wrapper> h3 {
+    color: red;
+}
+
+.close {
+    padding: 5px;
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    top: 3px;
+    right: 3px;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: all .3s;
+  }
+  
+  .close:hover {
+    background-color: rgba(128, 128, 128, 0.3);
+    transition: all .3s;
+  }
+  
+  .close:active {
+    background-color: rgba(255, 0, 0, 0.3);
+    transition: all .3s;
+  }

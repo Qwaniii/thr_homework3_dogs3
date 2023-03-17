@@ -34,6 +34,7 @@
 .current {
   color: rgba(0, 0, 0);
   font-size: 20px;
+  transform: scale(1.1);
   background-color: rgba(211, 211, 211, 1);
   transition: all .3s;
 }

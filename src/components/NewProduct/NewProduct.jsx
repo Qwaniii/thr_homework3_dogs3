@@ -3,8 +3,9 @@ import s from "./newproduct.module.css"
 import cn from "classnames"
 import api from "../../Api/Api";
 import { useEffect } from "react";
+import { useNavigate } from "react-router";
 
-const NewProduct = ({ isToken, setIsToken, setCards, anchor, setAnchor }) => {
+const NewProduct = ({ isToken, setIsToken, setCards, anchor, setAnchor, setModal, setSelectTab }) => {
   const {
     register,
     handleSubmit,
@@ -24,6 +25,8 @@ const NewProduct = ({ isToken, setIsToken, setCards, anchor, setAnchor }) => {
     }
   });
 
+  const navigate = useNavigate()
+
   useEffect(() => {
     const tokenStor = sessionStorage.getItem('token')
     if(tokenStor) {
@@ -42,10 +45,15 @@ const NewProduct = ({ isToken, setIsToken, setCards, anchor, setAnchor }) => {
         console.log(res)
         setCards((prevState) => ([...prevState, res]))
         setAnchor(!anchor)
+        setModal(true)
+        navigate("/thr_homework3_dogs3")
+        setSelectTab("new")
+        setTimeout(() => {
+          setModal(false)
+        }, 2000)
+        reset()
       })
       .catch((err) => console.log(err))
-
-    reset()
   }
 
   return (

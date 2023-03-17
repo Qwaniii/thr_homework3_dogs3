@@ -25,7 +25,8 @@ export default function IndexPage({
   anchorPaginate,
   setAnchorPaginate,
   cardsForPaginate,
-  curPaginateOnClient
+  curPaginateOnClient,
+  setBasket
 }) {
 
   return (
@@ -53,6 +54,7 @@ export default function IndexPage({
           setAnchorPaginate={setAnchorPaginate}
           cardsForPaginate={cardsForPaginate}
           curPaginateOnClient={curPaginateOnClient}
+          setBasket={setBasket}
         /> : <Spinner/>}
       </div> 
     :

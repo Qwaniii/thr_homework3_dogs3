@@ -15,6 +15,8 @@ import Login from "./components/LoginForm/Login";
 import Registration from "./components/LoginForm/Registration";
 import MyReviewPage from "./Page/MyReviewPage";
 import NewProduct from "./components/NewProduct/NewProduct";
+import Notification from "./components/Notification/Notification";
+import BasketPage from "./Page/BasketPage";
 
 function App() {
   const [cards, setCards] = useState([]);
@@ -32,12 +34,14 @@ function App() {
   const [modalUserReview, setModalUserReview] = useState(false)
   const [modalLogin, setModalLogin] = useState(false)
   const [modalRegistr, setModalRegistr] = useState(false)
+  const [modalNotific, setModalNotific] = useState(false)
   const [isToken, setIsToken] = useState(null)
   const [myReviewArr, setMyReviewArr] = useState([])
   const [anchorReview, setAnchorReview] = useState(false);
   const [anchorPaginate, setAnchorPaginate] = useState(true);
   const [anchorNewProduct, setAnchorNewProduct] = useState(false);
   const [userRegistration, setUserRegistration] = useState(null)
+  const [basket, setBasket] = useState([])
 
   
   const arrMaxPage = [];
@@ -82,7 +86,7 @@ function App() {
       .catch((err) => console.log(err))
   
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentUser, isToken])
+  }, [currentUser, isToken, anchorNewProduct])
 
   useEffect(() => {
     isToken &&
@@ -215,6 +219,7 @@ function App() {
                 anchorPaginate={anchorPaginate}
                 setAnchorPaginate={setAnchorPaginate}
                 setSelectTab={setSelectTab}
+                basket={basket}
 
         />
         <Routes>
@@ -243,6 +248,7 @@ function App() {
                 setAnchorPaginate={setAnchorPaginate}
                 cardsForPaginate={cardsForPaginate}
                 curPaginateOnClient={curPaginateOnClient}
+                setBasket={setBasket}
               />
             }
           ></Route>
@@ -286,6 +292,25 @@ function App() {
             }
           ></Route>
           <Route
+            path="thr_homework3_dogs3/basket"
+            element={
+              <BasketPage
+                cards={basket}
+                cardsForPaginate={favoriteCards}
+                handleProductLike={handleProductLike}
+                currentUser={currentUser}
+                isLoading={isLoading}
+                setIsLoading={setIsLoading}
+                countPage={arrMaxPage}
+                page={page}
+                setPage={setPage}
+                curPaginate={curPaginate}
+                cardsOnList={cardsOnList}
+                setCardsOnList={setCardsOnList}
+              />
+            }
+          ></Route>
+          <Route
             path="thr_homework3_dogs3/my-review"
             element={
               <MyReviewPage
@@ -303,6 +328,8 @@ function App() {
               setCards={setCards}
               anchor={anchorNewProduct}
               setAnchor={setAnchorNewProduct}
+              setModal={setModalNotific}
+              setSelectTab={setSelectTab}
             />
             }
           ></Route>
@@ -343,6 +370,9 @@ function App() {
             userRegistration={userRegistration}
             setUserRegistration={setUserRegistration}
             />
+        </Popup>
+        <Popup popup={modalNotific} setPopup={setModalNotific}>
+            <Notification title={"Отлично!"} message={"Продукт добавлен!"} close={setModalNotific}/>
         </Popup>
       </UserContext.Provider>
       </FavoriteContext.Provider>

@@ -85,3 +85,17 @@
   font-weight: bold;
   color: red;
 }
+
+@media (max-width: 500px) {
+  .newproduct {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .image {
+    width: max-content;
+    height: 200px;
+  }
+
+}

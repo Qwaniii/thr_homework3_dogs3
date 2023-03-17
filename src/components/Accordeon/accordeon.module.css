@@ -67,7 +67,7 @@
 .link {
   width: 80%;
   display: flex;
-
+  flex-wrap: wrap;
   justify-content: flex-start;
   align-items: center;
   gap: 40px;
@@ -173,6 +173,42 @@
   border-top: 2px solid gray;
 }
 
+.basket {
+  margin-left: 20px;
+  padding: 15px;
+  text-decoration: none;
+  cursor: pointer;
+  color: currentColor;
+  font-size: 20px;
+  border-radius: 10px;
+  position: relative;
+  transition: all .3s;
+
+}
+
+.basket:hover {
+  color: rgb(150, 150, 150);
+  transition: all .3s;
+
+}
+
+.basket::after {
+  content: "корзина";
+  font-size: 13px;
+  height: 1px;
+  width: 120%;
+  transform: translate(-9%);
+  position: absolute;
+  text-align: center;
+  bottom: 0;
+  left: 0;
+  border-top: 2px solid gray;
+}
+
+
+
+
+
 .close {
   cursor: pointer;
   text-align: center;
@@ -189,5 +225,34 @@
 .close:active {
   color: yellow;
   transition: all .3s;
+
+}
+
+@media (max-width: 790px) {
+  .user {
+    width: 50%;
+  }
+  
+  .link {
+    width: 50%;
+    gap: 2px;
+    margin: 0;
+  }
+
+  .newPost::after {
+    display: none;
+  } 
+
+  .favorite::after {
+    display: none;
+  }
+
+  .basket::after {
+    display: none;
+  }
+
+  .review::after {
+    display: none;
+  }
 
 }

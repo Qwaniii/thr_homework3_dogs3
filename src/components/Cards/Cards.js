@@ -24,6 +24,7 @@ export default function Cards({
   setAnchorPaginate,
   cardsForPaginate,
   curPaginateOnClient,
+  setBasket
 }) {
   const { currentUser, selectTab } = useContext(UserContext);
   const arrCountProducts = [12, 24, 36, 48];
@@ -66,6 +67,7 @@ export default function Cards({
                   currentUser={currentUser}
                   setIsLoading={setIsLoading}
                   goods={goods}
+                  setBasket={setBasket}
                 />
               ))}
           {selectTab === "new" &&
@@ -78,6 +80,7 @@ export default function Cards({
                   onProductLike={onProductLikeAllProducts}
                   currentUser={currentUser}
                   setIsLoading={setIsLoading}
+                  setBasket={setBasket}
                 />
               ))}
           {selectTab === "cheap" &&

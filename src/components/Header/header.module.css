@@ -16,6 +16,10 @@ header {
     position: relative;
 }
 
+.info {
+    display: none;
+}
+
 .enter span {
     display: block;
 }
@@ -46,8 +50,8 @@ header {
 
 .exit {
     position: absolute;
-    bottom: 7px;
-    right: -35px;
+    top: 0px;
+    right: 0;
     width: 20px;
     height: 20px;
     cursor: pointer;
@@ -67,8 +71,8 @@ header {
 
 .accordeon {
     position: absolute;
-    top: 7px;
-    left: -35px;
+    bottom: 0px;
+    right: 0px;
     transition: all .3s;
 }
 
@@ -83,7 +87,23 @@ header {
     object-fit: cover;
 }
 
+@media (min-width: 1200px) {
+    .info {
+        display: block;
+    }
 
+    .exit {
+        top: 10px;
+        right: -35px;
+    
+    }
+
+    .accordeon {
+        bottom: -2px;
+        left: -35px;
+    }
+
+}
 
 @media (max-width: 790px) {
     .wrapper {
@@ -91,6 +111,19 @@ header {
         grid-template-rows: repeat(3, auto);
         justify-items: stretch;
         gap: 5px;
+    }
+
+    .accordeon {
+        left: -35px;
+    }
+
+    .exit {
+        top: 7px;
+        right: -35px;
+    }
+
+    .info {
+        display: block;
     }
 
     .logo {

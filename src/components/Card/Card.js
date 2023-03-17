@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import Tags from "../Tags/Tags";
 import { UserContext } from "../../Context/UserContext";
 
-export default function Card({ card, onProductLike, setIsLoading, likes }) {
+export default function Card({ card, onProductLike, setIsLoading, likes, setBasket }) {
   const { currentUser } = useContext(UserContext);
 
   const isLiked = card.likes.some((id) => id === currentUser._id);
@@ -41,7 +41,7 @@ export default function Card({ card, onProductLike, setIsLoading, likes }) {
         </div>
       </Link>
       <div className={s.add}>
-        <span className={s.linkBtn}>В корзину</span>
+        <span className={s.linkBtn} onClick={() => {setBasket((prevState) => ([...prevState, card])); console.log(card)}}>В корзину</span>
         <div className={s.likeContainer}>
         <button
           className={cn(s.like, { [s.likeActive]: isLiked })}

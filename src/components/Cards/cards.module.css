@@ -95,6 +95,15 @@ select:hover {
         grid-template-columns: repeat(2, 1fr);
     }
 
+    .box {
+        height: max-content;
+    }
+
+    .option {
+        display: flex;
+        flex-direction: column;
+    }
+
 }
 
 @media (min-width: 1200px) {

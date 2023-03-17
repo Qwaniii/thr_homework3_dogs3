@@ -1,11 +1,12 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react'
 import {ReactComponent as ImageAcc} from "./Img/treebars.svg"
+import {ReactComponent as Basket} from "./Img/bask.svg"
 import s from "./accordeon.module.css"
 import { Link } from 'react-router-dom'
 import { FavoriteContext } from '../../Context/FavoriteContext'
 import cn from "classnames"
 
-export default function Accordeon({ children, myReviewArr }) {
+export default function Accordeon({ children, myReviewArr, basket }) {
 
   const [isAccordeon, setIsAccordeon] = useState(false)
   const { favoriteCards } = useContext(FavoriteContext)
@@ -43,6 +44,7 @@ export default function Accordeon({ children, myReviewArr }) {
               <Link to="thr_homework3_dogs3/add-product" onClick={toggle} className={s.newPost}>&#10010;</Link>
               <Link to="thr_homework3_dogs3/favorite" onClick={toggle} className={s.favorite}>&#10084;  {favoriteCards.length}</Link>
               <Link to="thr_homework3_dogs3/my-review" onClick={toggle} className={s.review}>&#9998; {(myReviewArr.length).toString()}</Link>
+              <Link to="thr_homework3_dogs3/basket" onClick={toggle} className={s.basket}><Basket/> {basket.length}</Link>
             </div>
           </div>
           <div className={s.close} onClick={toggle}>

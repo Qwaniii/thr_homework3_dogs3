@@ -2,3 +2,20 @@
   margin: 50px auto;
   text-align: center;
 }
+
+.basket__header {
+  text-align: center;
+  margin: 50px auto;
+}
+
+.basket__main {
+  border: .3px solid rgba(128, 128, 128, 0.3);
+  border-radius: 10px;
+  margin-bottom: 30px;
+}
+
+.basket__price {
+  text-align: right;
+  font-weight: bold;
+  padding: 30px 50px;
+}
