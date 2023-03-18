@@ -18,9 +18,9 @@ export default function Accordeon({ children, myReviewArr, basket }) {
 
   const handleKeyPress = useCallback((event) => {
     if (event.key === "Escape") {
-      toggle()
+      setIsAccordeon(false)
     }
-  }, [toggle]);
+  }, [setIsAccordeon]);
   
   useEffect(() => {
       document.addEventListener('keydown', handleKeyPress);
@@ -32,6 +32,7 @@ export default function Accordeon({ children, myReviewArr, basket }) {
 
   return (
     <div className={s.container}>
+      <div className={cn(s.wrapperWindow, {[s.active]: isAccordeon})} onClick={(() => setIsAccordeon(false))}></div>
       <div className={s.wrapper}>
         <ImageAcc className={s.accordeon} onClick={toggle}/>
         <div className={cn(s.window, {[s.active]: isAccordeon})}>

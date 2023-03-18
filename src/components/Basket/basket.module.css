@@ -7,6 +7,15 @@
     align-items: center;
     gap: 10px;
     position: relative;
+    border-radius: 20px;
+    transition: all .3s;
+
+}
+
+.wrapper.active {
+    box-shadow: 0 10px 7px -7px rgba(128, 128, 128, 0.8);
+    transition: all .3s;
+
 }
 
 .wrapper:after {
@@ -18,6 +27,10 @@
     bottom: -20px;
 }
 
+.index {
+    font-size: 20px;
+}
+
 .infoProduct {
     display: flex;
     align-items: center;
@@ -27,6 +40,10 @@
 
 .aboutProd {
     width: 40%;
+}
+
+.name {
+    /* text-align: justify; */
 }
 
 .image {
@@ -42,6 +59,7 @@
 }
 
 .wight {
+    margin-top: 3px;
     font-size: 12px;
 }
 
@@ -53,6 +71,101 @@
 
 .finalPrice {
     display: flex;
-    justify-content: flex-end;
+    flex-direction: column;
+    align-items: flex-end;
     width: 20%;
+    position: relative;
+}
+
+.price {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 3px;
+}
+
+.delete {
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    right: -35px;
+    top: 10px;
+    opacity: 0;
+    cursor: pointer;
+    border-radius: 50%;
+    padding: 3px;
+    transition: all .3s;
+
+}
+
+.delete.active {
+    opacity: 1;
+    transition: all .3s;
+}
+
+.delete:hover {
+    opacity: 1;
+    background-color: rgba(255, 0, 0, 0.3);
+    transition: all .3s;
+}
+
+.inpWrapper {
+    position: relative;
+}
+
+
+.input {
+    width: 60px;
+    height: 30px;
+    border-radius: 10px;
+    border: .3px solid rgba(128, 128, 128, 0.5);
+    text-align: center;
+}
+
+.input::-webkit-outer-spin-button,
+.input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+.input[type=number] {
+    -moz-appearance:textfield; /* Firefox */
+}
+
+.inpWrapper > button {
+    border: none;
+
+}
+
+.plus:after {
+    content: "\2716";
+    position: absolute;
+    transform: rotate(45deg);
+    top: 7px;
+    right: 35px;
+    color: gray;
+    cursor: pointer;
+    transition: all .3s;
+
+}
+
+.plus:hover::after {
+    color: black;
+    transform: scale(1.5) rotate(45deg);
+}
+
+
+.minus:before {
+    content: "\2014";
+    position: absolute;
+    top: 7px;
+    left: 4px;
+    color: gray;
+    transition: all .3s;
+    cursor: pointer;
+}
+
+.minus:hover::before {
+    color: black;
+    transform: scale(1.5);
 }

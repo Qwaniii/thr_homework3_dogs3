@@ -1,0 +1,40 @@
+.wrapper {
+    position: relative;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    font-size: 20px;
+    padding: 5px 30px;
+    border-radius: 10px;
+    background-color: #f0fff0;
+    border: .3px solid gray;
+    box-shadow: 5px 7px 10px -3px rgba(128, 128, 128, 0.7);
+}
+
+.wrapper.error {
+  background-color: rgb(255, 234, 234);
+}
+
+.close {
+    padding: 5px;
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    top: 3px;
+    right: 3px;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: all .3s;
+  }
+  
+  .close:hover {
+    background-color: rgba(128, 128, 128, 0.3);
+    transition: all .3s;
+  }
+  
+  .close:active {
+    background-color: rgba(255, 0, 0, 0.3);
+    transition: all .3s;
+  }

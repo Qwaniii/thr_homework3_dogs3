@@ -80,6 +80,7 @@ const NewProduct = ({ isToken, setIsToken, setCards, anchor, setAnchor, setModal
           <input
             id="price"
             type="number"
+            step={.1}
             min="0"
             {...register("price", {
               required: "* Укажите стоимость",
@@ -92,6 +93,7 @@ const NewProduct = ({ isToken, setIsToken, setCards, anchor, setAnchor, setModal
               type="number" 
               min="0"
               max="100"
+              step={.5}
               {...register("discount")}
               placeholder="скидка"
             />

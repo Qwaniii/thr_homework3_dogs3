@@ -24,7 +24,9 @@ export default function Cards({
   setAnchorPaginate,
   cardsForPaginate,
   curPaginateOnClient,
-  setBasket
+  setBasket,
+  basket,
+  setSmallModalNotific
 }) {
   const { currentUser, selectTab } = useContext(UserContext);
   const arrCountProducts = [12, 24, 36, 48];
@@ -68,6 +70,9 @@ export default function Cards({
                   setIsLoading={setIsLoading}
                   goods={goods}
                   setBasket={setBasket}
+                  basket={basket}
+                  setSmallModalNotific={setSmallModalNotific}
+
                 />
               ))}
           {selectTab === "new" &&
@@ -81,6 +86,9 @@ export default function Cards({
                   currentUser={currentUser}
                   setIsLoading={setIsLoading}
                   setBasket={setBasket}
+                  basket={basket}
+                  setSmallModalNotific={setSmallModalNotific}
+
                 />
               ))}
           {selectTab === "cheap" &&
@@ -91,6 +99,10 @@ export default function Cards({
                 onProductLike={onProductLikeAllProducts}
                 currentUser={currentUser}
                 setIsLoading={setIsLoading}
+                setBasket={setBasket}
+                basket={basket}
+                setSmallModalNotific={setSmallModalNotific}
+
               />
             ))}
           {selectTab === "expens" &&
@@ -101,6 +113,10 @@ export default function Cards({
                 onProductLike={onProductLikeAllProducts}
                 currentUser={currentUser}
                 setIsLoading={setIsLoading}
+                setBasket={setBasket}
+                basket={basket}
+                setSmallModalNotific={setSmallModalNotific}
+
               />
             ))}
           {selectTab === "popular" &&
@@ -112,6 +128,10 @@ export default function Cards({
                 currentUser={currentUser}
                 setIsLoading={setIsLoading}
                 likes={item.likes.length}
+                setBasket={setBasket}
+                basket={basket}
+                setSmallModalNotific={setSmallModalNotific}
+
               />
             ))}
           {selectTab === "sale" &&
@@ -122,6 +142,10 @@ export default function Cards({
                 onProductLike={onProductLikeAllProducts}
                 currentUser={currentUser}
                 setIsLoading={setIsLoading}
+                setBasket={setBasket}
+                basket={basket}
+                setSmallModalNotific={setSmallModalNotific}
+
               />
             ))}
         </div>

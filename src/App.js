@@ -17,6 +17,8 @@ import MyReviewPage from "./Page/MyReviewPage";
 import NewProduct from "./components/NewProduct/NewProduct";
 import Notification from "./components/Notification/Notification";
 import BasketPage from "./Page/BasketPage";
+import PopupNotific from "./components/PopupNotific/PopupNotific";
+import SmallNotification from "./components/Notification/SmallNotification";
 
 function App() {
   const [cards, setCards] = useState([]);
@@ -35,13 +37,14 @@ function App() {
   const [modalLogin, setModalLogin] = useState(false)
   const [modalRegistr, setModalRegistr] = useState(false)
   const [modalNotific, setModalNotific] = useState(false)
+  const [smallModalNotific, setSmallModalNotific] = useState(false)
   const [isToken, setIsToken] = useState(null)
   const [myReviewArr, setMyReviewArr] = useState([])
   const [anchorReview, setAnchorReview] = useState(false);
   const [anchorPaginate, setAnchorPaginate] = useState(true);
   const [anchorNewProduct, setAnchorNewProduct] = useState(false);
   const [userRegistration, setUserRegistration] = useState(null)
-  const [basket, setBasket] = useState([])
+  const [basket, setBasket] = useState([])  
 
   
   const arrMaxPage = [];
@@ -204,6 +207,11 @@ function App() {
     arrMaxPage.push(i)
   }
   
+
+
+
+
+
   return (
     <div>
       <FavoriteContext.Provider value={{favoriteCards}}>
@@ -249,6 +257,8 @@ function App() {
                 cardsForPaginate={cardsForPaginate}
                 curPaginateOnClient={curPaginateOnClient}
                 setBasket={setBasket}
+                basket={basket}
+                setSmallModalNotific={setSmallModalNotific}
               />
             }
           ></Route>
@@ -295,7 +305,8 @@ function App() {
             path="thr_homework3_dogs3/basket"
             element={
               <BasketPage
-                cards={basket}
+                basket={basket}
+                setBasket={setBasket}
                 cardsForPaginate={favoriteCards}
                 handleProductLike={handleProductLike}
                 currentUser={currentUser}
@@ -374,6 +385,9 @@ function App() {
         <Popup popup={modalNotific} setPopup={setModalNotific}>
             <Notification title={"Отлично!"} message={"Продукт добавлен!"} close={setModalNotific}/>
         </Popup>
+        <PopupNotific popup={smallModalNotific} setPopup={setSmallModalNotific}>
+            <SmallNotification message={"Товар в корзине!"} close={setSmallModalNotific} error={false}/>
+        </PopupNotific>
       </UserContext.Provider>
       </FavoriteContext.Provider>
     </div>
