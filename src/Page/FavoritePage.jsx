@@ -15,7 +15,10 @@ export default function FavoritePage({
   curPaginate,
   cardsOnList,
   setCardsOnList,
-  cardsForPaginate
+  cardsForPaginate,
+  setBasket,
+  basket,
+  setSmallModalNotific
 }) {
 
   return (
@@ -35,6 +38,9 @@ export default function FavoritePage({
           curPaginate={curPaginate}
           cardsOnList={cardsOnList}
           setCardsOnList={setCardsOnList}
+          setBasket={setBasket}
+          basket={basket}
+          setSmallModalNotific={setSmallModalNotific}
         />
         </>
       ) : (

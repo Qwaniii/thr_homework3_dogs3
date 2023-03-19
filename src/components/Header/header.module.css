@@ -135,6 +135,24 @@ header {
     }
 }
 
+@media (max-width: 400px) {
+    .logo {
+    }
+
+    .info {
+        display: none;
+    }
+
+    .accordeon {
+        left: -20px;
+        bottom: -55px;
+    }
+
+    .exit {
+        top: 25px;
+        right: -25px;
+    }
+}
 
 
 

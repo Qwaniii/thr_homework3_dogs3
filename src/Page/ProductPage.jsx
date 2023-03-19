@@ -14,7 +14,10 @@ export default function ProductPage({
   setAnchorReview,
   anchorPaginate,
   handleProductLikeForAllProduct,
-  allCardsForSort
+  allCardsForSort,
+  basket,
+  setBasket,
+  setSmallModalNotific
 }) {
   const id = useParams();
 
@@ -34,6 +37,9 @@ export default function ProductPage({
         anchorPaginate={anchorPaginate}
         handleProductLikeForAllProduct={handleProductLikeForAllProduct}
         allCardsForSort={allCardsForSort}
+        basket={basket}
+        setBasket={setBasket}
+        setSmallModalNotific={setSmallModalNotific}
       />
     </div>
   );

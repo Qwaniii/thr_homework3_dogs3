@@ -106,6 +106,12 @@ select:hover {
 
 }
 
+@media (max-width: 400px) {
+    .cards {
+        grid-template-columns: 1fr;
+    }
+}
+
 @media (min-width: 1200px) {
     .container {
         width: calc(100% - 300px);
@@ -116,3 +122,4 @@ select:hover {
     }
 
 }
+

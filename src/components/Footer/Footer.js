@@ -4,9 +4,11 @@ import s from './footer.module.css'
 
 export default function Footer() {
   return (
-    <footer>
-        <div className={s.container}>
-          made by Oleg &copy;
+    <footer className='footer'>
+        <div  className='container'>
+          <div class={s.wrapper}>
+            made by Oleg &copy;
+          </div>
         </div>
     </footer>
   )

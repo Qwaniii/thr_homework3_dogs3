@@ -7,13 +7,14 @@
 }
 
 html {
-    box-sizing: border-box;
+    box-sizing: border-box;    
 }
 
 body {
     color: #181818;
     font-family: 'Montserrat', sans-serif;
-    font-weight: 300;
+    font-weight: 300;   
+
 }
 
 .container {
@@ -21,7 +22,54 @@ body {
     padding: 0 16px;
 	width: 95%;
 	margin: 0 auto;
+
 }
+
+.height {
+    height: 100vh;
+}
+
+.toUp {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+    width: 30px;
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    font-size: 30px;
+    cursor: pointer;
+    background-color: rgba(128, 128, 128, 0.3);
+    border: .3px solid rgba(0, 0, 0, 0.4);
+    border-radius: 50%;
+    color: rgba(0, 0, 0, 0.5);
+    z-index: 10000;
+    animation: animation .7s ease-out ;
+    transition: all .3s;
+}
+
+.toUp:hover {
+    transform: scale(1.1);
+    background-color: rgba(128, 128, 128, 0.4);
+}
+
+.toUp:active {
+    transform: scale(.8);
+    background-color: rgba(128, 128, 128, 0.8);
+}
+
+@keyframes animation {
+    0% {
+        transform: rotate(-360deg) scale(1.2);
+        opacity: 0;
+    }
+    100% {
+        transform: rotate(0) scale(1);
+        opacity: 1;
+    }
+  }
+
 /* 
 @media (max-width: 500px) {
     .containet {

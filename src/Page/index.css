@@ -8,6 +8,20 @@
   margin: 50px auto;
 }
 
+.basket__main-delete {
+  text-align: right;
+  padding: 3px 5px;
+  color: gray;
+  cursor: pointer;
+  transition: all .3s;
+}
+
+.basket__main-delete:hover {
+  color: black;
+}
+
+
+
 .basket__main {
   border: .3px solid rgba(128, 128, 128, 0.3);
   border-radius: 10px;

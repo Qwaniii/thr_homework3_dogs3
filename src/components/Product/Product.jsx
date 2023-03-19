@@ -23,11 +23,15 @@ export default function Product({
   setAnchorReview,
   anchorPaginate,
   handleProductLikeForAllProduct,
-  allCardsForSort
+  allCardsForSort,
+  basket,
+  setBasket,
+  setSmallModalNotific
 }) {
   const [aboutProduct, setAboutProduct] = useState({});
   const [reviewRating, setReviewRating] = useState(5);
   const [errStatus, setErrStatus] = useState(false);
+  const [countBasket, setCountBasket] = useState(1)
   const { currentUser } = useContext(UserContext);
 
   const isLike = aboutProduct?.likes?.some((id) => id === currentUser._id);
@@ -53,6 +57,19 @@ export default function Product({
           setErrStatus(true);
         });
   }, [id, cards, anchorReview, setIsLoading, allCardsForSort]);
+
+  const addToBascket = () => {
+    let inBasket = basket.find((item) => (item._id ===aboutProduct._id))
+    if (!inBasket) {
+    setBasket((prevState) => [...prevState, {...aboutProduct, count: (countBasket > 0 ? countBasket : 1)}])
+    } else {
+      setBasket((prevState) => [...prevState.map(item => item._id === aboutProduct._id ? ({...item, count: (item.count + (countBasket > 0 ? countBasket : 1))}) : ({...item}) )])
+    }
+    setSmallModalNotific(true)
+    setTimeout(() => {
+      setSmallModalNotific(false)
+    }, 1500)
+}
 
 
   useEffect(() => {
@@ -106,7 +123,12 @@ export default function Product({
                   <div className={s.price}>{Math.round(aboutProduct.price - aboutProduct.price * aboutProduct.discount / 100)} руб.</div>
                   <div className={s.wigth}>{aboutProduct.wight}</div>
                   <div className={s.cart}>
-                    <span className={s.link}>В корзину</span>
+                    <div className={s.wrapperNum}>
+                      <span className={s.minus} onClick={() => countBasket > 1 ? setCountBasket(Number(countBasket) - 1) : setCountBasket(countBasket)}></span>
+                      <input className={s.input} type="number" value={countBasket} min={1} onChange={(e) => setCountBasket(e.target.value)}></input>
+                      <span className={s.plus} onClick={() => setCountBasket(Number(countBasket) + 1)}></span>
+                    </div>
+                    <div className={s.link} onClick={() => addToBascket()}>В корзину</div>
                   </div>
                   <div className={s.likeContainer}>
                     <button
@@ -139,12 +161,11 @@ export default function Product({
                 <p>{aboutProduct.description}</p>
               </div>
               <div className={s.character}>
-                {/* <h3>Характеристики</h3>
+                <h3>Характеристики</h3>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. A, saepe
-              aliquid eveniet dolorem dolor similique temporibus. Unde impedit
-              neque eius.
-            </p> */}
+              Отличный продукт для вашего питомца
+              Цена {aboutProduct.price} руб. за {aboutProduct.wight} 
+            </p>
               </div>
               <div className={s.review}>
                 <h3 className={s.h3}>

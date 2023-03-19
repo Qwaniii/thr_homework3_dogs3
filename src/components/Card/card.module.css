@@ -70,11 +70,18 @@
   cursor: pointer;
   padding: 0;
   fill: rgba(128, 128, 128, 0.5);
+  transition: all .3s;
 }
 
 .like:hover {
   fill: rgba(128, 128, 128, 0.6);
+  transform: scale(1.1);
 }
+
+.like:active {
+  transform: scale(.9);
+}
+
 
 .likeActive {
   background: none;
@@ -82,10 +89,17 @@
   cursor: pointer;
   padding: 0;
   fill: red;
+  transition: all .3s;
+
 }
 
 .likeActive:hover {
   fill: rgba(255, 0, 0, 0.7);
+  transform: scale(1.1);
+}
+
+.likeActive:active {
+  transform: scale(.9);
 }
 
 .link {
@@ -175,6 +189,16 @@
 @media (max-width: 790px) {
   .card {
     grid-template-rows: 13rem 7rem auto auto;
+  }
+
+  .linkBtn {
+    font-size: 12px;
+    padding: 7px;
+    font-weight: bold;
+  }
+
+  .likeContainer {
+    right: -20px;
   }
 
 }

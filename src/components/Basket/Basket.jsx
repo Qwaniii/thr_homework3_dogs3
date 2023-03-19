@@ -25,7 +25,7 @@ const Basket = ({ card, index, basket, setBasket, finalPrice, setFinalPrice}) =>
   }
 
   useEffect(() => {
-    setBasket(prevState => [...prevState.map(item => item._id === card._id ? ({...item, count: countBasket}) : ({...item}) )])
+    setBasket(prevState => [...prevState.map(item => item._id === card._id ? ({...item, count: (countBasket > 0 ? countBasket : 1)}) : ({...item}) )])
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [countBasket])
 
@@ -63,13 +63,13 @@ const Basket = ({ card, index, basket, setBasket, finalPrice, setFinalPrice}) =>
                 className={s.minus}
                 onClick={() =>
                   countBasket > 1
-                    ? setCountBasket(countBasket - 1)
+                    ? setCountBasket(Number(countBasket) - 1)
                     : setCountBasket(countBasket)
                 }
               ></button>
               <button
                 className={s.plus}
-                onClick={() => setCountBasket(countBasket + 1)}
+                onClick={() => setCountBasket(Number(countBasket) + 1)}
               ></button>
             </div>
             <Close

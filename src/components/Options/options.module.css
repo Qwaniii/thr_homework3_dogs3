@@ -8,25 +8,26 @@
 
 .option:hover {
   color: rgb(0, 0, 0);
+  font-size: 16px;
+  letter-spacing: 2px;
   transition: all .3s;
 }
 
 .option:active {
   font-weight: 600;
-  font-size: 17px;
+  font-size: 12px;
+  letter-spacing: normal;
   transition: all .3s;
 }
 
 
 .select {
-  color: black;
+  color: rgba(0, 0, 0, 0.6);
   transition: all .3s;
-  font-weight: 600;
-  font-size: 17px;
+  font-weight: bold;
 }
 
 .select:active {
   color: red;
   transition: all .3s;
-  
 }

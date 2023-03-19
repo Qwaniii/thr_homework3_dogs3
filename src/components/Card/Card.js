@@ -34,7 +34,7 @@ export default function Card({
       setSmallModalNotific(true)
       setTimeout(() => {
         setSmallModalNotific(false)
-      }, 1000)
+      }, 1500)
   }
 
   const location = useLocation();

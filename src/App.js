@@ -45,6 +45,7 @@ function App() {
   const [anchorNewProduct, setAnchorNewProduct] = useState(false);
   const [userRegistration, setUserRegistration] = useState(null)
   const [basket, setBasket] = useState([])  
+  const [scrollTop, setScrollTop] = useState(0);
 
   
   const arrMaxPage = [];
@@ -207,7 +208,24 @@ function App() {
     arrMaxPage.push(i)
   }
   
+  useEffect(() => {
+    const handleScroll = event => {
+      setScrollTop(window.scrollY);
+    };
 
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  const toUp = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    })
+  }
 
 
 
@@ -278,6 +296,9 @@ function App() {
                 anchorPaginate={anchorPaginate}
                 handleProductLikeForAllProduct={handleProductLikeForAllProduct}
                 allCardsForSort={allCardsForSort}
+                basket={basket}
+                setBasket={setBasket}
+                setSmallModalNotific={setSmallModalNotific}
               />
             }
           ></Route>
@@ -298,6 +319,9 @@ function App() {
                 curPaginate={curPaginate}
                 cardsOnList={cardsOnList}
                 setCardsOnList={setCardsOnList}
+                setBasket={setBasket}
+                basket={basket}
+                setSmallModalNotific={setSmallModalNotific}
               />
             }
           ></Route>
@@ -388,6 +412,7 @@ function App() {
         <PopupNotific popup={smallModalNotific} setPopup={setSmallModalNotific}>
             <SmallNotification message={"Товар в корзине!"} close={setSmallModalNotific} error={false}/>
         </PopupNotific>
+        {scrollTop > 200 && <div className="toUp" onClick={() => toUp()}>^</div>}
       </UserContext.Provider>
       </FavoriteContext.Provider>
     </div>

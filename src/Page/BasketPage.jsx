@@ -44,27 +44,31 @@ export default function BasketPage({
     <div>
       {isLoading ? (
         <div className="container">
-          <h2 className="basket__header">Корзина ({basket.length}):</h2>
-          {basket.length !== 0 ? (
-            <div className="basket__main">
-              {basket?.map((card, index) => (
-                <Basket
-                  card={card}
-                  key={card._id + index}
-                  index={index}
-                  basket={basket}
-                  setBasket={setBasket}
-                  finalPrice={finalPrice}
-                  setFinalPrice={setFinalPrice}
-              
-                />
-              ))}
+          <h2 className="basket__header">Корзина {basket.length > 0 && `(${basket.length}):`}</h2>
+          {basket.length !== 0 
+            ? (
+              <>
+              <div className="basket__main-delete" onClick={() => setBasket(prevState => prevState.filter(item => item === 1))}>Очистить все</div>
+              <div className="basket__main">
+                {basket?.map((card, index) => (
+                  <Basket
+                    card={card}
+                    key={card._id + index}
+                    index={index}
+                    basket={basket}
+                    setBasket={setBasket}
+                    finalPrice={finalPrice}
+                    setFinalPrice={setFinalPrice}
+                
+                  />
+                ))}
               <div className="basket__price">
                 Итого:{" "}
                 {finalPrice.length !== 0 &&
                   finalPrice?.reduce((acc, prev) => acc + prev)} руб.
               </div>
             </div>
+            </>
           ) : (
             <h3 className="basket__header">
               Пусто...

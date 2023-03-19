@@ -19,15 +19,22 @@
 }
 
 .back {
+  display: flex;
+  align-items: center;
   text-decoration: none;
   cursor: pointer;
-  color: gray;
+  color: rgba(128, 128, 128, 0.7);
   box-sizing: border-box;
   transition: all .3s;
 }
 
 .back:hover {
   color: rgb(66, 66, 66);
+}
+
+.back:active {
+  color: red;
+  font-size: 15px;
 }
 
 .back::before {
@@ -71,9 +78,91 @@
 
 .cart {
   padding: 20px 2px;
+
+}
+
+.wrapperNum {
+  border-radius: 50%;
+  border-left: 1px solid rgba(128, 128, 128, 0.5);
+  border-right: 1px solid rgba(128, 128, 128, 0.5);
+  width: max-content;
+  padding: 10px 20px;
+  margin-left: 10px;
+  margin-bottom: 5px;
+  position: relative;
+}
+
+.input {
+  border-radius: 10px;
+  border: .3px solid rgba(128, 128, 128, 0.7);
+  height: 30px;
+  width: 50px;
+  text-align: center;
+  outline: none;
+  transition: all .3s;
+}
+
+.input:focus {
+  border: 1px solid rgba(206, 206, 0, 0.7);
+}
+
+
+.input::-webkit-outer-spin-button,
+.input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+.input[type=number] {
+    -moz-appearance:textfield; /* Firefox */
+}
+
+.minus:before {
+  content: "-";
+  position: absolute;
+  bottom: -2px;
+  left: 0px;
+  color: rgba(0, 0, 0, 0.5);
+  transition: all .3s;
+  cursor: pointer;
+  font-size: 50px;
+}
+
+.minus:hover::before {
+  color: black;
+  transform: scale(1.1);
+}
+
+.minus:active::before {
+  color: red;
+  transform: scale(0.9);
+}
+
+.plus:after {
+  content: "+";
+  position: absolute;
+  top: 0px;
+  right: -2px;
+  color: rgba(0, 0, 0, 0.5);
+  transition: all .3s;
+  cursor: pointer;
+  font-size: 40px;
+
+}
+
+.plus:hover::after {
+  color: black;
+  transform: scale(1.1);
+}
+
+.plus:active::after {
+  color: red;
+  transform: scale(0.9);
 }
 
 .link {
+  width: max-content;
   padding: 10px 15px;
   background-color: rgb(255, 255, 43, 0.7);
   border-radius: 20px;
@@ -113,10 +202,16 @@
   cursor: pointer;
   padding: 0;
   fill: rgba(128, 128, 128, 0.5);
+  transition: all .3s;
 }
 
 .like:hover {
   fill: rgba(128, 128, 128, 0.6);
+  transform: scale(1.1);
+}
+
+.like:active {
+  transform: scale(.9);
 }
 
 .likeActive {
@@ -125,10 +220,16 @@
   cursor: pointer;
   padding: 0;
   fill: red;
+  transition: all .3s;
 }
 
 .likeActive:hover {
   fill: rgba(255, 0, 0, 0.7);
+  transform: scale(1.1);
+}
+
+.likeActive:active {
+  transform: scale(.9);
 }
 
 .about {
@@ -217,3 +318,31 @@
   line-height: 1.5rem;
 }
 
+@media (max-width: 790px) {
+  .main {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .image {
+    width: 100%;
+  }
+
+  .info {
+    width: 100%;
+    padding: 0;
+  }
+
+  .revWrapper {
+    flex-direction: column;
+  }
+
+  .addRev {
+    width: 100%;
+  }
+
+  .rev {
+    width: 100%;
+  }
+}
