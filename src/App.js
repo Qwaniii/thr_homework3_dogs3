@@ -19,6 +19,9 @@ import Notification from "./components/Notification/Notification";
 import BasketPage from "./Page/BasketPage";
 import PopupNotific from "./components/PopupNotific/PopupNotific";
 import SmallNotification from "./components/Notification/SmallNotification";
+import AboutUser from "./components/AboutUser/AboutUser";
+import { useDispatch } from "react-redux";
+import { getUser } from "./storage/reducers/userReduce";
 
 function App() {
   const [cards, setCards] = useState([]);
@@ -48,6 +51,8 @@ function App() {
   const [scrollTop, setScrollTop] = useState(0);
 
   
+  const  dispatch = useDispatch()
+  
   const arrMaxPage = [];
 
   const debounceValue = useDebounce(searchQuery, 500);
@@ -73,10 +78,13 @@ function App() {
         setMaxPage(Math.ceil(cardData.total / cardsOnList))
         setCurrentUser(currentUserData);
         setIsLoading(true);
+        dispatch(getUser(currentUserData))
       })
       .catch((err) => console.log(err));
     
+// eslint-disable-next-line react-hooks/exhaustive-deps
 }, [page, debounceValue, cardsOnList, isToken, anchorNewProduct]);
+
 
   useEffect(() => {
     isToken &&
@@ -368,6 +376,11 @@ function App() {
             />
             }
           ></Route>
+          <Route
+            path="thr_homework3_dogs3/about-user"
+            element={
+              <AboutUser/>
+            }/>
           {!isToken && 
           <>
           <Route

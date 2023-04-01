@@ -6,7 +6,7 @@ export default function Footer() {
   return (
     <footer className='footer'>
         <div  className='container'>
-          <div class={s.wrapper}>
+          <div className={s.wrapper}>
             made by Oleg &copy;
           </div>
         </div>

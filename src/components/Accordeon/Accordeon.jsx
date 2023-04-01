@@ -39,7 +39,7 @@ export default function Accordeon({ children, myReviewArr, basket }) {
           {/* {isAccordeon && <> */}
           <div className={s.wrapperUser}>
             <div className={s.user} >
-              {children}
+              <Link to="thr_homework3_dogs3/about-user" onClick={toggle}>{children}</Link>
             </div>
             <div className={s.link}>
               <Link to="thr_homework3_dogs3/add-product" onClick={toggle} className={s.newPost}>&#10010;</Link>

@@ -49,7 +49,7 @@ export default function Cards({
             <div className={s.option}>
               {location.pathname === "/thr_homework3_dogs3/favorite" ? (
                 <div style={{ fontSize: 18, fontWeight: "bold" }}>
-                  Избранные товары:
+                  {goods.length > 0 ? `Избранные товары:` : `Товаров нет...`}
                 </div>
               ) : (
                 <Options setAnchorPaginate={setAnchorPaginate} setPage={setPage} />

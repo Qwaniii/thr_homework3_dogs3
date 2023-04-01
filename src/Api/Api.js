@@ -1,6 +1,6 @@
 const onResponce = (res) => {
     // return res.ok ? res.json() : Promise.reject(`Error ${res.status}`);
-    return res.ok ? res.json() : Promise.reject(res);
+    return res.ok ? res.json() : Promise.reject(res.json());
 }
 
 class Api {
@@ -63,6 +63,28 @@ class Api {
                 authorization: this._token,
             },
         }).then(onResponce);
+    }
+
+    editUserInfo(data) {
+        return fetch(`${this._dataUrl}/users/me`, {
+            method: "PATCH",
+            headers: {
+                authorization: this._token,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        }).then(onResponce)
+    }
+
+    editUserAvatar(avatar) {
+        return fetch(`${this._dataUrl}/users/me/avatar`, {
+            method: "PATCH",
+            headers: {
+                authorization: this._token,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(avatar) 
+        }).then(onResponce)
     }
 
     getReviewAuthor(authorId) {

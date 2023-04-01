@@ -25,6 +25,13 @@ body {
 
 }
 
+.title {
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+    margin: 50px auto;
+}
+
 .height {
     height: 100vh;
 }

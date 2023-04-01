@@ -1,0 +1,153 @@
+.wrapper {
+  margin-bottom: 50px;
+  padding: 30px 15px;
+  box-sizing: border-box;
+  border: 1px solid black;
+  border-radius: 10px;
+  background-color: rgba(192, 192, 192, 0.3);
+  position: relative;
+
+}
+
+.title {
+  margin: 25px auto;
+  max-width: max-content;
+  position: relative;
+}
+
+.data {
+  display: flex;
+  gap: 20px;
+}
+
+.photo {
+  max-width: 300px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: white;
+  box-sizing: border-box;
+}
+
+.avatar {
+  max-width: 100%;
+  object-fit: contain;
+  box-shadow: 0 5px 5px 2px silver;
+  border-radius: 10px;
+}
+
+.info {
+  align-self: center;
+  
+}
+
+.block {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.blockAvatar {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  bottom: 5px;
+}
+
+.key {
+  flex: 0 0 150px;
+}
+
+.value {
+  width: 400px;
+  border-radius: 5px;
+  background-color: white;
+  padding:10px;
+  font-weight: bold;
+  font-size: 16px;
+  word-break: break-all;
+}
+
+.value.disable {
+  background-color: rgba(128, 128, 128, 0.3);
+  color: gray;
+}
+
+.editWrapper {
+  position: absolute;
+  top: -7px;
+  right: -50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  border-radius: 50%;
+  opacity: .3;
+  transition: all .3s;
+  cursor: pointer;
+
+}
+
+.editWrapper:hover {
+  background-color: rgba(255, 255, 0, 0.5);
+  opacity: 1;
+
+}
+
+.edit {
+  width: 20px;
+  transition: all .3s;
+}
+
+.edit:hover {
+  transform: scale(1.1);
+}
+
+.edit:active {
+  transform: scale(.7);
+}
+
+.submitWrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: none;
+  border: none;
+  border-radius: 50%;
+  padding: 10px;
+  opacity: 1;
+  cursor: pointer;
+  transition: all .3s;
+  transform: scale(1);
+  animation: fadeIn .3s ease-out;
+}
+
+.submitWrap:hover {
+  background-color: rgba(255, 255, 0, 0.5);
+  opacity: .7;
+  transform: scale(1.1);
+}
+
+.submitWrap:active {
+  transform: scale(.8);
+}
+
+.submit {
+  width: 30px;  
+}
+
+@keyframes fadeIn {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1.3);
+  }
+}
