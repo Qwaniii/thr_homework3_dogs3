@@ -85,6 +85,22 @@
   right: 0;
 }
 
+.userLink {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: inherit;
+  text-decoration: none;
+  transition: all .3s;
+}
+
+.userLink:hover {
+  filter:contrast(.7);
+  opacity: .8;
+  transform: scale(1.05);
+}
+
 .link {
   width: 80%;
   display: flex;

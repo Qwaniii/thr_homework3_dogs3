@@ -17,7 +17,7 @@ const SmallNotification = ({ title, message, children, close, error }) => {
             <div>{error ? <Error style={{width: 80}}/> : <Done style={{width: 60}}/>}</div>
             <p>{message}</p>
             <p>{children}</p>
-            <Close className={s.close} onClick={closeNotific}/>
+            {close && <Close className={s.close} onClick={closeNotific}/>}
         </div>
     )
 }

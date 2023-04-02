@@ -5,13 +5,18 @@ const initialState = {
   infoUser: {},
   message: '',
   editAnchor: false,
+  avatarAnchor: false,
 }
 
 export const asyncEditUserInfo= createAsyncThunk(
   'edit/userInfo',
-  async (data) => {
-    const response = await api.editUserInfo(data);
-    return response
+  async (data, { rejectWithValue }) => {
+      try {
+        const response = await api.editUserInfo(data);
+        return response
+    } catch(err) {
+        return rejectWithValue(err.message)
+    }
 }
 )
 
@@ -41,27 +46,56 @@ const userSlice = createSlice({
     },
     editState(state, action) {
       state.editAnchor = action.payload
+    },
+    editAvatar(state, action) {
+      state.avatarAnchor = action.payload
+    },
+    setMessage(state, action) {
+      state.message = action.payload
     }
   },
   extraReducers: (builder) => {
     builder
       .addCase(asyncEditUserInfo.fulfilled, (state, action) => {
+        console.log(action.payload)
+
         state.infoUser = action.payload
+        state.editAnchor = false
+        state.message = "Данные сохранены!"
       })
       .addCase(asyncEditUserInfo.rejected, (state, action) => {
-        console.log(action.payload)
+        console.log(action.error)
+        console.log(action)
+        state.message = "Ошибка"
         // state.message = action.payload
       })
+    
+    builder
+        .addCase(asyncEditUserAvatar.fulfilled, (state, action) => {
+          state.infoUser = action.payload
+          state.avatarAnchor = false
+          state.message = "Аватар изменен!"
+
+        })
+        .addCase(asyncEditUserAvatar.rejected, (state, action) => {
+          console.log(action)
+          state.message = "Ошибка"
+
+        })
   }
+      
+    
 })
 
-export const { changeName, changeAbout, changeAvatar, getUser, editState } = userSlice.actions 
+export const { changeName, changeAbout, changeAvatar, getUser, editState, editAvatar, setMessage } = userSlice.actions 
 
 export const userName = (state) => state.user.infoUser.name
 export const userAvatar = (state) => state.user.infoUser.avatar
 export const userAbout = (state) => state.user.infoUser.about
 export const userEmail = (state) => state.user.infoUser.email
-export const editAncor = (state) => state.user.editAnchor
+export const editAnchor = (state) => state.user.editAnchor
+export const avatarAnchor = (state) => state.user.avatarAnchor
+export const messageEdit = (state) => state.user.message
 
 
 export default userSlice.reducer

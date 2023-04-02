@@ -30,7 +30,6 @@ const MyReview = ({ myRev }) => {
           });
       }, [myRev]);
 
-      console.log(productReview)
 
     return(
         <div className={s.wrapper}>

@@ -39,13 +39,15 @@ export default function Accordeon({ children, myReviewArr, basket }) {
           {/* {isAccordeon && <> */}
           <div className={s.wrapperUser}>
             <div className={s.user} >
-              <Link to="thr_homework3_dogs3/about-user" onClick={toggle}>{children}</Link>
+              <Link to="thr_homework3_dogs3/about-user" className={s.userLink} title="Личный кабинет" onClick={toggle}>
+                {children}
+              </Link>
             </div>
             <div className={s.link}>
-              <Link to="thr_homework3_dogs3/add-product" onClick={toggle} className={s.newPost}>&#10010;</Link>
-              <Link to="thr_homework3_dogs3/favorite" onClick={toggle} className={s.favorite}>&#10084;  {favoriteCards.length}</Link>
-              <Link to="thr_homework3_dogs3/my-review" onClick={toggle} className={s.review}>&#9998; {(myReviewArr.length).toString()}</Link>
-              <Link to="thr_homework3_dogs3/basket" onClick={toggle} className={s.basket}><Basket/> {basket.length}</Link>
+              <Link to="thr_homework3_dogs3/add-product" onClick={toggle} title="Добавить продукт" className={s.newPost}>&#10010;</Link>
+              <Link to="thr_homework3_dogs3/favorite" onClick={toggle} title="В избранном" className={s.favorite}>&#10084;  {favoriteCards.length}</Link>
+              <Link to="thr_homework3_dogs3/my-review" onClick={toggle} title="Мои отзывы" className={s.review}>&#9998; {(myReviewArr.length).toString()}</Link>
+              <Link to="thr_homework3_dogs3/basket" onClick={toggle} title="Корзина" className={s.basket}><Basket/> {basket.length}</Link>
             </div>
           </div>
           <div className={s.close} onClick={toggle}>

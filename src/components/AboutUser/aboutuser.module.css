@@ -20,12 +20,15 @@
   gap: 20px;
 }
 
+
+
 .photo {
-  max-width: 300px;
+  width: 300px;
   padding: 20px;
   border-radius: 10px;
   background-color: white;
   box-sizing: border-box;
+  position: relative;
 }
 
 .avatar {
@@ -33,11 +36,47 @@
   object-fit: contain;
   box-shadow: 0 5px 5px 2px silver;
   border-radius: 10px;
+  border: 2px solid transparent;
+  transition: all .3s;
+}
+
+.avatar.active {
+  filter:contrast(.7);
+  border: 2px solid gray;
+
+}
+
+.editAvatar {
+  padding: 3px 0;
+  text-align: center;
+  width: 260px;
+  position: absolute;
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  cursor: pointer;
+  pointer-events: none;
+  opacity: 0;
+  background-color: rgba(128, 128, 128, 0.5);
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  color: white;
+  font-weight: bold;
+  transition: all .3s;
+}
+
+.editAvatar:hover {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.editAvatar.active {
+  opacity: 1;
+  pointer-events: all;
 }
 
 .info {
   align-self: center;
-  
 }
 
 .block {
@@ -47,19 +86,28 @@
   margin-bottom: 15px;
 }
 
+
 .blockAvatar {
   position: absolute;
   display: flex;
   align-items: center;
-  gap: 10px;
-  bottom: 5px;
+  bottom: -25px;
 }
 
 .key {
   flex: 0 0 150px;
 }
 
+
+
+.block > input {
+  border: 1px solid black;
+  box-sizing: border-box;
+  transition: all .3s;
+}
+
 .value {
+  box-sizing: border-box;
   width: 400px;
   border-radius: 5px;
   background-color: white;
@@ -67,7 +115,14 @@
   font-weight: bold;
   font-size: 16px;
   word-break: break-all;
+  outline: none;
+  border: 1px solid transparent;
 }
+
+.value:focus {
+  border: 1px solid rgb(145, 145, 0);
+}
+
 
 .value.disable {
   background-color: rgba(128, 128, 128, 0.3);
@@ -86,7 +141,6 @@
   opacity: .3;
   transition: all .3s;
   cursor: pointer;
-
 }
 
 .editWrapper:hover {
@@ -140,6 +194,43 @@
   width: 30px;  
 }
 
+.inputValue {
+  height: 20px;
+  width: 240px;
+  padding: 0 7px;
+  border-radius: 5px;
+  border: .3px solid gray;
+  box-shadow: 0 3px 3px -2px rgba(128, 128, 128, 0.7);
+  outline: none;
+}
+
+.inputValue:focus {
+  border: .3px solid black;
+}
+
+.inputValue.errors {
+  border: .3px solid red;
+}
+
+.submitAva {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  text-decoration: none;
+}
+
+.submitImg {
+  height: 20px;
+  opacity: .6;
+  cursor: pointer;
+  transition: all .3s ;
+}
+
+.submitImg:hover {
+  opacity: 1;
+}
+
 @keyframes fadeIn {
   from {
     transform: scale(0);
@@ -149,5 +240,58 @@
   to {
     opacity: 1;
     transform: scale(1.3);
+  }
+}
+
+@keyframes fadeInAva {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+
+@media (max-width:990px) {
+  .data {
+    flex-direction: column;
+    gap: 40px;
+    justify-items: center;
+    align-items: center;
+  }
+}
+
+@media (max-width: 750px) {
+  .block {
+    flex-direction: column;
+  }
+  .key {
+    flex: 1 0 auto;
+  }
+  .value {
+    width: 300px;
+    text-align: center;
+  }
+  .title {
+    position: static;
+  }
+  .editWrapper {
+    top: 277px;
+    right: 90px;
+    z-index: 100;
+  }
+}
+
+@media (max-width: 400px) {
+  .value {
+    width: auto;
+  }
+  .photo {
+    width: auto;
+  }
+  .editWrapper {
+    right: auto;
   }
 }

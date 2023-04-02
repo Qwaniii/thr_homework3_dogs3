@@ -38,3 +38,12 @@
     background-color: rgba(255, 0, 0, 0.3);
     transition: all .3s;
   }
+
+  @media (max-width: 300px) {
+    .wrapper {
+      width: auto;
+      flex-direction: column;
+      padding: 1px 3px;
+      flex: 0 1 auto;
+    }
+  }

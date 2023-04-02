@@ -14,16 +14,21 @@ body {
     color: #181818;
     font-family: 'Montserrat', sans-serif;
     font-weight: 300;   
-
+    /* height: 100%; */
 }
 
 .container {
+
 	max-width: 1024px;
     padding: 0 16px;
 	width: 95%;
 	margin: 0 auto;
-
 }
+
+.wrap {
+    min-height: calc(100vh - 60px);
+}
+
 
 .title {
     text-align: center;
@@ -77,10 +82,10 @@ body {
     }
   }
 
-/* 
-@media (max-width: 500px) {
-    .containet {
+
+@media (max-width: 300px) {
+    .logo {
         width: 100%;
         margin: 0;
     }
-} */
+}
