@@ -136,8 +136,7 @@ header {
 }
 
 @media (max-width: 400px) {
-    .logo {
-    }
+ 
 
     .info {
         display: none;

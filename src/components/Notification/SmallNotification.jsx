@@ -11,15 +11,18 @@ const SmallNotification = ({ title, message, children, close, error }) => {
     const closeNotific = () => {
         close(false)
     }
+    if (!!message) {
+        return (
+            <div className={cn(s.wrapper, {[s.error]: error})}>
+                <div>{error ? <Error style={{width: 80}}/> : <Done style={{width: 60}}/>}</div>
+                <p>{message}</p>
+                <p>{children}</p>
+                {close && <Close className={s.close} onClick={closeNotific}/>}
+            </div>
+        )
+    }
+    else return null
 
-    return (
-        <div className={cn(s.wrapper, {[s.error]: error})}>
-            <div>{error ? <Error style={{width: 80}}/> : <Done style={{width: 60}}/>}</div>
-            <p>{message}</p>
-            <p>{children}</p>
-            {close && <Close className={s.close} onClick={closeNotific}/>}
-        </div>
-    )
 }
 
 export default SmallNotification

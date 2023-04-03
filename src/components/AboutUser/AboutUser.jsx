@@ -65,8 +65,10 @@ export default function AboutUser() {
       <div className={s.wrapper}>
         <div className={s.data}>
           <div className={s.photo}>
-            <img onMouseEnter={mouseEnter} onMouseLeave={mouseLeave} onClick={() => dispatch(editAvatar(!avatarUser))} src={avatarUser ? (watch("avatar") || background) : avatar} alt={name} className={`${s.avatar} ${enableEditAva && s.active}`}></img>
-            <div onClick={() => dispatch(editAvatar(!avatarUser))} onMouseEnter={mouseEnter} onMouseLeave={mouseLeave} className={`${s.editAvatar} ${enableEditAva && s.active}`}>{avatarUser ? "Оставить этот" : "Изменить аватар"}</div>
+            <div className={s.imgWrapper}>
+              <img onMouseEnter={mouseEnter} onMouseLeave={mouseLeave} onClick={() => dispatch(editAvatar(!avatarUser))} src={avatarUser ? (watch("avatar") || background) : avatar} alt={name} className={`${s.avatar} ${enableEditAva && s.active}`}></img>
+              <div onClick={() => dispatch(editAvatar(!avatarUser))} onMouseEnter={mouseEnter} onMouseLeave={mouseLeave} className={`${s.editAvatar} ${enableEditAva && s.active}`}>{avatarUser ? "Оставить этот" : "Изменить аватар"}</div>
+            </div>
             {avatarUser && <form className={s.blockAvatar} onSubmit={handleSubmit(onSubmitAvatar)}>
               <input className={`${s.inputValue} ${errors.avatar && s.errors}`} type="text" placeholder='Ссылка на автар' defaultValue={avatar} {...register("avatar", {required: "Заполните пароль"})}></input>
               <button type="submit" className={s.submitAva} title="Сохранить аватар"><img className={s.submitImg} src="https://img.icons8.com/ios-filled/50/null/save--v1.png" alt="Сохранить"/></button>

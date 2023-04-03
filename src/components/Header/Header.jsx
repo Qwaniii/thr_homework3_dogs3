@@ -49,8 +49,8 @@ export default function Header({currentUser,
               {/* {!currentUser.email && `Войти`} */}
               {currentUser && 
               <>
-              <div className={s.info}>
-                <span className={s.email}><b>E-mail: </b>{currentUser.email}</span>
+              <div className={s.info}  >
+                <span className={s.email} ><b>E-mail: </b>{currentUser.email}</span>
                 <span className={s.name}> <b>Имя:</b> {currentUser.name}</span>
               </div>
               </>}

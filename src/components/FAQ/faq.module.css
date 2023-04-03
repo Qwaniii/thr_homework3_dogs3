@@ -1,0 +1,103 @@
+.wrapper {
+  font-size: 18px;
+}
+
+.title.active {
+  color: rgba(0, 0, 0, 0.6);
+  transition: all .5s;
+}
+
+.title {
+  padding-left: 5px;
+  position: relative;
+  cursor: pointer;
+  width: max-content;
+  color: black;
+  transition: all .5s;
+  margin-bottom: 15px;
+
+}
+
+.title::before {
+  content: "\2014";
+  position: absolute;
+  left: -22px;
+  top: 0;
+}
+
+.title::after {
+  content: "\2014";
+  position: absolute;
+  left: -22px;
+  top: 0;
+  transform: rotate(0);
+  transition: all .5s;
+  /* animation: minus .6s ease; */
+}
+
+
+.title.active::after {
+  content: "\2014";
+  position: absolute;
+  left: -21px;
+  top: 2px;
+  transform: rotate(90deg);
+  transition: all .5s;
+  /* animation: plus .6s ease; */
+}
+
+.content {
+  margin: 15px 25px;
+  background-color: rgba(192, 192, 192, 0.3);
+  border-radius: 5px;
+  text-align: justify;
+  max-height: 0;
+  /* opacity: 0; */
+  overflow: hidden;
+  transition: all .4s ease;
+
+}
+
+.content.active {
+  opacity: 1;
+  max-height: 100vh;
+  transition: max-height 1s ease;
+}
+
+.contentWrapper {
+  padding: 10px;
+}
+
+/* 
+@keyframes plus {
+  from {
+    transform: rotate(0);
+    scale: 1;
+  }
+
+  30% {
+    scale: 1.1
+  }
+
+  50% {
+    scale: 1.3
+  }
+
+  70% {
+    scale: 1.1;
+  }
+
+  to {
+    transform: rotate(90deg);
+    scale: 1;
+  }
+}
+
+@keyframes minus {
+  from {
+    transform: rotate(90deg);
+  }
+  to {
+    transform: rotate(0);
+  }
+} */

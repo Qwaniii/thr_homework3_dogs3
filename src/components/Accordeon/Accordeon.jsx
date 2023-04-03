@@ -12,7 +12,6 @@ export default function Accordeon({ children, myReviewArr, basket }) {
   const { favoriteCards } = useContext(FavoriteContext)
 
   const toggle = useCallback(() => {
-    console.log("done", isAccordeon)
     setIsAccordeon(!isAccordeon)
   },[isAccordeon])
 

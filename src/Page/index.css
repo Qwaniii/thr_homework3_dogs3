@@ -34,3 +34,13 @@
   padding: 30px 50px;
   font-size: 25px;
 }
+
+.faq__wrapper {
+  margin: 50px auto;
+}
+
+.faq__content {
+  border: .3px solid rgba(128, 128, 128, 0.5);
+  padding: 30px 50px;
+  border-radius: 10px;
+}

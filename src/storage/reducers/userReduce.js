@@ -15,7 +15,8 @@ export const asyncEditUserInfo= createAsyncThunk(
         const response = await api.editUserInfo(data);
         return response
     } catch(err) {
-        return rejectWithValue(err.message)
+        console.log(err)
+        return err
     }
 }
 )
@@ -23,8 +24,13 @@ export const asyncEditUserInfo= createAsyncThunk(
 export const asyncEditUserAvatar = createAsyncThunk(
   'edit/userAvatar',
   async (avatar) => {
-    const respAva = await api.editUserAvatar(avatar);
-    return respAva
+    try {
+      const respAva = await api.editUserAvatar(avatar);
+      return respAva
+    } catch (error) {
+      console.log(error)
+      return error
+    }
   }
 )
 
@@ -58,10 +64,14 @@ const userSlice = createSlice({
     builder
       .addCase(asyncEditUserInfo.fulfilled, (state, action) => {
         console.log(action.payload)
-
-        state.infoUser = action.payload
-        state.editAnchor = false
-        state.message = "Данные сохранены!"
+        if (!action.payload.error) {
+                  state.infoUser = action.payload
+                  state.editAnchor = false
+                  state.message = "Данные сохранены!"
+        } else {
+          state.message = action.payload.message
+          console.log(`Error ${action.payload.statusCode}`)
+        }
       })
       .addCase(asyncEditUserInfo.rejected, (state, action) => {
         console.log(action.error)
@@ -72,15 +82,19 @@ const userSlice = createSlice({
     
     builder
         .addCase(asyncEditUserAvatar.fulfilled, (state, action) => {
-          state.infoUser = action.payload
-          state.avatarAnchor = false
-          state.message = "Аватар изменен!"
+          if (!action.payload.error) {
+            state.infoUser = action.payload
+            state.avatarAnchor = false
+            state.message = "Аватар изменен!"
+          } else {
+            state.message = action.payload.message
+            console.log(`Error ${action.payload.statusCode}`)  
+          }
 
         })
         .addCase(asyncEditUserAvatar.rejected, (state, action) => {
           console.log(action)
           state.message = "Ошибка"
-
         })
   }
       

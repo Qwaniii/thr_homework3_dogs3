@@ -6,7 +6,7 @@ export default function Search({setSearchQuery, isToken, anchorPaginate}) {
 
   const location = useLocation()
 
-  const arrUrl = ["favorite", "product", "my-review", "basket", "about-user"]
+  const arrUrl = ["favorite", "product", "my-review", "basket", "about-user", "faq"]
 
   return (
     <div className={s.search}>

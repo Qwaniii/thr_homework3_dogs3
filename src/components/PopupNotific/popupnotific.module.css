@@ -32,6 +32,7 @@
   left: 20px;
   box-sizing: border-box;
   border-radius: 10px;
+  pointer-events: none;
   /* background-color: rgb(255, 174, 174, 0.5); */
   transition: all .3s linear;
   opacity: 0;
@@ -39,5 +40,6 @@
 
 .content.active {
   opacity: 1;
+  pointer-events: all;
   transition: all .3s;
 }

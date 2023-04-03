@@ -22,6 +22,7 @@ import SmallNotification from "./components/Notification/SmallNotification";
 import AboutUser from "./components/AboutUser/AboutUser";
 import { useDispatch } from "react-redux";
 import { getUser } from "./storage/reducers/userReduce";
+import FaqPage from "./Page/FaqPage";
 
 function App() {
   const [cards, setCards] = useState([]);
@@ -382,6 +383,11 @@ function App() {
               element={
                 <AboutUser/>
               }/>
+            <Route
+              path="thr_homework3_dogs3/faq"
+              element={
+                <FaqPage/>
+              }/>
             {!isToken &&
             <>
             <Route
@@ -400,7 +406,7 @@ function App() {
             <Route path="*" element={<NotFoundPage />}></Route>
           </Routes>
         </div>
-        <Footer />
+        <Footer setSelectTab={setSelectTab} setAnchorPaginate={setAnchorPaginate}/>
         <Popup popup={modalLogin} setPopup={setModalLogin}>
           <Login 
             sToken={isToken} 

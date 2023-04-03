@@ -6,12 +6,29 @@ footer {
     margin: 0 auto;
     padding: 20px 0;
     text-align: center;
-    
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.link {
+    color: inherit;
+    text-decoration: none;
+    transition: all .3s;
+}
+
+.link:hover {
+    color: rgb(113, 113, 113);
 }
 
 @media (max-width: 720px) {
     .wrapper {
         flex-direction: column;
+        gap: 5px;
+    }
+
+    .logo {
+        order: 3;
     }
 }
 
