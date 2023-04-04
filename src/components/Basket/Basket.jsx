@@ -2,11 +2,14 @@ import React, { useEffect, useState } from "react";
 import s from "./basket.module.css";
 import { ReactComponent as Close } from "../LoginForm/img/close.svg";
 import cn from "classnames";
+import { useNavigate } from "react-router";
 
 const Basket = ({ card, index, basket, setBasket, finalPrice, setFinalPrice}) => {
 
   const [anchorUnderCard, setAnchorUnderCard] = useState(false);
   const [countBasket, setCountBasket] = useState(card.count);
+
+  const navigate = useNavigate()
   // const [value, setValue] = useState(1)
 
   // useEffect(() => {
@@ -40,10 +43,10 @@ const Basket = ({ card, index, basket, setBasket, finalPrice, setFinalPrice}) =>
       >
         <div className={s.index}>{index + 1}.</div>
         <div className={s.infoProduct}>
-          <div className={s.image}>
+          <div className={s.image} onClick={() => navigate(`/thr_homework3_dogs3/product/${card._id}`)}>
             <img src={card.pictures} alt={card.name}></img>
           </div>
-          <div className={s.aboutProd}>
+          <div className={s.aboutProd} onClick={() => navigate(`/thr_homework3_dogs3/product/${card._id}`)}>
             <div className={s.name}>{card.name}</div>
             <div className={s.wight}>{card.wight}</div>
           </div>

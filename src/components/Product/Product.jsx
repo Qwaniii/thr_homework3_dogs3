@@ -3,12 +3,14 @@ import s from "./product.module.css";
 import { ReactComponent as Like } from "../Card/img/like.svg";
 import cn from "classnames";
 import api from "../../Api/Api";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import NotFoundPage from "../../Page/NotFoundPage";
 import Spinner from "../Spinner/Spinner";
 import { UserContext } from "../../Context/UserContext";
 import Review from "../Review/Review";
 import AddReview from "../AddReview/AddReview";
+import Popup from "../Popup/Popup";
+import SmallNotification from "../Notification/SmallNotification";
 
 export default function Product({
   id,
@@ -32,7 +34,10 @@ export default function Product({
   const [reviewRating, setReviewRating] = useState(5);
   const [errStatus, setErrStatus] = useState(false);
   const [countBasket, setCountBasket] = useState(1)
+  const [delObj, setDelObj] = useState({})
+
   const { currentUser } = useContext(UserContext);
+
 
   const isLike = aboutProduct?.likes?.some((id) => id === currentUser._id);
   const navigate = useNavigate();
@@ -92,6 +97,26 @@ export default function Product({
   //     })
   // }
 
+
+  const handleDeleteReview = (postId, reviewId) => {
+    api.deleteReview(postId, reviewId)
+        .then(data => {
+          console.log(data)
+          setAboutProduct(data)
+          setAnchorReview(!anchorReview)
+          setModalUserReview(false)
+          setDelObj(prevState => ({...prevState, message: "Комментарий удален"}))
+          setTimeout(() => {
+            setDelObj({})
+          }, 5000)
+        })
+        .catch(err => {
+          console.log(err)
+          err.json()
+        })
+  }
+
+
   return (
     <div>
       {isLoading ? (
@@ -99,9 +124,10 @@ export default function Product({
           <div className="container">
             <div className={s.wrapper}>
               <div className={s.header}>
-                <Link onClick={() => navigate(-1)} className={s.back}>
-                  Назад
-                </Link>
+                <div  className={s.btnWrapper}>
+                  <span onClick={() => navigate(-1)} className={s.back}>Назад</span>
+                  <span className={s.edit}>Редактировать</span>
+                </div>
                 <h2 className="div">{aboutProduct.name}</h2>
                 <p className="div">Артикул {aboutProduct?._id?.slice(5,12)}</p>
               </div>
@@ -169,7 +195,7 @@ export default function Product({
               </div>
               <div className={s.review}>
                 <h3 className={s.h3}>
-                  Отзывов о товаре ({aboutProduct?.reviews?.length}) :{" "}
+                  {aboutProduct?.reviews?.length > 0 ? `Отзывов о товаре (${aboutProduct?.reviews?.length}) :` : `Нет отзывов. Будьте первым!`}
                 </h3>
                 <div className={s.revWrapper}>
                   <div className={s.addRev}>
@@ -188,14 +214,23 @@ export default function Product({
                           setReviewRating={setReviewRating}
                           setAnchorReview={setAnchorReview}
                           setModalUserReview={setModalUserReview}
+                          setDelObj={setDelObj}
                         />
                       ))
                       .reverse()}
                   </span>
-                  {/* <Popup popup={modalUserReview} setPopup={setModalUserReview}>
-                        <img src={authorReview.avatar} alt={authorReview.name}></img>
-                        {authorReview.name}
-                  </Popup> */}
+                  <Popup popup={modalUserReview} setPopup={setModalUserReview}>
+                    <div className={s.popup}>
+                      <h4>Удалить отзыв?</h4>
+                      <div className={s.btn}>
+                        <button  onClick={() => setModalUserReview(false)}>Отмена</button>
+                        <button  onClick={() => handleDeleteReview(delObj.product, delObj.review)}>Удалить</button>
+                      </div>
+                    </div>
+                  </Popup>
+                  <div className={s.notific}>
+                    <SmallNotification message={delObj.message} />
+                  </div>
                 </div>
               </div>
             </div>

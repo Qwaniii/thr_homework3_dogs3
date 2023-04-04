@@ -14,9 +14,9 @@ const handleAddReview = (e, id, data) => {
         .then((data) => {
             console.log(data)
             setAnchorReview(!anchorReview)
+            setObjectReview({})
         })
         .catch(err => console.log(err))
-    setObjectReview({})
 }
 
     return (

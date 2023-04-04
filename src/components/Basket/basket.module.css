@@ -40,12 +40,25 @@
 
 .aboutProd {
     width: 40%;
+    cursor: pointer;
+    color: rgba(0, 0, 0, 0.7);
+    transition: all .3s;
+}
+
+.aboutProd:hover {
+    color: rgba(0, 0, 0, 1);
 }
 
 .image {
     box-sizing: border-box;
     width: 100px;
     height: 100px;
+    cursor: pointer;
+    transition: all .3s;
+}
+
+.image:hover {
+    filter:contrast(1.3)
 }
 
 .image > img {

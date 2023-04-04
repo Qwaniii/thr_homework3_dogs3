@@ -1,6 +1,6 @@
 const onResponce = (res) => {
     // return res.ok ? res.json() : Promise.reject(`Error ${res.status}`);
-    return res.ok ? res.json() : Promise.reject(res.json());
+    return res.ok ? res.json() : Promise.reject(res);
 }
 
 class Api {
@@ -109,6 +109,16 @@ class Api {
 
     getAllReview() {
         return fetch(`${this._dataUrl}/products/review`, {
+            headers: {
+                authorization: this._token,
+                "Content-Type": "application/json"
+            }
+        }).then(onResponce)
+    }
+
+    deleteReview(prodId, reviewId) {
+        return fetch(`${this._dataUrl}/products/review/${prodId}/${reviewId}`, {
+            method: "DELETE",
             headers: {
                 authorization: this._token,
                 "Content-Type": "application/json"

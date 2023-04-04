@@ -55,6 +55,18 @@
   color: gray;
   font-size: 14px;
   align-self: flex-end;
+  display: flex;
+  gap: 20px;
+}
+
+.delete {
+  color: rgba(128, 128, 128, 0.6);
+  cursor: pointer;
+  transition: all .3s;
+}
+
+.delete:hover {
+  color: black;
 }
 
 .innerReview {

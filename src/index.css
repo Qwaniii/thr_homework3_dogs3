@@ -18,11 +18,28 @@ body {
 }
 
 .container {
-
+    position: relative;
 	max-width: 1024px;
     padding: 0 16px;
 	width: 95%;
 	margin: 0 auto;
+}
+
+.back__history {
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+    color: rgba(0, 0, 0, 0.5);
+    transition: all .3s;
+}
+
+.back__history:hover {
+    color: black;
+}
+
+.back__history:active {
+    color: red;
 }
 
 .wrap {

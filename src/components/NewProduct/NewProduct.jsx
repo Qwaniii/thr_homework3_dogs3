@@ -58,6 +58,9 @@ const NewProduct = ({ isToken, setIsToken, setCards, anchor, setAnchor, setModal
 
   return (
     <div className="container">
+      <div onClick={() => navigate(-1)} className='back__history'>
+        &lt;Назад
+      </div>
       <h3 className={s.title}>Добавление нового продукта</h3>
       <div className={s.wrapper}>
         <form className={s.newproduct} onSubmit={handleSubmit(onSubmit)}>

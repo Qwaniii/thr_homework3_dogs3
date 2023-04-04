@@ -5,7 +5,7 @@ import s from "./myreview.module.css"
 import cn from "classnames"
 
 
-const MyReview = ({ myRev }) => {
+const MyReview = ({ myRev, setDeleteComment, setModalDelete }) => {
 
     const createdDate = new Date(myRev.created_at)
     const [productReview, setProductReview] = useState({})
@@ -22,13 +22,19 @@ const MyReview = ({ myRev }) => {
       useEffect(() => {
         api
           .getProductById(myRev.product)
-          .then((data) => {
-            setProductReview(data);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
+            .then((data) => {
+                setProductReview(data);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
       }, [myRev]);
+
+      const startDeleteComment = () => {
+        setModalDelete(true)
+        setDeleteComment({product: myRev.product, review: myRev._id})
+
+      }
 
 
     return(
@@ -39,12 +45,15 @@ const MyReview = ({ myRev }) => {
                     <div>{myRev?.author.name}</div>
                 </div>
                 <div className={s.myReview}>
-                    <div className={s.date}>отзыв добавлен: {createdDate.toLocaleDateString("ru-RU", {
-                    month: "2-digit",
-                    day: "numeric",
-                    year: "numeric",
-                    })
-                    }</div>
+                    <div className={s.date}>
+                        отзыв добавлен: {createdDate.toLocaleDateString("ru-RU", {
+                        month: "2-digit",
+                        day: "numeric",
+                        year: "numeric",
+                        })
+                        }
+                        <span className={s.delete} onClick={startDeleteComment}>удалить</span>
+                    </div>
                     <div className={s.innerReview}>
                     <div>{myRev?.text}</div>
                         <div className={s.rate}>Оценка: <span className={s.rating}>{myRev?.rating}</span></div>
@@ -62,8 +71,8 @@ const MyReview = ({ myRev }) => {
                     </Link>
                     <div className={s.prodInfo}>
                         <Link to={`/thr_homework3_dogs3/product/${myRev.product}`} className={s.link}>
-                        <h2>{productReview?.name}</h2>
-                        <div>{productReview?.description}</div>
+                            <h2>{productReview?.name}</h2>
+                            <div>{productReview?.description}</div>
                         </Link>
                     </div>
                 </div>

@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { useLocation } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { UserContext } from "../../Context/UserContext";
 import Card from "../Card/Card";
 import Options from "../Options/Options";
@@ -32,6 +32,7 @@ export default function Cards({
   const arrCountProducts = [12, 24, 36, 48];
 
   const location = useLocation();
+  const navigate = useNavigate()
 
   return (
     <main>
@@ -48,9 +49,14 @@ export default function Cards({
           {!searchQuery && (
             <div className={s.option}>
               {location.pathname === "/thr_homework3_dogs3/favorite" ? (
-                <div style={{ fontSize: 18, fontWeight: "bold" }}>
-                  {goods.length > 0 ? `Избранные товары:` : `Товаров нет...`}
+                <>
+                <div onClick={() => navigate(-1)} className='back__history'>
+                  &lt;Назад
                 </div>
+                <div style={{ fontSize: 18, fontWeight: "bold" }}>
+                  {goods.length > 0 ? `Избранные товары (${goods.length}) :` : `Товаров нет...`}
+                </div>
+                </>
               ) : (
                 <Options setAnchorPaginate={setAnchorPaginate} setPage={setPage} />
               )}

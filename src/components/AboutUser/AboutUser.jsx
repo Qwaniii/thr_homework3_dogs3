@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router'
 import { asyncEditUserAvatar, asyncEditUserInfo, avatarAnchor, editAnchor, editAvatar, editState, messageEdit, setMessage, userAbout, userAvatar, userEmail, userName } from '../../storage/reducers/userReduce'
 import SmallNotification from '../Notification/SmallNotification'
 import PopupNotific from '../PopupNotific/PopupNotific'
@@ -19,6 +20,7 @@ export default function AboutUser() {
   const avatarUser = useSelector(avatarAnchor)
   const message = useSelector(messageEdit)
 
+  const navigate = useNavigate()
   const dispatch = useDispatch()
 
   const background = 'https://талисман-ростов.рф/wp-content/uploads/woocommerce-placeholder.png'
@@ -58,6 +60,9 @@ export default function AboutUser() {
 
   return (
     <div className='container'>
+      <div onClick={() => navigate(-1)} className='back__history'>
+        &lt;Назад
+      </div>
       <h3 className={s.title}>Информация о пользователе
         <div className={s.editWrapper} title={editUser ? "Отмена" : "Редактировать"} onClick={() => dispatch(editState(!editUser))}><img className={s.edit} src={editUser ? "https://img.icons8.com/ios-filled/50/null/cancel-2.png" : "https://img.icons8.com/ios/50/null/pencil-tip.png"} alt='edit'/></div>
       </h3>

@@ -41,6 +41,19 @@
     object-fit: cover;
 }
 
+.deleteRev {
+    color: rgba(128, 128, 128, 0.6);
+    align-self: flex-end;
+    margin-left: auto;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all .3s;
+}
+
+.deleteRev:hover {
+    color: black;
+}
+
 .main {
     text-align: justify;
     font-size: 18px;

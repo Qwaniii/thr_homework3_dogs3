@@ -361,6 +361,8 @@ function App() {
                 <MyReviewPage
                   myReviewArr={myReviewArr}
                   setMyReviewArr={setMyReviewArr}
+                  anchorReview={anchorReview}
+                  setAnchorReview={setAnchorReview}
                 />
               }
             ></Route>

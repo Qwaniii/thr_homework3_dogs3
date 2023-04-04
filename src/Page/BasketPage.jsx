@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 import Basket from "../components/Basket/Basket";
 import Spinner from "../components/Spinner/Spinner";
 import "./index.css";
@@ -21,7 +22,7 @@ export default function BasketPage({
 }) {
   const [finalPrice, setFinalPrice] = useState([]);
 
-
+  const navigate = useNavigate()
 
 //   useEffect(() => {
 //     if(countBasket.length === 0) {
@@ -44,6 +45,9 @@ export default function BasketPage({
     <div>
       {isLoading ? (
         <div className="container">
+          <div onClick={() => navigate(-1)} className='back__history'>
+            &lt;Назад
+          </div>
           <h2 className="basket__header">Корзина {basket.length > 0 && `(${basket.length}):`}</h2>
           {basket.length !== 0 
             ? (
