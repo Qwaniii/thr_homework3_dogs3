@@ -32,7 +32,7 @@ const MyReviewPage = ({ myReviewArr, setMyReviewArr, isLoading, setIsLoading, se
                 <div onClick={() => navigate(-1)} className='back__history'>
                   &lt;Назад
                 </div>
-                <h3 className="myreview">{myReviewArr > 0 ? `Мои отзывы ( ${(myReviewArr.length).toString()} ) :` : `Нет комментариев...`}</h3>
+                <h3 className="myreview">{myReviewArr.length > 0 ? `Мои отзывы ( ${(myReviewArr.length).toString()} ) :` : `Нет отзывов...`}</h3>
                     {myReviewArr
                         .map((myRev) => (
                         <MyReview
