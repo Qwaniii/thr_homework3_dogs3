@@ -2,10 +2,14 @@ import React from "react";
 import { useState } from "react";
 import api from "../../Api/Api";
 import s from "./addreview.module.css"
+import { useSelector } from "react-redux";
+import { numRating } from "../../storage/reducers/ratingReducer";
 
-const AddReview = ({ id, setAnchorReview, anchorReview }) => {
+const AddReview = ({ id, setAnchorReview, anchorReview, setAddRevAvailable }) => {
 
 const [objReview, setObjectReview] = useState({})
+
+const defaultRating = useSelector(numRating)
 
 const handleAddReview = (e, id, data) => {
     e.preventDefault();
@@ -18,6 +22,8 @@ const handleAddReview = (e, id, data) => {
         })
         .catch(err => console.log(err))
 }
+
+console.log(defaultRating)
 
     return (
         <div className={s.container}>
@@ -36,11 +42,11 @@ const handleAddReview = (e, id, data) => {
                             onChange={(e) => setObjectReview({...objReview, [e.target.name]: e.target.value})}
                         ></textarea>
                         <div className={s.number}>
-                            <label> Оценка
+                            <label> Ваша оценка
                                 <select 
                                     name="rating" 
                                     className={s.innerNum} 
-                                    defaultValue={5}
+                                    value={defaultRating}
                                     // value={objReview.rating || ""}
                                     onChange={(e) => setObjectReview({...objReview, [e.target.name]: e.target.value})}>
                                     <option value={1}>1</option>
@@ -54,6 +60,7 @@ const handleAddReview = (e, id, data) => {
                     </div>
                     <input className={s.btn} type="submit" value="Добавить отзыв"></input>
                 </form>
+                <div onClick={() => setAddRevAvailable(false)} className={s.back}>&#8617;</div>
             </div>
 
         </div>

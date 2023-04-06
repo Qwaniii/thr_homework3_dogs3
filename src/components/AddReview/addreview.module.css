@@ -10,7 +10,7 @@
     border-radius: 10px;
     box-shadow: 0 5px 7px -1px gray;
     background-color: rgb(255, 196, 0);
-
+    position: relative;
 }
 
 .wrapper h3 {
@@ -84,4 +84,18 @@
     background-color: rgba(255, 255, 255, 0.6);
     transition: all .3s ease;
 
+}
+
+.back {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 25px;
+    cursor: pointer;
+    color: rgba(0, 0, 0, 0.3);
+    transition: all .3s;
+}
+
+.back:hover {
+    color: black;
 }

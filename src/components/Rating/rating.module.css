@@ -1,0 +1,15 @@
+.wrapper {
+}
+
+.star {
+  /* opacity: .3; */
+  fill: black;
+  fill-opacity: .1;
+  cursor: pointer;
+}
+
+
+.rating {
+  fill: yellow;
+  fill-opacity: 1;
+}

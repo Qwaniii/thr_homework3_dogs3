@@ -14,6 +14,8 @@ import SmallNotification from "../Notification/SmallNotification";
 import { useDispatch, useSelector } from "react-redux";
 import { editMessage, emptyMessage, getProduct, modalEdit, modalWindow, productInfo } from "../../storage/reducers/editProductReducer";
 import EditProduct from "../EditProduct/EditProduct";
+import Rating from "../Rating/Rating";
+import { changeRating } from "../../storage/reducers/ratingReducer";
 
 export default function Product({
   id,
@@ -38,6 +40,7 @@ export default function Product({
   const [errStatus, setErrStatus] = useState(false);
   const [countBasket, setCountBasket] = useState(1)
   const [delObj, setDelObj] = useState({})
+  const [addRevAvailable, setAddRevAvailable] = useState(false)
 
   const { currentUser } = useContext(UserContext);
 
@@ -98,6 +101,7 @@ export default function Product({
       return res + item.rating;
     }, 0);
     setReviewRating(sum / length);
+    dispatch(changeRating(Math.floor(sum / length)))
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [aboutProduct, anchorReview]);
 
@@ -150,8 +154,12 @@ export default function Product({
                   <span onClick={() => navigate(-1)} className={s.back}>Назад</span>
                   {currentUser._id === aboutProduct.author._id && <span className={s.edit} onClick={() => toogleModal(true)}>Редактировать</span>}
                 </div>
-                <h2 className="div">{aboutProduct.name}</h2>
-                <p className="div">Артикул {aboutProduct?._id?.slice(5,12)}</p>
+                <h2>{aboutProduct.name}</h2>
+                <div className={s.upper}>
+                  <p>Артикул: {aboutProduct?._id?.slice(5,12)}</p>
+                  <Rating setAddRevAvailable={setAddRevAvailable}/>
+                  {aboutProduct?.reviews?.length > 0 && <div>Отзывов: {aboutProduct?.reviews?.length}</div>}
+                </div>
               </div>
               <div className={s.main}>
                 <div className={s.image}>
@@ -220,13 +228,18 @@ export default function Product({
                   {aboutProduct?.reviews?.length > 0 ? `Отзывов о товаре (${aboutProduct?.reviews?.length}) :` : `Нет отзывов. Будьте первым!`}
                 </h3>
                 <div className={s.revWrapper}>
-                  <div className={s.addRev}>
-                    <AddReview
-                      id={id}
-                      setAnchorReview={setAnchorReview}
-                      anchorReview={anchorReview}
-                    />
-                  </div>
+                    <div id="id" className={s.addRev}>
+                      {addRevAvailable ? 
+                      <AddReview
+                        id={id}
+                        setAnchorReview={setAnchorReview}
+                        anchorReview={anchorReview}
+                        setAddRevAvailable={setAddRevAvailable}
+                      />
+                      :
+                      <div onClick={() => setAddRevAvailable(true)} className={s.revBtn}>Написать отзыв</div>
+                      }
+                    </div>
                   <span className={s.rev}>
                     {aboutProduct?.reviews?.map((review) => (
                         <Review
@@ -239,7 +252,8 @@ export default function Product({
                           setDelObj={setDelObj}
                         />
                       ))
-                      .reverse()}
+                      .reverse()/* .slice(0, 4) */}
+                      {/* <div>Показать еще</div> */}
                   </span>
                   <Popup popup={modalUserReview} setPopup={setModalUserReview}>
                     <div className={s.popup}>
