@@ -1,0 +1,106 @@
+.container {
+    min-width: 500px;
+    max-width: 800px;
+    padding: 20px 30px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.title {
+    text-align: center;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.title::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 100%;
+    border-top: .3px solid rgba(0, 0, 0, 0.5);
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form > label {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    color: gray;
+}
+
+.form > label > input, 
+.form > label > textarea {
+    height: 30px;
+    padding: 5px;
+    border-radius: 7px;
+    border: .3px solid rgba(0, 0, 0, 0.5);
+    outline: none;
+}
+
+.form > label > input:focus,
+.form > label > textarea:focus {
+    border: .5px solid black;
+}
+
+.form > label > textarea {
+    resize: none;
+    overflow-y: auto;
+    height: 100px;
+}
+
+.imgWrapper {
+    height: 300px;
+    align-self: center;
+}
+
+.image {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+
+.form > label.errors {
+    color: red;
+    font-weight: bold;
+}
+
+.form > label.errors > input, 
+.form > label.errors > textarea {
+    border: .3px solid red;
+}
+
+.submit {
+    margin-top: 10px;
+    align-self: center;
+    padding: 5px 10px;
+    cursor: pointer;
+    background-color: rgb(0, 119, 255);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: all .3s;
+}
+
+.submit:hover {
+    background-color: rgb(0, 119, 255, .8);
+
+}
+
+.close {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    color: rgba(128, 128, 128, 0.7);
+    cursor: pointer;
+    transition: all .3s;
+}
+
+.close:hover {
+    color: black;
+}

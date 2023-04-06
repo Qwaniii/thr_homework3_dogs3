@@ -11,9 +11,8 @@ import Review from "../Review/Review";
 import AddReview from "../AddReview/AddReview";
 import Popup from "../Popup/Popup";
 import SmallNotification from "../Notification/SmallNotification";
-import NewProduct from "../NewProduct/NewProduct";
 import { useDispatch, useSelector } from "react-redux";
-import { modalEdit, modalWindow } from "../../storage/reducers/editProductReducer";
+import { editMessage, emptyMessage, getProduct, modalEdit, modalWindow, productInfo } from "../../storage/reducers/editProductReducer";
 import EditProduct from "../EditProduct/EditProduct";
 
 export default function Product({
@@ -34,7 +33,7 @@ export default function Product({
   setBasket,
   setSmallModalNotific
 }) {
-  const [aboutProduct, setAboutProduct] = useState({});
+  // const [aboutProduct, setAboutProduct] = useState({});
   const [reviewRating, setReviewRating] = useState(5);
   const [errStatus, setErrStatus] = useState(false);
   const [countBasket, setCountBasket] = useState(1)
@@ -44,14 +43,15 @@ export default function Product({
 
   const dispatch = useDispatch()
   const modal = useSelector(modalEdit)
+  const aboutProduct = useSelector(productInfo)
+  const messageAfterEdit = useSelector(editMessage)
 
-  const isLike = aboutProduct?.likes?.some((id) => id === currentUser._id);
   const navigate = useNavigate();
-  const length = aboutProduct?.reviews?.length;
 
   const toogleModal = (action) => {
     dispatch(modalWindow(action))
   }
+
 
   useEffect(() => {
     const tokenStor = sessionStorage.getItem('token')
@@ -64,14 +64,16 @@ export default function Product({
     api
       .getProductById(id)
         .then((data) => {
-          setAboutProduct(data);
+          // setAboutProduct(data);
+          dispatch(getProduct(data))
           setIsLoading(true);
         })
         .catch((err) => {
           console.log(err);
           setErrStatus(true);
         });
-  }, [id, cards, anchorReview, setIsLoading, allCardsForSort]);
+  }, [id, cards, anchorReview, setIsLoading, allCardsForSort, dispatch]);
+
 
   const addToBascket = () => {
     let inBasket = basket.find((item) => (item._id ===aboutProduct._id))
@@ -84,7 +86,11 @@ export default function Product({
     setTimeout(() => {
       setSmallModalNotific(false)
     }, 1500)
-}
+  }
+
+  const isLike = aboutProduct?.likes?.some((id) => id === currentUser._id);
+  const length = aboutProduct?.reviews?.length;
+
 
 
   useEffect(() => {
@@ -107,12 +113,18 @@ export default function Product({
   //     })
   // }
 
+  useEffect(() => {
+    setTimeout(() => {
+      dispatch(emptyMessage())
+    }, 4000)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [messageAfterEdit])
 
   const handleDeleteReview = (postId, reviewId) => {
     api.deleteReview(postId, reviewId)
         .then(data => {
           console.log(data)
-          setAboutProduct(data)
+          // setAboutProduct(data)
           setAnchorReview(!anchorReview)
           setModalUserReview(false)
           setDelObj(prevState => ({...prevState, message: "Комментарий удален"}))
@@ -136,7 +148,7 @@ export default function Product({
               <div className={s.header}>
                 <div  className={s.btnWrapper}>
                   <span onClick={() => navigate(-1)} className={s.back}>Назад</span>
-                  <span className={s.edit} onClick={() => toogleModal(true)}>Редактировать</span>
+                  {currentUser._id === aboutProduct.author._id && <span className={s.edit} onClick={() => toogleModal(true)}>Редактировать</span>}
                 </div>
                 <h2 className="div">{aboutProduct.name}</h2>
                 <p className="div">Артикул {aboutProduct?._id?.slice(5,12)}</p>
@@ -173,7 +185,7 @@ export default function Product({
                     >
                       <Like />
                     </button>
-                    <span>В изрбранное</span>
+                    <span>{isLike ? 'В избранном' : 'В изрбранное'}</span>
                   </div>
                   {aboutProduct?.reviews?.length > 0 && <div className={s.rating}>
                     Рейтинг товара:{" "}
@@ -243,6 +255,9 @@ export default function Product({
                   </Popup>
                   <div className={s.notific}>
                     <SmallNotification message={delObj.message} />
+                  </div>
+                  <div className={s.notific}>
+                    <SmallNotification message={messageAfterEdit} />
                   </div>
                 </div>
               </div>

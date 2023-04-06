@@ -20,9 +20,10 @@ import BasketPage from "./Page/BasketPage";
 import PopupNotific from "./components/PopupNotific/PopupNotific";
 import SmallNotification from "./components/Notification/SmallNotification";
 import AboutUser from "./components/AboutUser/AboutUser";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "./storage/reducers/userReduce";
 import FaqPage from "./Page/FaqPage";
+import { anchorEditProduct } from "./storage/reducers/editProductReducer";
 
 function App() {
   const [cards, setCards] = useState([]);
@@ -53,6 +54,7 @@ function App() {
 
   
   const  dispatch = useDispatch()
+  const anchorEditProd = useSelector(anchorEditProduct)
   
   const arrMaxPage = [];
 
@@ -84,7 +86,7 @@ function App() {
       .catch((err) => console.log(err));
     
 // eslint-disable-next-line react-hooks/exhaustive-deps
-}, [page, debounceValue, cardsOnList, isToken, anchorNewProduct]);
+}, [page, debounceValue, cardsOnList, isToken, anchorNewProduct, anchorEditProd]);
 
 
   useEffect(() => {
@@ -99,7 +101,7 @@ function App() {
       .catch((err) => console.log(err))
   
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentUser, isToken, anchorNewProduct])
+  }, [currentUser, isToken, anchorNewProduct, anchorEditProd])
 
   useEffect(() => {
     isToken &&
