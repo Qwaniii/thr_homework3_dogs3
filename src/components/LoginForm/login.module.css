@@ -123,6 +123,7 @@
 
 .registr {
   text-align: center;
+  max-width: 300px;
 }
 
 .secondregistr {
@@ -200,4 +201,15 @@
   color: red;
   word-wrap: break-word;
   hyphens: manual;
+}
+
+.forgot {
+  cursor: pointer;
+  font-size: 15px;
+  opacity: .7;
+  transition: all .3s;
+}
+
+.forgot:hover {
+  opacity: 1;
 }

@@ -9,6 +9,7 @@ import { ReactComponent as Exit } from "./img/exit.svg"
 import Accordeon from "../Accordeon/Accordeon"
 
 export default function Header({currentUser, 
+                                searchQuery,
                                 setSearchQuery, 
                                 setModalLogin, 
                                 setIsToken,
@@ -19,6 +20,7 @@ export default function Header({currentUser,
                                 anchorPaginate,
                                 setAnchorPaginate,
                                 setSelectTab,
+                                setPage,
                                 basket
                               }) {
 
@@ -37,10 +39,10 @@ export default function Header({currentUser,
       <div className="container">
         <div className={s.wrapper}>
           <div className={s.logo}>
-            <Logo setSelectTab={setSelectTab} setAnchorPaginate={setAnchorPaginate}/>
+            <Logo setSelectTab={setSelectTab} setAnchorPaginate={setAnchorPaginate} setSearchQuery={setSearchQuery}/>
           </div>
           <div className={s.search}>
-            <Search setSearchQuery={setSearchQuery} isToken={isToken} anchorPaginate={anchorPaginate}/>
+            <Search searchQuery={searchQuery} setSearchQuery={setSearchQuery} isToken={isToken} anchorPaginate={anchorPaginate} setPage={setPage}/>
           </div>
           {isToken 
           ? 

@@ -2,18 +2,28 @@ import React from "react";
 import { useState } from "react";
 import api from "../../Api/Api";
 import s from "./addreview.module.css"
-import { useSelector } from "react-redux";
-import { numRating } from "../../storage/reducers/ratingReducer";
+import { useDispatch, useSelector } from "react-redux";
+import { changeRating, numRating } from "../../storage/reducers/ratingReducer";
 
 const AddReview = ({ id, setAnchorReview, anchorReview, setAddRevAvailable }) => {
 
 const [objReview, setObjectReview] = useState({})
 
 const defaultRating = useSelector(numRating)
+const dispatch = useDispatch()
+
+const optionArr = new Array(5).fill(null).map((el, ind) => el = ind + 1)
+
+
+const onChange = (e) => {
+    setObjectReview({...objReview, [e.target.name]: e.target.value})
+    dispatch(changeRating(e.target.value))
+}
 
 const handleAddReview = (e, id, data) => {
     e.preventDefault();
-    console.log(objReview)
+    console.log(data)
+    if (!data.rating) {data.rating = defaultRating || 5}
     api.sendReview(id, data)
         .then((data) => {
             console.log(data)
@@ -22,8 +32,6 @@ const handleAddReview = (e, id, data) => {
         })
         .catch(err => console.log(err))
 }
-
-console.log(defaultRating)
 
     return (
         <div className={s.container}>
@@ -46,14 +54,16 @@ console.log(defaultRating)
                                 <select 
                                     name="rating" 
                                     className={s.innerNum} 
-                                    value={defaultRating}
+                                    value={defaultRating || 5}
                                     // value={objReview.rating || ""}
-                                    onChange={(e) => setObjectReview({...objReview, [e.target.name]: e.target.value})}>
-                                    <option value={1}>1</option>
-                                    <option value={2}>2</option>
+                                    onChange={(e) => onChange(e)}>
+                                    {optionArr.map(el => 
+                                        <option key={el} value={el}>{el}</option>
+                                    )}
+                                    {/* <option value={2}>2</option>
                                     <option value={3}>3</option>
                                     <option value={4}>4</option>
-                                    <option value={5}>5</option>
+                                    <option value={5}>5</option> */}
                                 </select>
                             </label>
                         </div>

@@ -24,6 +24,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "./storage/reducers/userReduce";
 import FaqPage from "./Page/FaqPage";
 import { anchorEditProduct } from "./storage/reducers/editProductReducer";
+import ForgotPass from "./components/LoginForm/ForgotPass";
 
 function App() {
   const [cards, setCards] = useState([]);
@@ -41,6 +42,7 @@ function App() {
   const [modalUserReview, setModalUserReview] = useState(false)
   const [modalLogin, setModalLogin] = useState(false)
   const [modalRegistr, setModalRegistr] = useState(false)
+  const [modalForgotPass, setModalForgotPass] = useState(false)
   const [modalNotific, setModalNotific] = useState(false)
   const [smallModalNotific, setSmallModalNotific] = useState(false)
   const [isToken, setIsToken] = useState(null)
@@ -246,6 +248,7 @@ function App() {
       <FavoriteContext.Provider value={{favoriteCards}}>
       <UserContext.Provider value={{currentUser, selectTab, setSelectTab, allCardsForSort}}>
         <Header currentUser={currentUser} 
+                searchQuery={searchQuery}
                 setSearchQuery={setSearchQuery} 
                 setModalLogin={setModalLogin}
                 setIsToken={setIsToken} 
@@ -256,6 +259,7 @@ function App() {
                 anchorPaginate={anchorPaginate}
                 setAnchorPaginate={setAnchorPaginate}
                 setSelectTab={setSelectTab}
+                setPage={setPage}
                 basket={basket}
 
         />
@@ -406,6 +410,12 @@ function App() {
                 <IndexPage/>
               }
             ></Route>
+            <Route
+              path="thr_homework3_dogs3/forgot-password"
+              element={
+                <IndexPage/>
+              }
+            ></Route>
             </>}
             <Route path="*" element={<NotFoundPage />}></Route>
           </Routes>
@@ -430,6 +440,12 @@ function App() {
             userRegistration={userRegistration}
             setUserRegistration={setUserRegistration}
             />
+        </Popup>
+        <Popup popup={modalForgotPass} setPopup={setModalForgotPass}>
+              <ForgotPass
+                isToken={isToken} 
+                setModalForgotPass={setModalForgotPass}
+              />
         </Popup>
         <Popup popup={modalNotific} setPopup={setModalNotific}>
             <Notification title={"Отлично!"} message={"Продукт добавлен!"} close={setModalNotific}/>

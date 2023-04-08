@@ -41,6 +41,8 @@ export default function Product({
   const [countBasket, setCountBasket] = useState(1)
   const [delObj, setDelObj] = useState({})
   const [addRevAvailable, setAddRevAvailable] = useState(false)
+  const [image, setImage] = useState(false)
+  const [allReview, setAllReview] = useState(false)
 
   const { currentUser } = useContext(UserContext);
 
@@ -137,8 +139,10 @@ export default function Product({
           }, 5000)
         })
         .catch(err => {
-          console.log(err)
           err.json()
+            .then(data => {
+              console.log(`Error: ${data.error}, ${data.message}`)
+            })
         })
   }
 
@@ -158,12 +162,16 @@ export default function Product({
                 <div className={s.upper}>
                   <p>Артикул: {aboutProduct?._id?.slice(5,12)}</p>
                   <Rating setAddRevAvailable={setAddRevAvailable}/>
-                  {aboutProduct?.reviews?.length > 0 && <div>Отзывов: {aboutProduct?.reviews?.length}</div>}
+                  {aboutProduct?.reviews?.length > 0 && 
+                  <>
+                  <span>{(Math.floor(reviewRating * 10) / 10).toString()}</span>
+                  <div>Отзывов: {aboutProduct?.reviews?.length}</div>
+                  </>}
                 </div>
               </div>
               <div className={s.main}>
                 <div className={s.image}>
-                  <img src={aboutProduct.pictures} alt={aboutProduct.title}></img>
+                  <img src={aboutProduct.pictures} alt={aboutProduct.title} onClick={() => setImage(true)} className={s.img}></img>
                   {aboutProduct.discount > 0 && (
                     <div className={`${s.sale} ${s.backgroundSale}`}>
                       - {aboutProduct.discount}%
@@ -198,7 +206,7 @@ export default function Product({
                   {aboutProduct?.reviews?.length > 0 && <div className={s.rating}>
                     Рейтинг товара:{" "}
                     <span className={s.numRat}>
-                      {(Math.floor(reviewRating * 100) / 100).toString()}
+                      {(Math.floor(reviewRating * 10) / 10).toString()}
                     </span>
                   </div>}
                   <div className={s.delivery}>
@@ -252,8 +260,9 @@ export default function Product({
                           setDelObj={setDelObj}
                         />
                       ))
-                      .reverse()/* .slice(0, 4) */}
-                      {/* <div>Показать еще</div> */}
+                      .reverse()
+                      .slice(0, allReview ? aboutProduct?.review?.length : 3)}
+                      <div className={s.revBtn} onClick={() => setAllReview(!allReview)}>{allReview ? 'Скрыть' : 'Показать еще'}</div>
                   </span>
                   <Popup popup={modalUserReview} setPopup={setModalUserReview}>
                     <div className={s.popup}>
@@ -266,6 +275,12 @@ export default function Product({
                   </Popup>
                   <Popup popup={modal} setPopup={toogleModal}>
                     <EditProduct/>
+                  </Popup>
+                  <Popup popup={image} setPopup={setImage}>
+                    <div className={s.modal}>
+                      <img src={aboutProduct.pictures} alt={aboutProduct.author.name} className={s.imgScale}></img>
+                      <div className={s.close} onClick={() => setImage(false)}></div>
+                    </div>
                   </Popup>
                   <div className={s.notific}>
                     <SmallNotification message={delObj.message} />

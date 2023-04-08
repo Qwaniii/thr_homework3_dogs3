@@ -103,6 +103,14 @@ export default function Login({ isToken, setIsToken, setModalLogin, modalLogin, 
   }, 500)
 }
 
+  const moveForgotPass = () => {
+    setModalLogin(false)
+    setTimeout(() => {
+      navigate("/thr_homework3_dogs3/forgot-password")
+    }, 300)
+
+  }
+
   return (
     <div className={s.container}>
       {anchorSuccess 
@@ -144,6 +152,9 @@ export default function Login({ isToken, setIsToken, setModalLogin, modalLogin, 
           <div className={s.registr}>
             <p>или</p>
             <div className={s.secondregistr} onClick={moveRegistr}>Зарегистрироваться</div>
+          </div>
+          <div className={s.registr} onClick={() => moveForgotPass()}>
+            <span className={s.forgot}>Напомнить пароль</span>
           </div>
         </form>
         <div onClick={() => setModalLogin(false)}>

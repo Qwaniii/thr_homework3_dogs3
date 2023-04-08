@@ -226,4 +226,9 @@
   .prodImg {
     width:fit-content;
   }
+
+  .product {
+    right: 0;
+    bottom: 0px;
+  }
 }

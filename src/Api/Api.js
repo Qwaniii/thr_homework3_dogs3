@@ -157,6 +157,26 @@ class Api {
         }).then(onResponce)
     }
 
+    forgotPassword(email) {
+        return fetch(`${this._dataUrl}/forgot-password`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(email)
+        }).then(onResponce)
+    }
+
+    resetPassword(newPassword, newToken) {
+        return fetch(`${this._dataUrl}/password-reset/${newToken}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type" : "application/json"
+            },
+            body: JSON.stringify(newPassword)
+        }).then(onResponce)
+    }
+
     //change info about user
 
     setUserInfo({ name, about }) {

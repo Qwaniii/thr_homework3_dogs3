@@ -10,7 +10,8 @@
 }
 
 .title {
-  margin: 25px auto;
+  padding: 25px 0;
+  margin: 0 auto;
   max-width: max-content;
   position: relative;
 }
@@ -135,7 +136,7 @@
 
 .editWrapper {
   position: absolute;
-  top: -7px;
+  top: 15px;
   right: -50px;
   display: flex;
   justify-content: center;
@@ -282,8 +283,8 @@
     position: static;
   }
   .editWrapper {
-    top: 277px;
-    right: 90px;
+    top: 35px;
+    right: 100px;
     z-index: 100;
   }
 }

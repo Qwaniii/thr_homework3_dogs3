@@ -1,11 +1,11 @@
 .myreview {
-  margin: 50px auto;
+  padding: 50px 0;
   text-align: center;
 }
 
 .basket__header {
   text-align: center;
-  margin: 50px auto;
+  padding: 50px 0;
 }
 
 .basket__main-delete {

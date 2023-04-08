@@ -11,11 +11,10 @@
   padding-left: 5px;
   position: relative;
   cursor: pointer;
-  width: max-content;
   color: black;
   transition: all .5s;
   margin-bottom: 15px;
-
+  word-wrap: break-word;
 }
 
 .title::before {
@@ -101,3 +100,9 @@
     transform: rotate(0);
   }
 } */
+
+@media (max-width: 1050px) {
+  title {
+    width:auto;
+  }
+}

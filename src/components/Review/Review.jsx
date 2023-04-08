@@ -24,8 +24,10 @@ const Review = ({ review, anchorReview, setAnchorReview, setReviewRating, modalU
     const delReview = () => {
         setModalUserReview(true)
         setDelObj({product: review.product, review: review._id})
+        console.log(review.product, review._id)
     }
 
+    const defaultBackground = "https://талисман-ростов.рф/wp-content/uploads/woocommerce-placeholder.png"
 
     // useEffect(() => {
     //     const readyRating = review.rating.reduce((acc, curVal) => acc + curVal, 0)
@@ -36,8 +38,8 @@ const Review = ({ review, anchorReview, setAnchorReview, setReviewRating, modalU
         <div className={s.container}>
             <div className={s.wrapper}>
                 <div className={s.header} >
-                    <div className={s.imgWrapper}><img className={s.avatar} src={authorReview.avatar} alt={authorReview.name}></img></div>
-                    {authorReview.name}
+                    <div className={s.imgWrapper}><img className={s.avatar} src={authorReview.avatar ? authorReview.avatar : defaultBackground} alt={authorReview.name}></img></div>
+                    {authorReview.name ? authorReview.name : "Гость Иванов"}
                     {currentUser._id === review.author && <div onClick={delReview} className={s.deleteRev}>Удалить</div>}
                 </div>
                 <div className={s.main}>
