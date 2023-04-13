@@ -71,23 +71,23 @@ export default function AboutUser() {
         <div className={s.data}>
           <div className={s.photo}>
             <div className={s.imgWrapper}>
-              <img onMouseEnter={mouseEnter} onMouseLeave={mouseLeave} onClick={() => dispatch(editAvatar(!avatarUser))} src={avatarUser ? (watch("avatar") || background) : avatar} alt={name} className={`${s.avatar} ${enableEditAva && s.active}`}></img>
+              <img onMouseEnter={mouseEnter} onMouseLeave={mouseLeave} onClick={() => dispatch(editAvatar(!avatarUser))} src={avatarUser ? (watch("avatar", avatar) || background) : avatar} alt={name} className={`${s.avatar} ${enableEditAva && s.active}`}></img>
               <div onClick={() => dispatch(editAvatar(!avatarUser))} onMouseEnter={mouseEnter} onMouseLeave={mouseLeave} className={`${s.editAvatar} ${enableEditAva && s.active}`}>{avatarUser ? "Оставить этот" : "Изменить аватар"}</div>
             </div>
             {avatarUser && <form className={s.blockAvatar} onSubmit={handleSubmit(onSubmitAvatar)}>
-              <input className={`${s.inputValue} ${errors.avatar && s.errors}`} type="text" placeholder='Ссылка на автар' defaultValue={avatar} {...register("avatar", {required: "Заполните пароль"})}></input>
+              <input className={`${s.inputValue} ${errors.avatar && s.errors}`} type="text" placeholder='Ссылка на автар' value={watch("avatar", avatar)} {...register("avatar", {required: "Добавьте аватар"})}></input>
               <button type="submit" className={s.submitAva} title="Сохранить аватар"><img className={s.submitImg} src="https://img.icons8.com/ios-filled/50/null/save--v1.png" alt="Сохранить"/></button>
             </form>}
           </div>
           <form className={s.info} onSubmit={handleSubmit(onSubmitUser)}>
             <div className={s.block}>
               <div className={s.key}>Имя:</div>
-              {editUser ? <input className={s.value} type="text" placeholder='Введите новое имя' defaultValue={name} {...register("name")}></input>
+              {editUser ? <input className={s.value} type="text" placeholder='Введите новое имя' value={watch("name", name)} {...register("name")}></input>
               : <div className={s.value}>{name}</div>}
             </div>
             <div className={s.block}>
               <div className={s.key}>О пользователе:</div>
-              {editUser ? <input className={s.value} type="text" placeholder='Введите описание' defaultValue={about} {...register("about")}></input>
+              {editUser ? <input className={s.value} type="text" placeholder='Введите описание' value={watch("about", about)} {...register("about")}></input>
               :<div className={s.value}>{about}</div>}
             </div>
             <div className={s.block}>
