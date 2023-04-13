@@ -110,6 +110,7 @@ export const userEmail = (state) => state.user.infoUser.email
 export const editAnchor = (state) => state.user.editAnchor
 export const avatarAnchor = (state) => state.user.avatarAnchor
 export const messageEdit = (state) => state.user.message
+export const user = (state) => state.user.infoUser
 
 
 export default userSlice.reducer

@@ -7,9 +7,10 @@ import { useNavigate } from 'react-router'
 import { Link } from 'react-router-dom'
 import { ReactComponent as Exit } from "./img/exit.svg"
 import Accordeon from "../Accordeon/Accordeon"
+import { useSelector } from 'react-redux'
+import { user } from '../../storage/reducers/userReduce'
 
-export default function Header({currentUser, 
-                                searchQuery,
+export default function Header({searchQuery,
                                 setSearchQuery, 
                                 setModalLogin, 
                                 setIsToken,
@@ -25,6 +26,7 @@ export default function Header({currentUser,
                               }) {
 
   const navigate = useNavigate()
+  const currentUser = useSelector(user)
 
   const handleLogOut = (e) => {
     e.preventDefault(); 
