@@ -224,6 +224,11 @@
   cursor: pointer;
 }
 
+.link.inBasket {
+  background-color: rgba(252, 252, 182, 0.7);
+
+}
+
 .link:hover {
   background-color:  rgba(202, 66, 7, 0.536);
   color: rgb(0, 0, 0);

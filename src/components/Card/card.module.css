@@ -178,6 +178,10 @@
   cursor: pointer;
 }
 
+.linkBtn.inBasket {
+  background-color: rgba(255, 255, 169, 0.7);
+}
+
 .linkBtn:hover {
     background-color:  rgba(202, 66, 7, 0.536);
     color: rgb(0, 0, 0);

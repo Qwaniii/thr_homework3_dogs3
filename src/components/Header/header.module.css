@@ -144,11 +144,11 @@ header {
 
     .accordeon {
         left: -20px;
-        bottom: -55px;
+        bottom: -27px;
     }
 
     .exit {
-        top: 25px;
+        top: -2px;
         right: -25px;
     }
 }

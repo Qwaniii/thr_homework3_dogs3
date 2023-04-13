@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import Logo from "../Logo/Logo"
 
 
-export default function Footer({ setSelectTab, setAnchorPaginate }) {
+export default function Footer({ setSelectTab, setAnchorPaginate, setSearchQuery }) {
   return (
     <footer className='footer'>
         <div  className='container'>
@@ -13,7 +13,7 @@ export default function Footer({ setSelectTab, setAnchorPaginate }) {
               <Link className={s.link} to="thr_homework3_dogs3/faq">FAQ</Link>
             </div>
             <div className={s.logo}>
-              <Logo setSelectTab={setSelectTab} setAnchorPaginate={setAnchorPaginate}/>
+              <Logo setSelectTab={setSelectTab} setAnchorPaginate={setAnchorPaginate} setSearchQuery={setSearchQuery}/>
               <div>
                 made by Oleg &copy;
               </div>

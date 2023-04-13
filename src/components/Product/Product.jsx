@@ -80,10 +80,11 @@ export default function Product({
   }, [id, cards, anchorReview, setIsLoading, allCardsForSort, dispatch]);
 
 
+  const inBasket = basket.find((item) => (item._id ===aboutProduct._id))
+
   const addToBascket = () => {
-    let inBasket = basket.find((item) => (item._id ===aboutProduct._id))
     if (!inBasket) {
-    setBasket((prevState) => [...prevState, {...aboutProduct, count: (countBasket > 0 ? countBasket : 1)}])
+      setBasket((prevState) => [...prevState, {...aboutProduct, count: (countBasket > 0 ? countBasket : 1)}])
     } else {
       setBasket((prevState) => [...prevState.map(item => item._id === aboutProduct._id ? ({...item, count: (item.count + (countBasket > 0 ? countBasket : 1))}) : ({...item}) )])
     }
@@ -146,7 +147,6 @@ export default function Product({
         })
   }
 
-
   return (
     <div>
       {isLoading ? (
@@ -192,7 +192,7 @@ export default function Product({
                       <input className={s.input} type="number" value={countBasket} min={1} onChange={(e) => setCountBasket(e.target.value)}></input>
                       <span className={s.plus} onClick={() => setCountBasket(Number(countBasket) + 1)}></span>
                     </div>
-                    <div className={s.link} onClick={() => addToBascket()}>В корзину</div>
+                    <div className={cn(s.link, {[s.inBasket]: inBasket})} onClick={() => addToBascket()}>{inBasket ? `В корзине ${inBasket?.count} шт.` : 'В корзину'}</div>
                   </div>
                   <div className={s.likeContainer}>
                     <button
@@ -261,8 +261,8 @@ export default function Product({
                         />
                       ))
                       .reverse()
-                      .slice(0, allReview ? aboutProduct?.review?.length : 3)}
-                      <div className={s.revBtn} onClick={() => setAllReview(!allReview)}>{allReview ? 'Скрыть' : 'Показать еще'}</div>
+                      .slice(0, allReview ? length : 3)}
+                      {length > 3 && <div className={s.revBtn} onClick={() => setAllReview(!allReview)}>{allReview ? 'Скрыть' : 'Показать еще'}</div>}
                   </span>
                   <Popup popup={modalUserReview} setPopup={setModalUserReview}>
                     <div className={s.popup}>

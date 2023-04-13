@@ -23,15 +23,16 @@ export default function Card({
     onProductLike(card);
   }
 
+  const inBasket = basket.find((item) => (item._id === card._id))
 
   const addToBascket = () => {
-      let inBasket = basket.find((item) => (item._id ===card._id))
       if (!inBasket) {
-      setBasket((prevState) => [...prevState, {...card, count: 1}])
+        setBasket((prevState) => [...prevState, {...card, count: 1}])
       } else {
         setBasket((prevState) => [...prevState.map(item => item._id === card._id ? ({...item, count: (item.count + 1)}) : ({...item}) )])
       }
       setSmallModalNotific(true)
+      // setCountItem((basket.filter(item => item._id === card._id).map(res => res.count)))
       setTimeout(() => {
         setSmallModalNotific(false)
       }, 1500)
@@ -78,10 +79,10 @@ export default function Card({
       </Link>
       <div className={s.add}>
         <span
-          className={s.linkBtn}
+          className={cn (s.linkBtn, {[s.inBasket]: inBasket})}
           onClick={() => addToBascket()}
         >
-          В корзину
+          {inBasket ? `В корзине ${inBasket?.count} шт.` : "В корзину"}
         </span>
         <div className={s.likeContainer}>
           <button

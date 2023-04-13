@@ -3,7 +3,7 @@ import Footer from "./components/Footer/Footer";
 import React, { useEffect, useState } from "react";
 import api from "./Api/Api";
 import useDebounce from "./hooks/useDebounse";
-import { Route, Routes } from "react-router";
+import { Route, Routes, useNavigate } from "react-router";
 import IndexPage from "./Page/IndexPage";
 import ProductPage from "./Page/ProductPage";
 import NotFoundPage from "./Page/NotFoundPage";
@@ -56,6 +56,7 @@ function App() {
 
   
   const  dispatch = useDispatch()
+  const navigate = useNavigate()
   const anchorEditProd = useSelector(anchorEditProduct)
   
   const arrMaxPage = [];
@@ -64,7 +65,7 @@ function App() {
 
   const startPaginate = (cardsOnList * page) - cardsOnList;
 
-  
+  // проверяем наличие токена
   useEffect(() => {
     const tokenStor = sessionStorage.getItem('token')
     if(tokenStor) {
@@ -73,6 +74,7 @@ function App() {
     }
   }, [isToken])
 
+  // получаем продукты и инфо опользователе (пагинация на сервере)
   useEffect(() => {
    isToken && 
     api.getAppInfo(page, cardsOnList, debounceValue)
@@ -91,6 +93,7 @@ function App() {
 }, [page, debounceValue, cardsOnList, isToken, anchorNewProduct, anchorEditProd]);
 
 
+  // получаем все продукты для сортировки и списка любимых товаров
   useEffect(() => {
     isToken &&
     api.getProductList()
@@ -105,11 +108,13 @@ function App() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentUser, isToken, anchorNewProduct, anchorEditProd])
 
+  // получаем все отзывы
   useEffect(() => {
     isToken &&
     api.getAllReview()
         .then((data) => {
             console.log(data)
+            // забираем отзывы данного юзера
             const myData = data.filter((item) => item.author._id === currentUser._id)
             setMyReviewArr(myData)
         })
@@ -155,10 +160,12 @@ function App() {
         } else {
           setFavoriteCards(prevState => prevState.filter((card) => card._id !== newCard._id))
         }
+        // лайки для пагинации на сервере
         setCards(newCards);
       });
     }
     }
+
 
   function handleProductLikeForAllProduct(product) {
     if(isToken) {
@@ -173,6 +180,7 @@ function App() {
       } else {
         setFavoriteCards(prevState => prevState.filter((card) => card._id !== newCard._id))
       }
+      // лайки для всех товаров
       setAllCardsForSort(newCards);
     });
   }
@@ -188,7 +196,7 @@ function App() {
 
   }
 
-
+  // сортируем все продукты 
   useEffect(() => {
     if (selectTab === "new") {
       setCardsForPaginate(allCardsForSort
@@ -239,9 +247,6 @@ function App() {
       behavior: "smooth"
     })
   }
-
-
-
 
   return (
     <div>
@@ -420,7 +425,7 @@ function App() {
             <Route path="*" element={<NotFoundPage />}></Route>
           </Routes>
         </div>
-        <Footer setSelectTab={setSelectTab} setAnchorPaginate={setAnchorPaginate}/>
+        <Footer setSelectTab={setSelectTab} setAnchorPaginate={setAnchorPaginate} setSearchQuery={setSearchQuery}/>
         <Popup popup={modalLogin} setPopup={setModalLogin}>
           <Login 
             sToken={isToken} 
@@ -451,7 +456,7 @@ function App() {
             <Notification title={"Отлично!"} message={"Продукт добавлен!"} close={setModalNotific}/>
         </Popup>
         <PopupNotific popup={smallModalNotific} setPopup={setSmallModalNotific}>
-            <SmallNotification message={"Товар в корзине!"} close={setSmallModalNotific} error={false}/>
+            <SmallNotification message={"Товар в корзине!"} close={setSmallModalNotific} error={false} onClick={() => navigate("/thr_homework3_dogs3/basket")} />
         </PopupNotific>
         {scrollTop > 200 && <div className="toUp" onClick={() => toUp()}>^</div>}
       </UserContext.Provider>

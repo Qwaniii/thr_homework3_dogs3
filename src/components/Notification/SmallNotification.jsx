@@ -6,14 +6,14 @@ import { ReactComponent as Done} from "./img/checkmark.svg"
 import { ReactComponent as Error} from "./img/cancel.svg"
 
 
-const SmallNotification = ({ title, message, children, close, error }) => {
+const SmallNotification = ({ title, message, children, close, error, onClick }) => {
 
     const closeNotific = () => {
         close(false)
     }
     if (!!message) {
         return (
-            <div className={cn(s.wrapper, {[s.error]: error})}>
+            <div className={cn(s.wrapper, {[s.error]: error}, {[s.click]: onClick})} onClick={onClick}>
                 <div>{error ? <Error style={{width: 80}}/> : <Done style={{width: 60}}/>}</div>
                 <p>{message}</p>
                 <p>{children}</p>
