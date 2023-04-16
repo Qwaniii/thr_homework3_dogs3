@@ -18,5 +18,5 @@ npm start
 
 ## Gh-pages (Demo)
 
-[Posts](https://qwaniii.github.io/thr_homework3_dogs3/)
+[Dog Food](https://qwaniii.github.io/thr_homework3_dogs3/)
 
