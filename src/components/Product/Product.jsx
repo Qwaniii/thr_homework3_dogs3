@@ -58,6 +58,7 @@ export default function Product({
   }
 
 
+
   useEffect(() => {
     const tokenStor = sessionStorage.getItem('token')
     if(tokenStor) {

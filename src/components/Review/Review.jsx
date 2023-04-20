@@ -11,10 +11,11 @@ const Review = ({ review, anchorReview, setAnchorReview, setReviewRating, modalU
     const dateCreated = new Date(review.created_at)
     const [authorReview, setAuthorReview] = useState({});
     const { currentUser } = useContext(UserContext)
-  
+    
+    console.log("review", review)
 
     useEffect(() => {
-        api.getReviewAuthor(review.author)
+        api.getReviewAuthor(review.author._id)
             .then((data) => {
                 setAuthorReview(data)
             })
@@ -40,7 +41,7 @@ const Review = ({ review, anchorReview, setAnchorReview, setReviewRating, modalU
                 <div className={s.header} >
                     <div className={s.imgWrapper}><img className={s.avatar} src={authorReview.avatar ? authorReview.avatar : defaultBackground} alt={authorReview.name}></img></div>
                     {authorReview.name ? authorReview.name : "Гость Иванов"}
-                    {currentUser._id === review.author && <div onClick={delReview} className={s.deleteRev}>Удалить</div>}
+                    {currentUser._id === review.author._id && <div onClick={delReview} className={s.deleteRev}>Удалить</div>}
                 </div>
                 <div className={s.main}>
                     {review.text}

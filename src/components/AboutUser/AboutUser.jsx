@@ -11,21 +11,21 @@ import s from "./aboutuser.module.css"
 export default function AboutUser() {
 
   const [enableEditAva, setEnableEditAva] = useState(false)
- 
-  const name = useSelector(userName)
+  
+  const nameMe = useSelector(userName)
   const about = useSelector(userAbout)
   const avatar = useSelector(userAvatar)
   const email = useSelector(userEmail)
   const editUser = useSelector(editAnchor)
   const avatarUser = useSelector(avatarAnchor)
   const message = useSelector(messageEdit)
+  const { register, watch, handleSubmit, reset, formState: {errors}} = useForm({mode: "onSubmit", defaultValues: {name: nameMe, about: about, avatar: avatar}})
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
   const background = 'https://талисман-ростов.рф/wp-content/uploads/woocommerce-placeholder.png'
 
-  const { register, watch, handleSubmit, reset, formState: {errors}} = useForm({mode: "onSubmit", defaultValues: {name: name, about: about, avatar: avatar}})
 
   const close = () => {
     dispatch(setMessage(""))
@@ -54,7 +54,7 @@ export default function AboutUser() {
   }
 
   useEffect(() => {
-    if(!avatarUser && !editUser) reset()
+    if(!avatarUser && !editUser) reset({name: nameMe})
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [avatarUser, editUser])
 
@@ -66,12 +66,12 @@ export default function AboutUser() {
       <h3 className={s.title}>Информация о пользователе
         <div className={s.editWrapper} title={editUser ? "Отмена" : "Редактировать"} onClick={() => dispatch(editState(!editUser))}><img className={s.edit} src={editUser ? "https://img.icons8.com/ios-filled/50/null/cancel-2.png" : "https://img.icons8.com/ios/50/null/pencil-tip.png"} alt='edit'/></div>
       </h3>
-      {name &&
+      {nameMe &&
       <div className={s.wrapper}>
         <div className={s.data}>
           <div className={s.photo}>
             <div className={s.imgWrapper}>
-              <img onMouseEnter={mouseEnter} onMouseLeave={mouseLeave} onClick={() => dispatch(editAvatar(!avatarUser))} src={avatarUser ? (watch("avatar", avatar) || background) : avatar} alt={name} className={`${s.avatar} ${enableEditAva && s.active}`}></img>
+              <img onMouseEnter={mouseEnter} onMouseLeave={mouseLeave} onClick={() => dispatch(editAvatar(!avatarUser))} src={avatarUser ? (watch("avatar", avatar) || background) : avatar} alt={nameMe} className={`${s.avatar} ${enableEditAva && s.active}`}></img>
               <div onClick={() => dispatch(editAvatar(!avatarUser))} onMouseEnter={mouseEnter} onMouseLeave={mouseLeave} className={`${s.editAvatar} ${enableEditAva && s.active}`}>{avatarUser ? "Оставить этот" : "Изменить аватар"}</div>
             </div>
             {avatarUser && <form className={s.blockAvatar} onSubmit={handleSubmit(onSubmitAvatar)}>
@@ -82,8 +82,8 @@ export default function AboutUser() {
           <form className={s.info} onSubmit={handleSubmit(onSubmitUser)}>
             <div className={s.block}>
               <div className={s.key}>Имя:</div>
-              {editUser ? <input className={s.value} type="text" placeholder='Введите новое имя' value={watch("name", name)} {...register("name")}></input>
-              : <div className={s.value}>{name}</div>}
+              {editUser ? <input className={s.value} type="text" placeholder='Введите новое имя' value={watch("name", nameMe)} {...register("name")}></input>
+              : <div className={s.value}>{nameMe}</div>}
             </div>
             <div className={s.block}>
               <div className={s.key}>О пользователе:</div>
