@@ -2,6 +2,10 @@
 
 Данный проект создан с использованием [Create React App](https://github.com/facebook/create-react-app).
 
+## Gh-pages (Demo)
+
+[Dog Food](https://qwaniii.github.io/thr_homework3_dogs3/)
+
 ## Скриншоты
 ![Screenshots](/public/gif-scr.gif) 
 
@@ -30,7 +34,5 @@ npm i
 npm start
 ```
 
-## Gh-pages (Demo)
 
-[Dog Food](https://qwaniii.github.io/thr_homework3_dogs3/)
 
