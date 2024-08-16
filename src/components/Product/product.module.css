@@ -84,6 +84,15 @@
   padding-right: 3px;
 }
 
+.clickrev {
+  text-decoration:underline;
+  cursor: pointer;
+}
+
+.clickrev:hover {
+  opacity: 0.7;
+}
+
 .edit {
   cursor: pointer;
   opacity: .6;

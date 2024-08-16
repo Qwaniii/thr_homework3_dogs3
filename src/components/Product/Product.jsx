@@ -148,6 +148,11 @@ export default function Product({
         })
   }
 
+  const goToReview = () => {
+    const idrev = document.querySelector("#review")
+    idrev.scrollIntoView()
+  }
+
   return (
     <div>
       {isLoading ? (
@@ -166,7 +171,7 @@ export default function Product({
                   {aboutProduct?.reviews?.length > 0 && 
                   <>
                   <span>{(Math.floor(reviewRating * 10) / 10).toString()}</span>
-                  <div>Отзывов: {aboutProduct?.reviews?.length}</div>
+                  <div>Отзывов: <span className={s.clickrev} onClick={()=>goToReview()}>{aboutProduct?.reviews?.length}</span></div>
                   </>}
                 </div>
               </div>
@@ -232,7 +237,7 @@ export default function Product({
               Цена {aboutProduct.price} руб. за {aboutProduct.wight} 
             </p>
               </div>
-              <div className={s.review}>
+              <div id="review" className={s.review}>
                 <h3 className={s.h3}>
                   {aboutProduct?.reviews?.length > 0 ? `Отзывов о товаре (${aboutProduct?.reviews?.length}) :` : `Нет отзывов. Будьте первым!`}
                 </h3>
