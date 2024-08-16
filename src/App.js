@@ -45,7 +45,7 @@ function App() {
   const [modalForgotPass, setModalForgotPass] = useState(false)
   const [modalNotific, setModalNotific] = useState(false)
   const [smallModalNotific, setSmallModalNotific] = useState(false)
-  const [isToken, setIsToken] = useState(null)
+  const [isToken, setIsToken] = useState(true)
   const [myReviewArr, setMyReviewArr] = useState([])
   const [anchorReview, setAnchorReview] = useState(false);
   const [anchorPaginate, setAnchorPaginate] = useState(true);
@@ -66,13 +66,13 @@ function App() {
   const startPaginate = (cardsOnList * page) - cardsOnList;
 
   // проверяем наличие токена
-  useEffect(() => {
-    const tokenStor = sessionStorage.getItem('token')
-    if(tokenStor) {
-      api.setToken(tokenStor)
-      setIsToken(tokenStor)
-    }
-  }, [isToken])
+  // useEffect(() => {
+  //   const tokenStor = sessionStorage.getItem('token')
+  //   if(tokenStor) {
+  //     api.setToken(tokenStor)
+  //     setIsToken(tokenStor)
+  //   }
+  // }, [isToken])
 
   // получаем продукты и инфо опользователе (пагинация на сервере)
   useEffect(() => {
